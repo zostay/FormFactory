@@ -3,53 +3,52 @@ use Moose;
 
 with qw( FormFactory::Feature );
 
-has name => (
-    is        => 'ro',
-    isa       => 'Str',
-);
-
 has cleaner_code => (
     is        => 'ro',
-    isa       => 'CodeRef',
-    predicate => 'has_cleaner',
+    isa       => 'HashRef[CodeRef]',
+    required  => 1,
+    default   => sub { {} },
 );
 
 has checker_code => (
     is        => 'ro',
-    isa       => 'CodeRef',
-    predicate => 'has_checker',
+    isa       => 'HashRef[CodeRef]',
+    required  => 1,
+    default   => sub { {} },
 );
 
 has pre_processor_code => (
     is        => 'ro',
-    isa       => 'CodeRef',
-    predicate => 'has_pre_processor',
+    isa       => 'HashRef[CodeRef]',
+    required  => 1,
+    default   => sub { {} },
 );
 
 has post_processor_code => (
     is        => 'ro',
-    isa       => 'CodeRef',
-    predicate => 'has_post_processor',
+    isa       => 'HashRef[CodeRef]',
+    required  => 1,
+    default   => sub { {} },
 );
 
 sub clean {
     my $self = shift;
-    $self->cleaner_code->($self->action, @_) if $self->has_cleaner;
+    $_->($self->action, @_) for values %{ $self->cleaner_code };
 }
 
 sub check {
     my $self = shift;
-    $self->checker_code->($self->action, @_) if $self->has_checker;
+    $_->($self->action, @_) for values %{ $self->checker_code };
 }
 
 sub pre_process {
     my $self = shift;
-    $self->pre_processor_code->($self->action, @_) if $self->has_pre_processor;
+    $_->($self->action, @_) for values %{ $self->pre_processor_code };
 }
 
 sub post_process {
     my $self = shift;
-    $self->post_processor_code->($self->action, @_) if $self->has_post_processor;
+    $_->($self->action, @_) for values %{ $self->post_processor_code };
 }
 
 1;

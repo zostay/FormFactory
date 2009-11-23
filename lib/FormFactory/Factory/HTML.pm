@@ -25,7 +25,7 @@ has consumer => (
     is        => 'ro',
     isa       => 'CodeRef',
     required  => 1,
-    default   => sub { sub { my %params = @_; $params{request} } },
+    default   => sub { sub { $_[0] } },
 );
 
 sub new_widget_for_control {

@@ -127,11 +127,20 @@ has features => (
 
 sub _meta_features {
     my $self = shift;
+    my $all_features = $self->meta->get_all_features;
 
     my @features;
-    for my $feature_config (@{ $self->meta->get_all_features }) {
-        my $feature = FormFactory::Feature::Functional->new(
-            %$feature_config,
+    for my $feature_name (keys %$all_features) {
+        my $feature_options = $all_features->{ $feature_name };
+        my $feature_class = 'FormFactory::Feature::' 
+                          . class_name_from_name($feature_name);
+        unless (Class::MOP::load_class($feature_class)) {
+            die $@ if $@;
+            die "cannot load feature class $feature_class";
+        }
+
+        my $feature = $feature_class->new(
+            %$feature_options,
             action => $self,
         );
         push @features, $feature;

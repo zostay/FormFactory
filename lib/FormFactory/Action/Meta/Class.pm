@@ -20,9 +20,9 @@ All form actions have this role attached to its meta-class.
 
 has features => (
     is       => 'ro',
-    isa      => 'ArrayRef[HashRef]',
+    isa      => 'HashRef',
     required => 1,
-    default  => sub { [] },
+    default  => sub { {} },
 );
 
 sub get_controls {
@@ -45,7 +45,7 @@ sub get_controls {
 sub get_all_features {
     my $meta = shift;
 
-    my @features;
+    my %all_features;
     for my $class (reverse $meta->linearized_isa) {
         my $other_meta = $meta->initialize($class);
 
@@ -53,10 +53,10 @@ sub get_all_features {
         next unless $other_meta->meta->can('does_role');
         next unless $other_meta->meta->does_role('FormFactory::Action::Meta::Class');
 
-        push @features, @{ $other_meta->features };
+        %all_features = (%{ $other_meta->features }, %all_features);
     }
 
-    return \@features;
+    return \%all_features;
 }
 
 1;

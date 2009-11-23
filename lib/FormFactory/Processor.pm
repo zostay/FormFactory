@@ -67,10 +67,7 @@ sub deferred_value(&) {
 sub _add_feature {
     my ($type, $meta, $name, $code) = @_;
     die "bad code given for $type $name" unless defined $code;
-    push @{ $meta->features }, {
-        name            => $name,
-        $type . '_code' => $code,
-    };
+    $meta->features->{functional}{$type . '_code'}{$name} = $code;
 }
 
 sub has_cleaner        { _add_feature('cleaner', @_) }
