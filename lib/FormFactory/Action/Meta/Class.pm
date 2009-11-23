@@ -1,6 +1,23 @@
 package FormFactory::Action::Meta::Class;
 use Moose::Role;
 
+=head1 NAME
+
+FormFactory::Action::Meta::Class - The meta-class for form actions
+
+=head1 SYNOPSIS
+
+  package MyApp::Action::Foo;
+  use FormFactory::Processor;
+
+=head1 DESCRIPTION
+
+All form actions have this role attached to its meta-class.
+
+=head1 ATTRIBUTES
+
+=cut
+
 has features => (
     is       => 'ro',
     isa      => 'ArrayRef[HashRef]',
