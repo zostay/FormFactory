@@ -42,6 +42,11 @@ sub error_messages {
     return _return { $_->type eq 'error' } @{ $self->messages };
 }
 
+sub regular_messages {
+    my $self = shift;
+    return _return { not $_->is_tied_to_field } @{ $self->messages };
+}
+
 sub regular_info_messages {
     my $self = shift;
     return _return { not $_->is_tied_to_field and $_->type eq 'info' } 
