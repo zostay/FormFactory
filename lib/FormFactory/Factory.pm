@@ -8,7 +8,26 @@ requires qw( render_control consume_control );
 
 =head1 NAME
 
-FormFactory::Factory - interface for control factories
+FormFactory::Factory - Interface for form factory implementations
+
+=head1 SYNOPSIS
+
+  package FormFactory::Factory::MyFactory;
+  use Moose;
+
+  with qw( FormFactory::Factory );
+
+  sub render_control {
+      my ($self, $control, %options) = @_;
+
+      # Draw $control for user
+  }
+
+  sub consume_control {
+      my ($self, $control, %options) = @_;
+
+      # Consume values from user to fill $control
+  }
 
 =head1 DESCRIPTION
 
@@ -32,13 +51,17 @@ has stasher => (
 
 =head1 METHODS
 
+=head2 stash
+
+=head2 unstash
+
+See L<FormFactory::Stash>.
+
 =head2 new_action
 
-  my $action = $factory->new_action('Some::Action::Class' => {
-      constructor => 'argument',
-  });
+  my $action = $factory->new_action('Some::Action::Class', \%options);
 
-Given the name of an action class, it initializes the class for use with this factory.
+Given the name of an action class, it initializes the class for use with this factory. The C<%options> are passed to the constructor.
 
 =cut
 
@@ -74,10 +97,7 @@ sub control_class {
 
 =head2 new_control
 
-  my $control = $factory->new_control(text => {
-      name          => 'foo',
-      default_value => 'bar',
-  });
+  my $control = $factory->new_control($name, \%options);
 
 Given the short name for a control and a hash reference of initialization arguments, return a fully initialized control.
 
@@ -94,13 +114,19 @@ sub new_control {
 
 =head1 ROLE METHODS
 
-Roles must implement the following methods.
+The following methods need to implement the following methods.
 
-=head2 new_widget_for_control
+=head2 render_control
 
-  my $widget = $factory->new_widget_for_control(text => $control);
+  $factory->render_control($control, %options);
 
-Given the short name for a control and a control object, return the widget to attach to the control.
+This method is used to render the control in the current form.
+
+=head2 consume_control
+
+  $factory->consume_control($control, %options);
+
+This method is used to consume the values input for a current form.
 
 =head1 CONTROLS
 
@@ -142,9 +168,20 @@ L<FormFactory::Control::Value>
 
 =back
 
+=head1 SEE ALSO
+
+L<FormFactory::Action>, L<FormFactory::Control>, L<FormFactory::Stasher>
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp, C<< <hanenkamp@cpan.org> >>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2009 Qubling Software LLC.
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
