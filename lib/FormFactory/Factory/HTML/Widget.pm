@@ -5,7 +5,7 @@ requires qw( render_control consume_control );
 
 =head1 NAME
 
-FormFactory::Factory::HTML::Widget - rendering/processing HTML controls
+FormFactory::Factory::HTML::Widget - rendering/consuming HTML controls
 
 =head1 DESCRIPTION
 
@@ -88,6 +88,13 @@ Given consumer options, process the input.
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp, C<< <hanenkamp@cpan.org> >>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2009 Qubling Software LLC.
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
