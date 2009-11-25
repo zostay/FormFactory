@@ -14,6 +14,45 @@ use FormFactory::Factory::HTML::Widget::Select;
 use FormFactory::Factory::HTML::Widget::Span;
 use FormFactory::Factory::HTML::Widget::Textarea;
 
+=head1 NAME
+
+FormFactory::Factory::HTML - Simple HTML form factory
+
+=head1 SYNOPSIS
+
+  use FormFactory;
+
+  my $q = CGI->new;
+  my $html = '<form>';
+
+  my $form = FormFactory->new(HTML => {
+      renderer => sub { $html .= join('', @_) },
+      consumer => sub { shift->Vars },
+  });
+
+  my $action = $form->new_action('MyApp::Action::Foo');
+  $action->consume_and_clean_and_check_and_process( request => $q );
+  $action->render;
+
+  $html .= '</form>';
+
+  print $q->header('text/html');
+  print $html;
+
+=head1 DESCRIPTION
+
+This renders plain HTML forms and consumes value from a hash.
+
+=head1 ATTRIBUTES
+
+=head2 renderer
+
+This is a code reference responsible for printing the HTML elements. The HTML for the controls is passed to this subroutine as a string. The default implementation just prints to the screen.
+
+  sub { print @_ }
+
+=cut
+
 has renderer => (
     is        => 'ro',
     isa       => 'CodeRef',
@@ -21,12 +60,26 @@ has renderer => (
     default   => sub { sub { print @_ } },
 );
 
+=head2 consumer
+
+This is a code reference responsible for taking the request object and turning it into a hash reference of values passed in from the HTTP request. The value passed in is the value passed as the C<request> parameter to L<FormFactory::Action/consume>.
+
+=cut
+
 has consumer => (
     is        => 'ro',
     isa       => 'CodeRef',
     required  => 1,
     default   => sub { sub { $_[0] } },
 );
+
+=head1 METHODS
+
+=head2 new_widget_for_control
+
+Returns a L<FormFactory::Factory::HTML::Widget> implementation for the given control.
+
+=cut
 
 sub new_widget_for_control {
     my $self    = shift;
@@ -122,11 +175,23 @@ sub _alerts_for_control {
     return @items;
 }
 
+=head2 new_widget_for_button
+
+Returns a widget for a L<FormFactory::Control::Button>.
+
+=cut
+
 sub new_widget_for_button {
     my ($self, $control) = @_;
 
     return _input($control->name, 'button', 'submit', $control->label);
 }
+
+=head2 new_widget_for_checkbox
+
+Returns a widget for a L<FormFactory::Control::Checkbox>.
+
+=cut
 
 sub new_widget_for_checkbox {
     my ($self, $control, @alerts) = @_;
@@ -138,6 +203,12 @@ sub new_widget_for_checkbox {
         _alerts($control->name, 'checkbox', @alerts),
     );
 }
+
+=head2 new_widget_for_fulltext
+
+Returns a widget for a L<FormFactory::Control::FullText>.
+
+=cut
 
 sub new_widget_for_fulltext {
     my ($self, $control, @alerts) = @_;
@@ -155,6 +226,12 @@ sub new_widget_for_fulltext {
     );
 }
 
+=head2 new_widget_for_password
+
+Returns a widget for a L<FormFactory::Control::Password>.
+
+=cut
+
 sub new_widget_for_password {
     my ($self, $control, @alerts) = @_;
 
@@ -165,6 +242,12 @@ sub new_widget_for_password {
         _alerts($control->name, 'password', @alerts),
     );
 }
+
+=head2 new_widget_for_selectmany
+
+Returns a widget for a L<FormFactory::Control::SelectMany>.
+
+=cut
 
 sub new_widget_for_selectmany {
     my ($self, $control, @alerts) = @_;
@@ -189,6 +272,12 @@ sub new_widget_for_selectmany {
     );
 }
 
+=head2 new_widget_for_selectone
+
+Returns a widget for a L<FormFactory::Control::SelectOne>.
+
+=cut
+
 sub new_widget_for_selectone {
     my ($self, $control, @alerts) = @_;
 
@@ -207,6 +296,12 @@ sub new_widget_for_selectone {
     );
 }
 
+=head2 new_widget_for_text
+
+Returns a widget for a L<FormFactory::Control::Text>.
+
+=cut
+
 sub new_widget_for_text {
     my ($self, $control, @alerts) = @_;
 
@@ -217,6 +312,12 @@ sub new_widget_for_text {
         _alerts($control->name, 'text', @alerts),
     );
 }
+
+=head2 new_widget_for_value
+
+Returns a widget for a L<FormFactory::Control::Value>.
+
+=cut
 
 sub new_widget_for_value {
     my ($self, $control, @alerts) = @_;
@@ -236,6 +337,12 @@ sub new_widget_for_value {
     return;
 }
 
+=head2 render_control
+
+Renders the widget for the given control.
+
+=cut
+
 sub render_control {
     my ($self, $control, %options) = @_;
 
@@ -243,6 +350,12 @@ sub render_control {
     return unless $widget;
     $self->renderer->($widget->render);
 }
+
+=head2 consume_control
+
+Consumes values using the widget for the given control.
+
+=cut
 
 sub consume_control {
     my ($self, $control, %options) = @_;
@@ -267,5 +380,29 @@ sub consume_control {
         $control->current_values( $params->{ $control->name } );
     }
 }
+
+=head1 CAVEATS
+
+When I initially implemented this, using the widget classes made sense. However, the API has changed in some subtle ways since then. Originally, widgets were a required piece of the factory API, but they are not anymore. As such, they don't make nearly as much sense as they once did.
+
+They will probably be removed in a future release.
+
+=head1 SEE ALSO
+
+L<FormFactory::Factory>
+
+=head1 AUTHOR
+
+Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2009 Qubling Software LLC.
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
 
 1;
