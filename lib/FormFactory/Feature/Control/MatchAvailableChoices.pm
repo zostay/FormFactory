@@ -6,6 +6,36 @@ with qw(
     FormFactory::Feature::Role::Control
 );
 
+=head1 NAME
+
+FormFactory::Feature::Control::MatchAvailableChoices - Check for choice availability
+
+=head1 SYNOPSIS
+
+  has_control time_zone => (
+      control => 'select_one',
+      options => {
+          available_choices => [
+              map { FormFactory::Control::Choice->new($_) } qw( PST MST CST EST )
+          ],
+      },
+      features => {
+          match_available_choices => 1,
+      },
+  );
+
+=head1 DESCRIPTION
+
+Verifies that the value set for the control matches one of the available choices.
+
+=head1 METHODS
+
+=head2 check_control
+
+Verifies that the control does the L<FormFactory::Control::Role::AvailableChoices> and that it does either L<FormFactory::Control::Role::ListValue> or L<FormFactory::Control::Role::ScalarValue>.
+
+=cut
+
 sub check_control {
     my ($self, $control) = @_;
 
@@ -17,6 +47,12 @@ sub check_control {
 
     die "the match_available_feature does not know hwo to check the value of $control";
 }
+
+=head2 check_value
+
+Verifies that the value or values set match one or more of the available values.
+
+=cut
 
 sub check_value {
     my $self    = shift;
@@ -43,5 +79,18 @@ sub check_value {
         }
     }
 }
+
+=head1 AUTHOR
+
+Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2009 Qubling Software LLC.
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;
