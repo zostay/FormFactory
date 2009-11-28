@@ -3,6 +3,16 @@ use Moose;
 
 with qw( FormFactory::Factory::HTML::Widget );
 
+=head1 NAME
+
+FormFactory::Factory::HTML::Widget::Element - HTML factory widget helper
+
+=head1 DESCRIPTION
+
+Move along. Nothing to see here.
+
+=cut
+
 has tag_name => (
     is        => 'ro',
     isa       => 'Str',
@@ -99,5 +109,24 @@ sub render_attributes {
 sub more_attributes { {} }
 
 sub consume_control { }
+
+=head1 AUTHOR
+
+Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2009 Qubling Software LLC.
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=begin Pod::Coverage
+
+  .*
+
+=end Pod::Coverage
+
+=cut
 
 1;
