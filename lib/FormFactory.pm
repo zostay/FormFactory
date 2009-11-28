@@ -1,6 +1,8 @@
 package FormFactory;
 use Moose;
 
+use FormFactory::Util qw( class_name_from_name );
+
 our $VERSION = '0.001';
 
 =head1 NAME
@@ -91,6 +93,27 @@ sub new_factory {
         die "cannot load form factory $class_name";
     }
     return $class_name->new(@_);
+}
+
+=head2 control_class
+
+  my $class_name = FormFactory->control_class('full_text');
+
+Returns the control class for the named control.
+
+=cut
+
+sub control_class {
+    my $name = $_[1];
+
+    my $class_name = 'FormFactory::Control::' . class_name_from_name($name);
+
+    unless (Class::MOP::load_class($class_name)) {
+        warn $@ if $@;
+        return;
+    }
+
+    return $class_name;
 }
 
 =head1 SEE ALSO

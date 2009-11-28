@@ -2,7 +2,6 @@ package FormFactory::Factory;
 use Moose::Role;
 
 use FormFactory::Stasher::Memory;
-use FormFactory::Util qw( class_name_from_name );
 
 requires qw( render_control consume_control );
 
@@ -74,27 +73,6 @@ sub new_action {
     return $class_name->new( %$args, form_factory => $self );
 }
 
-=head2 control_class
-
-  my $class_name = $factory->control_class('full_text');
-
-Returns the control class for the named control.
-
-=cut
-
-sub control_class {
-    my ($self, $name) = @_;
-
-    my $class_name = 'FormFactory::Control::' . class_name_from_name($name);
-
-    unless (Class::MOP::load_class($class_name)) {
-        warn $@ if $@;
-        return;
-    }
-
-    return $class_name;
-}
-
 =head2 new_control
 
   my $control = $factory->new_control($name, \%options);
@@ -106,7 +84,7 @@ Given the short name for a control and a hash reference of initialization argume
 sub new_control {
     my ($self, $name, $args) = @_;
 
-    my $class_name = $self->control_class($name);
+    my $class_name = FormFactory->control_class($name);
     return unless $class_name;
 
     return $class_name->new($args);
