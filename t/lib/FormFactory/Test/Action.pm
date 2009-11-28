@@ -105,4 +105,8 @@ test plan => 13, control_name => sub {
     is($control->current_value, '', 'control current value is the empty string');
 };
 
+# TODO test stash_and_clear_and_unstash => sub { ... }
+# TODO test render => sub { ... }
+# TODO test render_control => sub { ... }
+
 1;
