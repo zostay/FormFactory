@@ -15,7 +15,9 @@ has action => (
     is         => 'ro',
     does       => 'FormFactory::Action',
     required   => 1,
-    default    => sub { shift->factory->new_action('TestApp::Action::Basic') },
+    default    => sub { shift->factory->new_action('TestApp::Action::Basic' => {
+        value_to_defer => 'Superbark',
+    }) },
     lazy       => 1,
 );
 
@@ -81,7 +83,8 @@ test plan => 6, meta_control_name => sub {
     is($control->name, 'name', 'control is named name');
     is($control->placement, 0, 'control placement is 0');
     is($control->control, 'text', 'control control is text');
-    is_deeply($control->options, {}, 'control options are empty');
+    is_deeply([ keys %{ $control->options } ], ['default_value'], 
+        'control options sets default_value');
     is_deeply($control->features, {}, 'control features are empty');
 };
 
@@ -100,9 +103,9 @@ test plan => 13, control_name => sub {
         'control value is stashable');
     is($control->has_value, '', 'control has no value');
     is($control->value, undef, 'control value is undef');
-    is($control->has_default_value, '', 'control has no default value');
-    is($control->default_value, undef, 'control default value is undef');
-    is($control->current_value, '', 'control current value is the empty string');
+    is($control->has_default_value, 1, 'control has a default value');
+    is($control->default_value, 'Superbark', 'control default value is Superbark');
+    is($control->current_value, 'Superbark', 'control current value is Superbark');
 };
 
 # TODO test stash_and_clear_and_unstash => sub { ... }

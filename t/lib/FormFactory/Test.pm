@@ -39,12 +39,6 @@ before run_tests => sub {
 
 I have not gotten nearly all the tests I want written done. Here is a list of tests I intend to write but haven't (as of this writing):
 
-=head2 FormFactory::Test::Action::Basic
-
-Rename FormFactory::Test::Action to this. 
-
-Make sure that actions cope with deferred values properly.
-
 =head2 FormFactory::Test::Action::Inheritance
 
 Test to make sure that actions cope with inheritance correctly.

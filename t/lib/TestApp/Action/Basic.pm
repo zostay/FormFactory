@@ -3,8 +3,17 @@ use FormFactory::Processor;
 
 my $counter = 0;
 
+has value_to_defer => (
+    is        => 'ro',
+    isa       => 'Str',
+    required  => 1,
+);
+
 has_control name => (
-    control => 'text',
+    control   => 'text',
+    options   => {
+        default_value => deferred_value { shift->value_to_defer },
+    },
 );
 
 has_cleaner one => sub {
