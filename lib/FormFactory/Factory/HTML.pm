@@ -255,7 +255,7 @@ sub new_widget_for_selectmany {
     my @checkboxes;
     for my $choice (@{ $control->available_choices }) {
         push @checkboxes, _input(
-            $choice->name, 'select-many choice', 'checkbox', 
+            $choice->label, 'select-many choice', 'checkbox', 
             $choice->value, checked => $control->is_choice_selected($choice),
         );
     }
