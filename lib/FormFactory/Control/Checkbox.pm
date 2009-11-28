@@ -50,7 +50,7 @@ The string value the control should have when toggled to the unchecked or off po
 has unchecked_value => (
     is        => 'ro',
     isa       => 'Str',
-    requried  => 1,
+    required  => 1,
     default   => 0,
 );
 
