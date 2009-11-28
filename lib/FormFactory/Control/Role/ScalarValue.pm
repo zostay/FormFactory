@@ -13,6 +13,14 @@ Implemented by single scalar valued controls
 
 =head1 METHODS
 
+=head2 default_isa
+
+Scalar valued controls are "Str" by default.
+
+=cut
+
+use constant default_isa => 'Str';
+
 =head2 set_attribute_value
 
   $control->set_attribute_value($action, $attribute);

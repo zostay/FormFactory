@@ -145,13 +145,13 @@ sub has_control {
     my $name = shift;
     my $args = @_ == 1 ? shift : { @_ };
 
-    $args->{is}       ||= 'ro';
-    $args->{isa}      ||= 'Str';
-
     $args->{control}  ||= 'text';
     $args->{options}  ||= {};
     $args->{features} ||= {};
     $args->{traits}   ||= [];
+
+    $args->{is}       ||= 'ro';
+    $args->{isa}      ||= FormFactory->control_class($args->{control})->default_isa;
 
     for my $value (values %{ $args->{features} }) {
         $value = {} unless ref $value;

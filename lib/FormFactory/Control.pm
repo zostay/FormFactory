@@ -1,7 +1,10 @@
 package FormFactory::Control;
 use Moose::Role;
 
+use FormFactory::Control::Choice;
 use List::Util qw( first );
+
+requires qw( default_isa );
 
 =head1 NAME
 

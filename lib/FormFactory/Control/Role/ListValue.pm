@@ -13,6 +13,14 @@ Implemented by control that are multi-values.
 
 =head1 METHODS
 
+=head2 default_isa
+
+List valued controls are "ArrayRef[Str]" by default.
+
+=cut
+
+use constant default_isa => 'ArrayRef[Str]';
+
 =head2 set_attribute_value
 
   $control->set_attribute_valeu($action, $attribute);
