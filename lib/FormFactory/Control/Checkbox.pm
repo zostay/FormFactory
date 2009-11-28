@@ -87,7 +87,12 @@ Returns the L</checked_value> if L</is_checked> is true. Returns L</unchecked_va
 
 sub current_value {
     my $self = shift;
-    $self->is_checked($self->checked_value eq shift) if @_;
+
+    if (@_) {
+        my $checked = shift;
+        $self->is_checked($self->checked_value eq $checked);
+    }
+
     return $self->is_checked ? $self->checked_value : $self->unchecked_value;
 }
 

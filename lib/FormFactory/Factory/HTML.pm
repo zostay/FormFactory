@@ -197,7 +197,7 @@ sub new_widget_for_checkbox {
     my ($self, $control, @alerts) = @_;
 
     return _wrapper($control->name, 'checkbox', 
-        _input($control->name, 'checkbox', 'checkbox', $control->current_value, 
+        _input($control->name, 'checkbox', 'checkbox', $control->checked_value, 
             checked => $control->is_checked),
         _label($control->name, 'checkbox', $control->label),
         _alerts($control->name, 'checkbox', @alerts),
