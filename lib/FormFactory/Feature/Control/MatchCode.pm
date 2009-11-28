@@ -64,11 +64,12 @@ Does the work of running the given subroutine over the control value and reports
 =cut
 
 sub check_value {
-    my $self  = shift;
-    my $value = $control->does('FormFactory::Control::Role::ScalarValue')
-              ? $self->control->current_value
-              : $self->control->current_values
-              ;
+    my $self    = shift;
+    my $control = $self->control;
+    my $value   = $control->does('FormFactory::Control::Role::ScalarValue')
+                ? $control->current_value
+                : $control->current_values
+                ;
 
     unless ($self->code->($value)) {
         $self->control_error('the %s is not correct');
