@@ -53,15 +53,49 @@ has stashable_keys => (
     default   => sub { [] },
 );
 
+=head1 METHODS
+
+=head2 get_feature_by_name
+
+  my $feature = $control->get_feature_by_name($name);
+
+Given a feature name, it returns the named feature object. Returns C<undef> if no such feature is attached to this control.
+
+=cut
+
 sub get_feature_by_name {
     my ($self, $name) = @_;
     return first { $_->name eq $name } @{ $self->features };
 }
+
+=head2 has_feature
+
+  if ($control->has_feature($name)) {
+      # do something about it...
+  }
+
+Returns a true value if the named feature is attached to this control. Returns false otherwise.
+
+=cut
 
 sub has_feature {
     my ($self, $name) = @_;
     return 1 if $self->get_feature_by_name($name);
     return '';
 }
+
+=head1 AUTHOR
+
+Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2009 Qubling Software LLC.
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
 
 1;
