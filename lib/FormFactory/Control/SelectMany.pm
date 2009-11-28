@@ -46,7 +46,6 @@ This is a list of currently selected choices.
 has selected_choices => (
     is        => 'rw',
     isa       => 'ArrayRef[Str]',
-    required  => 1,
     predicate => 'has_selected_choices',
 );
 
