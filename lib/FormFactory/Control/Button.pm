@@ -34,7 +34,6 @@ The current value is always the same as the C<label>.
 
 sub current_value { 
     my $self = shift;
-    warn "attempt to change read-only label failed" if @_;
     return $self->label;
 }
 
