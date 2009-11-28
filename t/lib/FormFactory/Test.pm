@@ -8,7 +8,7 @@ has test_packages => (
     isa       => 'ArrayRef[Str]',
     required  => 1,
     default   => sub { [ qw(
-        FormFactory::Test::Action
+        FormFactory::Test::Action::Basic
         FormFactory::Test::Factory::HTML
     ) ] },
 );

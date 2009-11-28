@@ -1,4 +1,4 @@
-package FormFactory::Test::Action;
+package FormFactory::Test::Action::Basic;
 use Test::Able;
 use Test::More;
 use Test::Moose;
