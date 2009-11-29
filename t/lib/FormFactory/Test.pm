@@ -9,6 +9,7 @@ has test_packages => (
     required  => 1,
     default   => sub { [ qw(
         FormFactory::Test::Action::Basic
+        FormFactory::Test::Action::Controls
         FormFactory::Test::Factory::HTML
     ) ] },
 );
@@ -38,6 +39,14 @@ before run_tests => sub {
 =head1 TODO
 
 I have not gotten nearly all the tests I want written done. Here is a list of tests I intend to write but haven't (as of this writing):
+
+=head2 FormFactory::Test::Action::Basic
+
+Testing that the stash/unstash are used correctly.
+
+Test render.
+
+Test render_control.
 
 =head2 FormFactory::Test::Action::Inheritance
 

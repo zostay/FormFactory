@@ -3,22 +3,13 @@ use Test::Able;
 use Test::More;
 use Test::Moose;
 
-has factory => (
-    is         => 'ro',
-    does       => 'FormFactory::Factory',
-    required   => 1,
-    default    => sub { FormFactory->new_factory('HTML') },
-    lazy       => 1,
-);
+with qw( FormFactory::Test::Action );
 
-has action => (
-    is         => 'ro',
-    does       => 'FormFactory::Action',
-    required   => 1,
+has '+action' => (
+    lazy       => 1,
     default    => sub { shift->factory->new_action('TestApp::Action::Basic' => {
         value_to_defer => 'Superbark',
     }) },
-    lazy       => 1,
 );
 
 test plan => 5, run_action => sub {
