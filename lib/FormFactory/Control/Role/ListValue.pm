@@ -23,7 +23,7 @@ use constant default_isa => 'ArrayRef[Str]';
 
 =head2 set_attribute_value
 
-  $control->set_attribute_valeu($action, $attribute);
+  $control->set_attribute_value($action, $attribute);
 
 Sets the value of the action attribute with current value of teh control.
 
