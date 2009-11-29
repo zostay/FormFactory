@@ -178,11 +178,11 @@ sub _build_controls {
     my @meta_controls = $self->meta->get_controls;
     for my $meta_control (@meta_controls) {
         my %options = %{ $meta_control->options };
-        for my $key (keys %options) {
+        OPTION: for my $key (keys %options) {
             my $value = $options{$key};
 
-            next unless blessed $value;
-            next unless $value->isa('FormFactory::Processor::DeferredValue');
+            next OPTION unless blessed $value;
+            next OPTION unless $value->isa('FormFactory::Processor::DeferredValue');
 
             $options{$key} = $value->code->($self, $key);
         }
