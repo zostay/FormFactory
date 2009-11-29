@@ -196,7 +196,10 @@ sub _build_controls {
         for my $feature_name (keys %$meta_features) {
             my $feature_class = 'FormFactory::Feature::Control::' 
                               . class_name_from_name($feature_name);
-            Class::MOP::load_class($feature_class);
+            unless (Class::MOP::load_class($feature_class)) {
+                die $@ if $@;
+                die "cannot load control feature $feature_name\n";
+            }
 
             my $feature = $feature_class->new(
                 %{ $meta_features->{$feature_name} },
