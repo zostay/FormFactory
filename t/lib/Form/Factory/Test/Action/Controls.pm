@@ -1,9 +1,9 @@
-package FormFactory::Test::Action::Controls;
+package Form::Factory::Test::Action::Controls;
 use Test::Able;
 use Test::More;
 use Test::Moose;
 
-with qw( FormFactory::Test::Action );
+with qw( Form::Factory::Test::Action );
 
 has '+action' => (
     lazy       => 1,

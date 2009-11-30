@@ -1,15 +1,15 @@
-package FormFactory::Processor::DeferredValue;
+package Form::Factory::Processor::DeferredValue;
 use Moose;
 
 =head1 NAME
 
-FormFactory::Processor::DeferredValue - Tag class for deferred_values
+Form::Factory::Processor::DeferredValue - Tag class for deferred_values
 
 =head1 DESCRIPTION
 
 No user serviceable parts. You void your non-existant warranty if you open this up.
 
-See L<FormFactory::Processor/deferred_value>. There's really nothing to see here.
+See L<Form::Factory::Processor/deferred_value>. There's really nothing to see here.
 
 =cut
 
@@ -21,7 +21,7 @@ has code => (
 
 =head1 SEE ALSO
 
-L<FormFactory::Processor>
+L<Form::Factory::Processor>
 
 =head1 AUTHOR
 

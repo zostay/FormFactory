@@ -1,11 +1,11 @@
-package FormFactory::Stasher;
+package Form::Factory::Stasher;
 use Moose::Role;
 
 requires qw( stash unstash );
 
 =head1 NAME
 
-FormFactory::Stasher - An object responsible for remembering things
+Form::Factory::Stasher - An object responsible for remembering things
 
 =head1 DESCRIPTION
 
@@ -27,7 +27,7 @@ Given a C<$key>, recall a previously stored C<$hashref>.
 
 =head1 SEE ALSO
 
-L<FormFactory::Stasher::Memory>
+L<Form::Factory::Stasher::Memory>
 
 =head1 AUTHOR
 

@@ -1,11 +1,11 @@
-package FormFactory::Control::Role::ListValue;
+package Form::Factory::Control::Role::ListValue;
 use Moose::Role;
 
 requires qw( current_values );
 
 =head1 NAME
 
-FormFactory::Control::Role::ListValue - list-valued controls
+Form::Factory::Control::Role::ListValue - list-valued controls
 
 =head1 DESCRIPTION
 

@@ -1,14 +1,14 @@
-package FormFactory::Control;
+package Form::Factory::Control;
 use Moose::Role;
 
-use FormFactory::Control::Choice;
+use Form::Factory::Control::Choice;
 use List::Util qw( first );
 
 requires qw( default_isa );
 
 =head1 NAME
 
-FormFactory::Control - high-level API for working with form controls
+Form::Factory::Control - high-level API for working with form controls
 
 =head1 DESCRIPTION
 
@@ -30,7 +30,7 @@ has name => (
 
 =head2 feature
 
-This is the list of L<FormFactory::Feature::Role::Control> features associated with the control.
+This is the list of L<Form::Factory::Feature::Role::Control> features associated with the control.
 
 =cut
 

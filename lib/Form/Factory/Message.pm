@@ -1,17 +1,17 @@
-package FormFactory::Message;
+package Form::Factory::Message;
 use Moose;
 
 use Moose::Util::TypeConstraints;
-enum 'FormFactory::Message::Type' => qw( info warning error );
+enum 'Form::Factory::Message::Type' => qw( info warning error );
 no Moose::Util::TypeConstraints;
 
 =head1 NAME
 
-FormFactory::Message - Handy class for encapsulating messages
+Form::Factory::Message - Handy class for encapsulating messages
 
 =head1 SYNOPSIS
 
-  my $message = FormFactory::Message->new(
+  my $message = Form::Factory::Message->new(
       field   => 'foo',
       type    => 'warning',
       message => 'Blah blah blah',
@@ -63,7 +63,7 @@ This is the type of message. Must be one of: info, warning, or error.
 
 has type => (
     is       => 'rw',
-    isa      => 'FormFactory::Message::Type',
+    isa      => 'Form::Factory::Message::Type',
     required => 1,
     default  => 'info',
 );

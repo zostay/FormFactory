@@ -1,11 +1,11 @@
-package FormFactory::Result;
+package Form::Factory::Result;
 use Moose::Role;
 
-use FormFactory::Message;
+use Form::Factory::Message;
 
 =head1 NAME
 
-FormFactory::Result - Interface for the result classes
+Form::Factory::Result - Interface for the result classes
 
 =head1 SYNOPSIS
 
@@ -52,7 +52,7 @@ sub is_failure {
   my $messages = $result->all_messages;
   my @messages = $result->all_messages;
 
-Returns all messages. When a scalar is expected, it returns all messages concatenated with a newline between each. When a list is expected, it returns a list of L<FormFactory::Message> objects.
+Returns all messages. When a scalar is expected, it returns all messages concatenated with a newline between each. When a list is expected, it returns a list of L<Form::Factory::Message> objects.
 
 =cut
 

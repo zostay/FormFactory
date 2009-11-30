@@ -1,20 +1,20 @@
-package FormFactory::Factory;
+package Form::Factory::Factory;
 use Moose::Role;
 
-use FormFactory::Stasher::Memory;
+use Form::Factory::Stasher::Memory;
 
 requires qw( render_control consume_control );
 
 =head1 NAME
 
-FormFactory::Factory - Interface for form factory implementations
+Form::Factory::Factory - Interface for form factory implementations
 
 =head1 SYNOPSIS
 
-  package FormFactory::Factory::MyFactory;
+  package Form::Factory::Factory::MyFactory;
   use Moose;
 
-  with qw( FormFactory::Factory );
+  with qw( Form::Factory::Factory );
 
   sub render_control {
       my ($self, $control, %options) = @_;
@@ -42,9 +42,9 @@ A place for remembering things.
 
 has stasher => (
     is        => 'ro',
-    does      => 'FormFactory::Stasher',
+    does      => 'Form::Factory::Stasher',
     required  => 1,
-    default   => sub { FormFactory::Stasher::Memory->new },
+    default   => sub { Form::Factory::Stasher::Memory->new },
     handles   => [ qw( stash unstash ) ],
 );
 
@@ -54,7 +54,7 @@ has stasher => (
 
 =head2 unstash
 
-See L<FormFactory::Stash>.
+See L<Form::Factory::Stash>.
 
 =head2 new_action
 
@@ -84,7 +84,7 @@ Given the short name for a control and a hash reference of initialization argume
 sub new_control {
     my ($self, $name, $args) = @_;
 
-    my $class_name = FormFactory->control_class($name);
+    my $class_name = Form::Factory->control_class($name);
     return unless $class_name;
 
     return $class_name->new($args);
@@ -114,41 +114,41 @@ Here's a list of controls and the classes they represent:
 
 =item button
 
-L<FormFactory::Control::Button>
+L<Form::Factory::Control::Button>
 
 =item checkbox
 
-L<FormFactory::Control::Checkbox>
+L<Form::Factory::Control::Checkbox>
 
 =item full_text
 
-L<FormFactory::Control::FullText>
+L<Form::Factory::Control::FullText>
 
 =item password
 
-L<FormFactory::Control::Password>
+L<Form::Factory::Control::Password>
 
 =item select_many
 
-L<FormFactory::Control::SelectMany>
+L<Form::Factory::Control::SelectMany>
 
 =item select_one
 
-L<FormFactory::Control::SelectOne>
+L<Form::Factory::Control::SelectOne>
 
 =item text
 
-L<FormFactory::Control::Text>
+L<Form::Factory::Control::Text>
 
 =item value
 
-L<FormFactory::Control::Value>
+L<Form::Factory::Control::Value>
 
 =back
 
 =head1 SEE ALSO
 
-L<FormFactory::Action>, L<FormFactory::Control>, L<FormFactory::Stasher>
+L<Form::Factory::Action>, L<Form::Factory::Control>, L<Form::Factory::Stasher>
 
 =head1 AUTHOR
 

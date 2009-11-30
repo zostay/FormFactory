@@ -1,19 +1,19 @@
-package FormFactory::Control::Choice;
+package Form::Factory::Control::Choice;
 use Moose;
 
 =head1 NAME
 
-FormFactory::Control::Choice - Helper class for tracking choices
+Form::Factory::Control::Choice - Helper class for tracking choices
 
 =head1 SYNOPSIS
 
-  my $foo = FormFactory::Control::Choice->new('foo');
-  my $bar = FormFactory::Control::Choice->new('bar' => 'Bar');
-  my $baz = FormFactory::Control::Choice->new(
+  my $foo = Form::Factory::Control::Choice->new('foo');
+  my $bar = Form::Factory::Control::Choice->new('bar' => 'Bar');
+  my $baz = Form::Factory::Control::Choice->new(
       label => 'Baz',
       value => 'baz',
   );
-  my $qux = FormFactory::Control::Choice->new({
+  my $qux = Form::Factory::Control::Choice->new({
       label => 'Qux',
       value => 'qux',
   });
@@ -22,13 +22,13 @@ FormFactory::Control::Choice - Helper class for tracking choices
 
 These objects represent a single choice for a list or popup box. Each choice has a label and a value. The constructor is flexible to allow the following uses:
 
-  my $choice = FormFactory::Control::Choice->new($value) # $label = $value
-  my $choice = FormFactory::Control::Choice->new($value => $label);
-  my $choice = FormFactory::Control::Choice->new(
+  my $choice = Form::Factory::Control::Choice->new($value) # $label = $value
+  my $choice = Form::Factory::Control::Choice->new($value => $label);
+  my $choice = Form::Factory::Control::Choice->new(
       label => $label,
       value => $value,
   );
-  my $choice = FormFactory::Control::Choice->new({
+  my $choice = Form::Factory::Control::Choice->new({
       label => $label,
       value => $value,
   });

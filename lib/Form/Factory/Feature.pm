@@ -1,4 +1,4 @@
-package FormFactory::Feature;
+package Form::Factory::Feature;
 use Moose::Role;
 
 use Scalar::Util qw( blessed );
@@ -7,14 +7,14 @@ requires qw( clean check pre_process post_process );
 
 =head1 NAME
 
-FormFactory::Feature - Interface for objects that modify how actions work
+Form::Factory::Feature - Interface for objects that modify how actions work
 
 =head1 SYNOPSIS
 
   package MyApp::Feature::Foo;
   use Moose;
 
-  with qw( FormFactory::Feature );
+  with qw( Form::Factory::Feature );
 
   sub clean {
       my $self = shift;
@@ -60,8 +60,8 @@ has name => (
     default   => sub {
         my $self = shift;
         my $class_name = blessed $self;
-        unless ($class_name =~ s/^FormFactory::Feature::Control:://) {
-            $class_name =~ s/^FormFactory::Feature:://;
+        unless ($class_name =~ s/^Form::Factory::Feature::Control:://) {
+            $class_name =~ s/^Form::Factory::Feature:://;
         }
         $class_name =~ s/(\p{Lu})/_\l$1/g;
         $class_name =~ s/\W+/_/g;
@@ -79,7 +79,7 @@ The action this feature has been attached to.
 
 has action => (
     is        => 'ro',
-    isa       => 'FormFactory::Action',
+    isa       => 'Form::Factory::Action',
     required  => 1,
     weak_ref  => 1,
 );
@@ -100,15 +100,15 @@ has message => (
 
 =head2 result
 
-This is the L<FormFactory::Result::Single> recording the success or failure of the parts of this feature.
+This is the L<Form::Factory::Result::Single> recording the success or failure of the parts of this feature.
 
 =cut
 
 has result => (
     is        => 'ro',
-    isa       => 'FormFactory::Result::Single',
+    isa       => 'Form::Factory::Result::Single',
     required  => 1,
-    default   => sub { FormFactory::Result::Single->new },
+    default   => sub { Form::Factory::Result::Single->new },
 );
 
 =head1 METHODS

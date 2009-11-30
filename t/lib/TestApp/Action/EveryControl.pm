@@ -1,5 +1,5 @@
 package TestApp::Action::EveryControl;
-use FormFactory::Processor;
+use Form::Factory::Processor;
 
 has_control button => (
     control   => 'button',
@@ -28,7 +28,7 @@ has_control select_many => (
     control   => 'select_many',
     options   => {
         available_choices => [
-            map { FormFactory::Control::Choice->new($_) } 
+            map { Form::Factory::Control::Choice->new($_) } 
               qw( one two three four five )
         ],
     },
@@ -38,7 +38,7 @@ has_control select_one => (
     control   => 'select_one',
     options   => {
         available_choices => [
-            map { FormFactory::Control::Choice->new($_) } 
+            map { Form::Factory::Control::Choice->new($_) } 
               qw( ay bee see dee ee )
         ],
     },

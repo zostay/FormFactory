@@ -1,14 +1,14 @@
-package FormFactory::Feature::Control::MatchAvailableChoices;
+package Form::Factory::Feature::Control::MatchAvailableChoices;
 use Moose;
 
 with qw( 
-    FormFactory::Feature 
-    FormFactory::Feature::Role::Control
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Control
 );
 
 =head1 NAME
 
-FormFactory::Feature::Control::MatchAvailableChoices - Check for choice availability
+Form::Factory::Feature::Control::MatchAvailableChoices - Check for choice availability
 
 =head1 SYNOPSIS
 
@@ -16,7 +16,7 @@ FormFactory::Feature::Control::MatchAvailableChoices - Check for choice availabi
       control => 'select_one',
       options => {
           available_choices => [
-              map { FormFactory::Control::Choice->new($_) } qw( PST MST CST EST )
+              map { Form::Factory::Control::Choice->new($_) } qw( PST MST CST EST )
           ],
       },
       features => {
@@ -32,7 +32,7 @@ Verifies that the value set for the control matches one of the available choices
 
 =head2 check_control
 
-Verifies that the control does the L<FormFactory::Control::Role::AvailableChoices> and that it does either L<FormFactory::Control::Role::ListValue> or L<FormFactory::Control::Role::ScalarValue>.
+Verifies that the control does the L<Form::Factory::Control::Role::AvailableChoices> and that it does either L<Form::Factory::Control::Role::ListValue> or L<Form::Factory::Control::Role::ScalarValue>.
 
 =cut
 
@@ -40,10 +40,10 @@ sub check_control {
     my ($self, $control) = @_;
 
     die "the match_available_options feature only works for controls that have available choices, not $control"
-        unless $control->does('FormFactory::Control::Role::AvailableChoices');
+        unless $control->does('Form::Factory::Control::Role::AvailableChoices');
 
-    return if $control->does('FormFactory::Control::Role::ListValue');
-    return if $control->does('FormFactory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::ListValue');
+    return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
     die "the match_available_feature does not know hwo to check the value of $control";
 }
@@ -62,7 +62,7 @@ sub check_value {
         @{ $self->control->available_choices };
 
     # Deal with scalar valued controls
-    if ($control->does('FormFactory::Control::Role::ScalarValue')) {
+    if ($control->does('Form::Factory::Control::Role::ScalarValue')) {
         my $value = $control->current_value;
         $self->control_error('the given value for %s is not one of the available choices')
             unless $available_values{ $value };

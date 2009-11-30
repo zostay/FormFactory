@@ -1,15 +1,15 @@
-package FormFactory::Control::Checkbox;
+package Form::Factory::Control::Checkbox;
 use Moose;
 
 with qw(
-    FormFactory::Control
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::Checkbox - the checkbox control
+Form::Factory::Control::Checkbox - the checkbox control
 
 =head1 SYNOPSIS
 
@@ -24,7 +24,7 @@ FormFactory::Control::Checkbox - the checkbox control
 
 =head1 DESCRIPTION
 
-This represents a toggle button, typically displayed as a checkbox. This control implements L<FormFactory::Control>, L<FormFactory::Control::Role::Labeled>, L<FormFactory::Control::Role::ScalarValue>.
+This represents a toggle button, typically displayed as a checkbox. This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
 
 =head1 ATTRIBUTES
 

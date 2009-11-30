@@ -1,11 +1,11 @@
-package FormFactory::Processor;
+package Form::Factory::Processor;
 use Moose;
 use Moose::Exporter;
 
-use FormFactory::Action;
-use FormFactory::Action::Meta::Class;
-use FormFactory::Action::Meta::Attribute::Control;
-use FormFactory::Processor::DeferredValue;
+use Form::Factory::Action;
+use Form::Factory::Action::Meta::Class;
+use Form::Factory::Action::Meta::Attribute::Control;
+use Form::Factory::Processor::DeferredValue;
 
 Moose::Exporter->setup_import_methods(
     as_is     => [ qw( deferred_value ) ],
@@ -18,12 +18,12 @@ Moose::Exporter->setup_import_methods(
 
 =head1 NAME
 
-FormFactory::Processor - Moos-ish helper for action classes
+Form::Factory::Processor - Moos-ish helper for action classes
 
 =head1 SYNOPSIS
 
   package MyApp::Action::Foo;
-  use FormFactory::Processor;
+  use Form::Factory::Processor;
 
   has_control name => (
       control => 'text',
@@ -90,11 +90,11 @@ sub init_meta {
 
     my $meta = Moose::Util::MetaRole::apply_metaclass_roles(
         for_class       => $options{for_class},
-        metaclass_roles => [ 'FormFactory::Action::Meta::Class' ],
+        metaclass_roles => [ 'Form::Factory::Action::Meta::Class' ],
     );
 
     Moose::Util::apply_all_roles(
-        $options{for_class}, 'FormFactory::Action',
+        $options{for_class}, 'Form::Factory::Action',
     );
 
     return $meta;
@@ -110,7 +110,7 @@ sub init_meta {
       features => \%control_features,
   );
 
-This works very similar to L<Moose/has>. This also applies the L<FormFactory::Action::Meta::Attribute::Control> trait to the attribute and sets up other defaults.
+This works very similar to L<Moose/has>. This also applies the L<Form::Factory::Action::Meta::Attribute::Control> trait to the attribute and sets up other defaults.
 
 The following defaults are set:
 
@@ -151,7 +151,7 @@ sub has_control {
     $args->{traits}   ||= [];
 
     $args->{is}       ||= 'ro';
-    $args->{isa}      ||= FormFactory->control_class($args->{control})->default_isa;
+    $args->{isa}      ||= Form::Factory->control_class($args->{control})->default_isa;
 
     for my $value (values %{ $args->{features} }) {
         $value = {} unless ref $value;
@@ -181,7 +181,7 @@ This is a helper for deferring the calculation of a value. This works similar to
 sub deferred_value(&) {
     my $code = shift;
 
-    return FormFactory::Processor::DeferredValue->new(
+    return Form::Factory::Processor::DeferredValue->new(
         code => $code,
     );
 }
@@ -225,7 +225,7 @@ sub has_post_processor { _add_feature('post_processor', @_) }
 
 =head1 SEE ALSO
 
-L<FormFactory::Action>
+L<Form::Factory::Action>
 
 =head1 AUTHOR
 

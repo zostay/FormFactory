@@ -1,14 +1,14 @@
-package FormFactory::Feature::Control::Trim;
+package Form::Factory::Feature::Control::Trim;
 use Moose;
 
 with qw( 
-    FormFactory::Feature 
-    FormFactory::Feature::Role::Control
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Control
 );
 
 =head1 NAME
 
-FormFactory::Feature::Control::Trim - Trims whitespace from a control value
+Form::Factory::Feature::Control::Trim - Trims whitespace from a control value
 
 =head1 SYNOPSIS
 
@@ -34,7 +34,7 @@ Reports an error unless the control is a scalar value.
 sub check_control {
     my ($self, $control) = @_;
 
-    return if $control->does('FormFactory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
     die "the trim feature only works on scalar values, not $control";
 }

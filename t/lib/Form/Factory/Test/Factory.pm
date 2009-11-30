@@ -1,4 +1,4 @@
-package FormFactory::Test::Factory;
+package Form::Factory::Test::Factory;
 use Test::Able::Role;
 use Test::More;
 use Test::Moose;
@@ -14,14 +14,14 @@ has class_name => (
     isa       => 'Str',
     required  => 1,
     lazy      => 1,
-    default   => sub { 'FormFactory::Factory::' . shift->name },
+    default   => sub { 'Form::Factory::Factory::' . shift->name },
 );
 
 has factory => (
     is        => 'ro',
-    does      => 'FormFactory::Factory',
+    does      => 'Form::Factory::Factory',
     required  => 1,
-    default   => sub { FormFactory->new_factory('HTML') },
+    default   => sub { Form::Factory->new_factory('HTML') },
     lazy      => 1,
 );
 
@@ -31,7 +31,7 @@ test plan => 4, factory_ok => sub {
     my $factory = $self->factory;
     ok($factory, "got a factory for " . $self->name);
     isa_ok($factory, $self->class_name);
-    does_ok($factory, 'FormFactory::Factory');
+    does_ok($factory, 'Form::Factory::Factory');
     can_ok($factory, qw( render_control consume_control ));
 };
 

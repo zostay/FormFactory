@@ -1,15 +1,15 @@
-package FormFactory::Result::Single;
+package Form::Factory::Result::Single;
 use Moose;
 
-with qw( FormFactory::Result );
+with qw( Form::Factory::Result );
 
 =head1 NAME
 
-FormFactory::Result::Single - Form result class representing a single result
+Form::Factory::Result::Single - Form result class representing a single result
 
 =head1 SYNOPSIS
 
-  my $result = FormFactory::Result::Single->new;
+  my $result = Form::Factory::Result::Single->new;
 
   $result->is_valid(1);
   $result->is_success(1);
@@ -29,7 +29,7 @@ FormFactory::Result::Single - Form result class representing a single result
 
 =head1 DESCRIPTION
 
-This class provides an individual L<FormFactory::Result>.
+This class provides an individual L<Form::Factory::Result>.
 
 =head1 ATTRIBUTES
 
@@ -59,13 +59,13 @@ has is_success => (
 
 =head2 messages
 
-This is the array of L<FormFactory::Message> objects attached to this result.
+This is the array of L<Form::Factory::Message> objects attached to this result.
 
 =cut
 
 has messages => (
     is       => 'ro',
-    isa      => 'ArrayRef[FormFactory::Message]',
+    isa      => 'ArrayRef[Form::Factory::Message]',
     required => 1,
     default  => sub { [] },
 );
@@ -89,13 +89,13 @@ has content => (
 
   $result->add_message(%options);
 
-The C<%options> are passed to the constructor of L<FormFactory::Message>. The new message object is added to the end of L</messages>.
+The C<%options> are passed to the constructor of L<Form::Factory::Message>. The new message object is added to the end of L</messages>.
 
 =cut
 
 sub add_message {
     my ($self, %params) = @_;
-    push @{ $self->messages }, FormFactory::Message->new( %params );
+    push @{ $self->messages }, Form::Factory::Message->new( %params );
 }
 
 =head2 clear_messages

@@ -1,9 +1,9 @@
-package FormFactory::Control::Role::Labeled;
+package Form::Factory::Control::Role::Labeled;
 use Moose::Role;
 
 =head1 NAME
 
-FormFactory::Control::Role::Labeled - labeled controls
+Form::Factory::Control::Role::Labeled - labeled controls
 
 =head1 DESCRIPTION
 

@@ -1,14 +1,14 @@
-package FormFactory::Feature::Control::MatchCode;
+package Form::Factory::Feature::Control::MatchCode;
 use Moose;
 
 with qw( 
-    FormFactory::Feature 
-    FormFactory::Feature::Role::Control
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Control
 );
 
 =head1 NAME
 
-FormFactory::Feature::Control::MatchCode - Greps the control value for correctness
+Form::Factory::Feature::Control::MatchCode - Greps the control value for correctness
 
 =head1 SYNOPSIS
 
@@ -44,15 +44,15 @@ has code => (
 
 =head2 check_control
 
-Checks to make sure the control does either L<FormFactory::Control::Role::ScalarValue> or L<FormFactory::Control::Role::ListValue>.
+Checks to make sure the control does either L<Form::Factory::Control::Role::ScalarValue> or L<Form::Factory::Control::Role::ListValue>.
 
 =cut
 
 sub check_control { 
     my ($self, $control) = @_;
 
-    return if $control->does('FormFactory::Control::Role::ListValue');
-    return if $control->does('FormFactory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::ListValue');
+    return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
     die "the match_code feature only works with scalar or list valued controls";
 }
@@ -66,7 +66,7 @@ Does the work of running the given subroutine over the control value and reports
 sub check_value {
     my $self    = shift;
     my $control = $self->control;
-    my $value   = $control->does('FormFactory::Control::Role::ScalarValue')
+    my $value   = $control->does('Form::Factory::Control::Role::ScalarValue')
                 ? $control->current_value
                 : $control->current_values
                 ;

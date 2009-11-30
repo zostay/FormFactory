@@ -3,7 +3,7 @@ use warnings;
 
 use lib 't/lib';
 
-use FormFactory::Test;
+use Form::Factory::Test;
 
-my $test = FormFactory::Test->new;
+my $test = Form::Factory::Test->new;
 $test->run_tests;

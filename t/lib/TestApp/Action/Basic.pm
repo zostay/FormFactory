@@ -1,5 +1,5 @@
 package TestApp::Action::Basic;
-use FormFactory::Processor;
+use Form::Factory::Processor;
 
 my $counter = 0;
 

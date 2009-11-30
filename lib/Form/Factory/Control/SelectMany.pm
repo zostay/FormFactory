@@ -1,18 +1,18 @@
-package FormFactory::Control::SelectMany;
+package Form::Factory::Control::SelectMany;
 use Moose;
 
 with qw(
-    FormFactory::Control
-    FormFactory::Control::Role::AvailableChoices
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ListValue
+    Form::Factory::Control
+    Form::Factory::Control::Role::AvailableChoices
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ListValue
 );
 
 use List::MoreUtils qw( any );
 
 =head1 NAME
 
-FormFactory::Control::SelectMany - the multi-select control
+Form::Factory::Control::SelectMany - the multi-select control
 
 =head1 SYNOPSIS
 
@@ -21,9 +21,9 @@ FormFactory::Control::SelectMany - the multi-select control
       options => {
           label => 'Just select some of these already...",
           available_choices => [
-              FormFactory::Control::Choice->new('one');
+              Form::Factory::Control::Choice->new('one');
               Formfactory::Control::Choice->new('two');
-              FormFactory::Control::Choice->new('three');
+              Form::Factory::Control::Choice->new('three');
           ],
           default_selected_choices => [ qw( one three ) ],
       },
@@ -33,7 +33,7 @@ FormFactory::Control::SelectMany - the multi-select control
 
 A select many can be displayed as a multi-select list box or a list of checkboxes.
 
-This control implements L<FormFactory::Control>, L<FormFactory::Control::Role::AvailableChoices>, L<FormFactory::Control::Role::Labeled>, L<FormFactory::Control::Role::ListValue>.
+This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::AvailableChoices>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ListValue>.
 
 =head1 ATTRIBUTES
 

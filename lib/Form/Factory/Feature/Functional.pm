@@ -1,16 +1,16 @@
-package FormFactory::Feature::Functional;
+package Form::Factory::Feature::Functional;
 use Moose;
 
-with qw( FormFactory::Feature );
+with qw( Form::Factory::Feature );
 
 =head1 NAME
 
-FormFactory::Feature::Functional - A generic feature for actions
+Form::Factory::Feature::Functional - A generic feature for actions
 
 =head1 SYNOPSIS
 
   package MyApp::Action::Foo;
-  use FormFactory::Processor;
+  use Form::Factory::Processor;
 
   has_cleaner squeaky => sub {
       my $action = shift;
@@ -34,7 +34,7 @@ FormFactory::Feature::Functional - A generic feature for actions
 
 =head1 DESCRIPTION
 
-You probably don't want to use this feature directly. The various helpers imported when you use L<FormFactory::Processor> actually use this feature for implementation. You probably want to use those instead.
+You probably don't want to use this feature directly. The various helpers imported when you use L<Form::Factory::Processor> actually use this feature for implementation. You probably want to use those instead.
 
 =head1 ATTRIBUTES
 

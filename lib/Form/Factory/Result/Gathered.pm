@@ -1,18 +1,18 @@
-package FormFactory::Result::Gathered;
+package Form::Factory::Result::Gathered;
 use Moose;
 
 use Scalar::Util qw( blessed refaddr );
 use List::MoreUtils qw( all any );
 
-with qw( FormFactory::Result );
+with qw( Form::Factory::Result );
 
 =head1 NAME
 
-FormFactory::Result::Gathered - A group of results
+Form::Factory::Result::Gathered - A group of results
 
 =head1 SYNOPSIS
 
-  my $result = FormFactory::Result::Gathered->new;
+  my $result = Form::Factory::Result::Gathered->new;
   $result->gather_results($other_result1, $other_result2, $other_result3);
 
   my @child_results = $result->results;
@@ -33,13 +33,13 @@ FormFactory::Result::Gathered - A group of results
 
 =head1 DESCRIPTION
 
-This is a collection of results. The results are grouped and collected together in a way that makes sense to the FormFactory API.
+This is a collection of results. The results are grouped and collected together in a way that makes sense to the Form::Factory API.
 
 =cut
 
 has _results => (
     is       => 'ro',
-    isa      => 'HashRef[FormFactory::Result]',
+    isa      => 'HashRef[Form::Factory::Result]',
     required => 1,
     default  => sub { {} },
 );

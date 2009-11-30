@@ -1,14 +1,14 @@
-package FormFactory::Feature::Control::Length;
+package Form::Factory::Feature::Control::Length;
 use Moose;
 
 with qw( 
-    FormFactory::Feature 
-    FormFactory::Feature::Role::Control
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Control
 );
 
 =head1 NAME
 
-FormFactory::Feature::Control::Length - A control feature for checking length
+Form::Factory::Feature::Control::Length - A control feature for checking length
 
 =head1 SYNOPSIS
 
@@ -68,14 +68,14 @@ sub BUILDARGS {
 
 =head2 check_control
 
-Makes sure the value is a L<FormFactory::Control::Role::ScalarValue>.
+Makes sure the value is a L<Form::Factory::Control::Role::ScalarValue>.
 
 =cut
 
 sub check_control {
     my ($self, $control) = @_;
 
-    return if $control->does('FormFactory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
     die "the length feature only works with scalar values\n";
 }

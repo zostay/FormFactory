@@ -1,9 +1,9 @@
-package FormFactory::Test::Action::Basic;
+package Form::Factory::Test::Action::Basic;
 use Test::Able;
 use Test::More;
 use Test::Moose;
 
-with qw( FormFactory::Test::Action );
+with qw( Form::Factory::Test::Action );
 
 has '+action' => (
     lazy       => 1,
@@ -29,7 +29,7 @@ test plan => 1, meta_class => sub {
     my $self = shift;
     my $meta = $self->action->meta;
 
-    does_ok($meta, 'FormFactory::Action::Meta::Class');
+    does_ok($meta, 'Form::Factory::Action::Meta::Class');
 };
 
 test plan => 3, meta_class_controls => sub {
@@ -37,7 +37,7 @@ test plan => 3, meta_class_controls => sub {
     my @controls = $self->action->meta->get_controls;
 
     is(scalar @controls, 1, 'we have one control');
-    does_ok($controls[0], 'FormFactory::Action::Meta::Attribute::Control');
+    does_ok($controls[0], 'Form::Factory::Action::Meta::Attribute::Control');
     is($controls[0]->name, 'name', 'control is named name');
 };
 
@@ -84,10 +84,10 @@ test plan => 13, control_name => sub {
     my $control = $self->action->controls->{name};
 
     ok($control, 'got control');
-    does_ok($control, 'FormFactory::Control');
-    isa_ok($control, 'FormFactory::Control::Text');
-    does_ok($control, 'FormFactory::Control::Role::Labeled');
-    does_ok($control, 'FormFactory::Control::Role::ScalarValue');
+    does_ok($control, 'Form::Factory::Control');
+    isa_ok($control, 'Form::Factory::Control::Text');
+    does_ok($control, 'Form::Factory::Control::Role::Labeled');
+    does_ok($control, 'Form::Factory::Control::Role::ScalarValue');
     is($control->name, 'name', 'control is named name');
     is_deeply($control->features, [], 'control features are empty');
     is_deeply($control->stashable_keys, [ qw( value ) ], 

@@ -1,16 +1,16 @@
-package FormFactory::Stasher::Memory;
+package Form::Factory::Stasher::Memory;
 use Moose;
 
-with qw( FormFactory::Stasher );
+with qw( Form::Factory::Stasher );
 
 =head1 NAME
 
-FormFactory::Stasher::Memory - Remember things in a Perl hash
+Form::Factory::Stasher::Memory - Remember things in a Perl hash
 
 =head1 SYNOPSIS
 
   $c->session->{stash_stuff} ||= {};
-  my $stasher = FormFactory::Stasher::Memory->new(
+  my $stasher = Form::Factory::Stasher::Memory->new(
       stash_hash => $c->session->{stash_stuff},
   );
 

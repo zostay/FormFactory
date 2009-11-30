@@ -1,14 +1,14 @@
-package FormFactory::Feature::Control::MatchRegex;
+package Form::Factory::Feature::Control::MatchRegex;
 use Moose;
 
 with qw( 
-    FormFactory::Feature 
-    FormFactory::Feature::Role::Control
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Control
 );
 
 =head1 NAME
 
-FormFactory::Feature::Control::MatchRegex - Match a control value against a regex
+Form::Factory::Feature::Control::MatchRegex - Match a control value against a regex
 
 =head1 SYNOPSIS
 
@@ -44,14 +44,14 @@ has regex => (
 
 =head2 check_control
 
-Checks that the control does L<FormFactory::Control::Role::ScalarValue>.
+Checks that the control does L<Form::Factory::Control::Role::ScalarValue>.
 
 =cut
 
 sub check_control {
     my ($self, $control) = @_;
 
-    return if $control->does('FormFactory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
     die "the match_regex feature only works with scalar value controls, not $control";
 }

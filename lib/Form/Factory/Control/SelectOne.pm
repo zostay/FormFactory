@@ -1,16 +1,16 @@
-package FormFactory::Control::SelectOne;
+package Form::Factory::Control::SelectOne;
 use Moose;
 
 with qw(
-    FormFactory::Control
-    FormFactory::Control::Role::AvailableChoices
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control
+    Form::Factory::Control::Role::AvailableChoices
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::SelectOne - A control for selecting a single item
+Form::Factory::Control::SelectOne - A control for selecting a single item
 
 =head1 SYNOPSIS
 
@@ -18,9 +18,9 @@ FormFactory::Control::SelectOne - A control for selecting a single item
       control => 'select_one',
       options => {
           available_choices => [
-              FormFactory::Control::Choice->new('one'),
-              FormFactory::Control::Choice->new('two'),
-              FormFactory::Control::Choice->new('three'),
+              Form::Factory::Control::Choice->new('one'),
+              Form::Factory::Control::Choice->new('two'),
+              Form::Factory::Control::Choice->new('three'),
           ],
           default_value => 'two',
       },

@@ -1,15 +1,15 @@
-package FormFactory::Control::Password;
+package Form::Factory::Control::Password;
 use Moose;
 
 with qw( 
-    FormFactory::Control 
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control 
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::Password - the password control
+Form::Factory::Control::Password - the password control
 
 =head1 SYNOPSIS
 

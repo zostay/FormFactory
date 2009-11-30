@@ -1,31 +1,31 @@
-package FormFactory::Factory::HTML;
+package Form::Factory::Factory::HTML;
 use Moose;
 
-with qw( FormFactory::Factory );
+with qw( Form::Factory::Factory );
 
 use Scalar::Util qw( blessed );
 
-use FormFactory::Factory::HTML::Widget::Div;
-use FormFactory::Factory::HTML::Widget::Input;
-use FormFactory::Factory::HTML::Widget::Label;
-use FormFactory::Factory::HTML::Widget::List;
-use FormFactory::Factory::HTML::Widget::ListItem;
-use FormFactory::Factory::HTML::Widget::Select;
-use FormFactory::Factory::HTML::Widget::Span;
-use FormFactory::Factory::HTML::Widget::Textarea;
+use Form::Factory::Factory::HTML::Widget::Div;
+use Form::Factory::Factory::HTML::Widget::Input;
+use Form::Factory::Factory::HTML::Widget::Label;
+use Form::Factory::Factory::HTML::Widget::List;
+use Form::Factory::Factory::HTML::Widget::ListItem;
+use Form::Factory::Factory::HTML::Widget::Select;
+use Form::Factory::Factory::HTML::Widget::Span;
+use Form::Factory::Factory::HTML::Widget::Textarea;
 
 =head1 NAME
 
-FormFactory::Factory::HTML - Simple HTML form factory
+Form::Factory::Factory::HTML - Simple HTML form factory
 
 =head1 SYNOPSIS
 
-  use FormFactory;
+  use Form::Factory;
 
   my $q = CGI->new;
   my $html = '<form>';
 
-  my $form = FormFactory->new(HTML => {
+  my $form = Form::Factory->new(HTML => {
       renderer => sub { $html .= join('', @_) },
       consumer => sub { shift->Vars },
   });
@@ -62,7 +62,7 @@ has renderer => (
 
 =head2 consumer
 
-This is a code reference responsible for taking the request object and turning it into a hash reference of values passed in from the HTTP request. The value passed in is the value passed as the C<request> parameter to L<FormFactory::Action/consume>.
+This is a code reference responsible for taking the request object and turning it into a hash reference of values passed in from the HTTP request. The value passed in is the value passed as the C<request> parameter to L<Form::Factory::Action/consume>.
 
 =cut
 
@@ -77,7 +77,7 @@ has consumer => (
 
 =head2 new_widget_for_control
 
-Returns a L<FormFactory::Factory::HTML::Widget> implementation for the given control.
+Returns a L<Form::Factory::Factory::HTML::Widget> implementation for the given control.
 
 =cut
 
@@ -87,7 +87,7 @@ sub new_widget_for_control {
     my $results = shift;
 
     my $control_type = blessed $control;
-    my ($name) = $control_type =~ /^FormFactory::Control::(\w+)$/;
+    my ($name) = $control_type =~ /^Form::Factory::Control::(\w+)$/;
     return unless $name;
     $name = lc $name;
 
@@ -103,7 +103,7 @@ sub new_widget_for_control {
 sub _wrapper($$@) {
     my ($name, $type, @widgets) = @_;
 
-    return FormFactory::Factory::HTML::Widget::Div->new(
+    return Form::Factory::Factory::HTML::Widget::Div->new(
         id      => $name . '-wrapper',
         classes => [ qw( widget wrapper ), $type ],
         widgets => \@widgets,
@@ -113,7 +113,7 @@ sub _wrapper($$@) {
 sub _label($$$;$) {
     my ($name, $type, $label, $is_required) = @_;
 
-    return FormFactory::Factory::HTML::Widget::Label->new(
+    return Form::Factory::Factory::HTML::Widget::Label->new(
         id      => $name . '-label',
         classes => [ qw( widget label ), $type ],
         for     => $name,
@@ -125,7 +125,7 @@ sub _required_marker($) {
     my ($is_required) = @_;
     
     if ($is_required) {
-        return FormFactory::Factory::HTML::Widget::Span->new(
+        return Form::Factory::Factory::HTML::Widget::Span->new(
             classes => [ qw( required ) ],
             content => '*',
         )->render;
@@ -138,7 +138,7 @@ sub _required_marker($) {
 sub _input($$$;$%) {
     my ($name, $type, $input_type, $value, %args) = @_;
 
-    return FormFactory::Factory::HTML::Widget::Input->new(
+    return Form::Factory::Factory::HTML::Widget::Input->new(
         id      => $name,
         name    => $name,
         type    => $input_type,
@@ -151,7 +151,7 @@ sub _input($$$;$%) {
 sub _alerts($$@) {
     my ($name, $type, @items) = @_;
 
-    return FormFactory::Factory::HTML::Widget::List->new(
+    return Form::Factory::Factory::HTML::Widget::List->new(
         id      => $name . '-alerts',
         classes => [ qw( widget alerts ), $type ],
         items   => \@items,
@@ -165,7 +165,7 @@ sub _alerts_for_control {
     my $count = 0;
     my @messages = $results->field_messages($name);
     for my $message (@messages) {
-        push @items, FormFactory::Factory::HTML::Widget::ListItem->new(
+        push @items, Form::Factory::Factory::HTML::Widget::ListItem->new(
             id      => $name . '-message-' . ++$count,
             classes => [ qw( widget message ), $type, $message->type ],
             content => $message->english_message,
@@ -177,7 +177,7 @@ sub _alerts_for_control {
 
 =head2 new_widget_for_button
 
-Returns a widget for a L<FormFactory::Control::Button>.
+Returns a widget for a L<Form::Factory::Control::Button>.
 
 =cut
 
@@ -189,7 +189,7 @@ sub new_widget_for_button {
 
 =head2 new_widget_for_checkbox
 
-Returns a widget for a L<FormFactory::Control::Checkbox>.
+Returns a widget for a L<Form::Factory::Control::Checkbox>.
 
 =cut
 
@@ -206,7 +206,7 @@ sub new_widget_for_checkbox {
 
 =head2 new_widget_for_fulltext
 
-Returns a widget for a L<FormFactory::Control::FullText>.
+Returns a widget for a L<Form::Factory::Control::FullText>.
 
 =cut
 
@@ -216,7 +216,7 @@ sub new_widget_for_fulltext {
     return _wrapper($control->name, 'full-text',
         _label($control->name, 'full-text', $control->label, 
             $control->has_feature('required')),
-        FormFactory::Factory::HTML::Widget::Textarea->new(
+        Form::Factory::Factory::HTML::Widget::Textarea->new(
             id      => $control->name,
             name    => $control->name,
             classes => [ qw( widget field full-text ) ],
@@ -228,7 +228,7 @@ sub new_widget_for_fulltext {
 
 =head2 new_widget_for_password
 
-Returns a widget for a L<FormFactory::Control::Password>.
+Returns a widget for a L<Form::Factory::Control::Password>.
 
 =cut
 
@@ -245,7 +245,7 @@ sub new_widget_for_password {
 
 =head2 new_widget_for_selectmany
 
-Returns a widget for a L<FormFactory::Control::SelectMany>.
+Returns a widget for a L<Form::Factory::Control::SelectMany>.
 
 =cut
 
@@ -263,7 +263,7 @@ sub new_widget_for_selectmany {
     return _wrapper($control->name, 'select-many',
         _label($control->name, 'select-many', $control->label,
             $control->has_feature('required')),
-        FormFactory::Factory::HTML::Widget::Div->new(
+        Form::Factory::Factory::HTML::Widget::Div->new(
             id      => $control->name . '-list',
             classes => [ qw( widget list select-many ) ],
             widgets => \@checkboxes,
@@ -274,7 +274,7 @@ sub new_widget_for_selectmany {
 
 =head2 new_widget_for_selectone
 
-Returns a widget for a L<FormFactory::Control::SelectOne>.
+Returns a widget for a L<Form::Factory::Control::SelectOne>.
 
 =cut
 
@@ -284,7 +284,7 @@ sub new_widget_for_selectone {
     return _wrapper($control->name, 'select-one',
         _label($control->name, 'select-one', $control->label,
             $control->has_feature('required')),
-        FormFactory::Factory::HTML::Widget::Select->new(
+        Form::Factory::Factory::HTML::Widget::Select->new(
             id       => $control->name,
             name     => $control->name,
             classes  => [ qw( widget field select-one ) ],
@@ -298,7 +298,7 @@ sub new_widget_for_selectone {
 
 =head2 new_widget_for_text
 
-Returns a widget for a L<FormFactory::Control::Text>.
+Returns a widget for a L<Form::Factory::Control::Text>.
 
 =cut
 
@@ -315,7 +315,7 @@ sub new_widget_for_text {
 
 =head2 new_widget_for_value
 
-Returns a widget for a L<FormFactory::Control::Value>.
+Returns a widget for a L<Form::Factory::Control::Value>.
 
 =cut
 
@@ -325,7 +325,7 @@ sub new_widget_for_value {
     if ($control->is_visible) {
         return _wrapper($control->name, 'value',
             _label($control->name, 'value', $control->label),
-            FormFactory::Factory::HTML::Widget::Span->new(
+            Form::Factory::Factory::HTML::Widget::Span->new(
                 id      => $control->name,
                 content => $control->value,
                 classes => [ qw( widget field value ) ],
@@ -363,8 +363,8 @@ sub consume_control {
     die "no request option passed" unless defined $options{request};
 
     die "HTML factory does not know how to consume values for $control"
-        unless $control->does('FormFactory::Control::Role::ScalarValue')
-            or $control->does('FormFactory::Control::Role::ListValue');
+        unless $control->does('Form::Factory::Control::Role::ScalarValue')
+            or $control->does('Form::Factory::Control::Role::ListValue');
 
     my $widget = $self->new_widget_for_control($control);
     return unless defined $widget;
@@ -373,7 +373,7 @@ sub consume_control {
 
     return unless defined $params->{ $control->name };
 
-    if ($control->does('FormFactory::Control::Role::ScalarValue')) {
+    if ($control->does('Form::Factory::Control::Role::ScalarValue')) {
         $control->current_value( $params->{ $control->name } );
     }
     else {
@@ -389,7 +389,7 @@ They will probably be removed in a future release.
 
 =head1 SEE ALSO
 
-L<FormFactory::Factory>
+L<Form::Factory::Factory>
 
 =head1 AUTHOR
 

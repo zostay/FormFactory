@@ -1,15 +1,15 @@
-package FormFactory::Control::Text;
+package Form::Factory::Control::Text;
 use Moose;
 
 with qw( 
-    FormFactory::Control 
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control 
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::Text - A single line text field
+Form::Factory::Control::Text - A single line text field
 
 =head1 SYNOPSIS
 
@@ -25,7 +25,7 @@ FormFactory::Control::Text - A single line text field
 
 A regular text box.
 
-This control implements L<FormFactory::Control>, L<FormFactory::Control::Role::Labeled>, and L<Formfactory::Control::Role::ScalarValue>.
+This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, and L<Formfactory::Control::Role::ScalarValue>.
 
 =head1 ATTRIBUTES
 

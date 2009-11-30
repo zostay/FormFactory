@@ -1,14 +1,14 @@
-package FormFactory::Feature::Control::Required;
+package Form::Factory::Feature::Control::Required;
 use Moose;
 
 with qw( 
-    FormFactory::Feature 
-    FormFactory::Feature::Role::Control
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Control
 );
 
 =head1 NAME
 
-FormFactory::Feature::Control::Required - Makes sure a value is set on a control
+Form::Factory::Feature::Control::Required - Makes sure a value is set on a control
 
 =head1 SYNOPSIS
 
@@ -34,8 +34,8 @@ Only works with scalar and list valued controls.
 sub check_control {
     my ($self, $control) = @_;
 
-    return if $control->does('FormFactory::Control::Role::ScalarValue');
-    return if $control->does('FormFactory::Control::Role::ListValue');
+    return if $control->does('Form::Factory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::ListValue');
 
     die "the required feature does not know how to check the value of $control";
 }
@@ -51,7 +51,7 @@ sub check_value {
     my $control = $self->control;
 
     # Handle scalar value controls
-    if ($control->does('FormFactory::Control::Role::ScalarValue')) {
+    if ($control->does('Form::Factory::Control::Role::ScalarValue')) {
         my $value = $control->current_value;
         unless (length($value) > 0) {
             $self->control_error('the %s is required');

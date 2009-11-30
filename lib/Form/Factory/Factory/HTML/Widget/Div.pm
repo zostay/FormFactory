@@ -1,11 +1,11 @@
-package FormFactory::Factory::HTML::Widget::Div;
+package Form::Factory::Factory::HTML::Widget::Div;
 use Moose;
 
-extends qw( FormFactory::Factory::HTML::Widget::Element );
+extends qw( Form::Factory::Factory::HTML::Widget::Element );
 
 =head1 NAME
 
-FormFactory::Factory::HTML::Widget::Div - HTML factory widget helper
+Form::Factory::Factory::HTML::Widget::Div - HTML factory widget helper
 
 =head1 DESCRIPTION
 

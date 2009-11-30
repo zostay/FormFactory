@@ -1,4 +1,4 @@
-package FormFactory::Util;
+package Form::Factory::Util;
 use Moose;
 
 use Sub::Exporter -setup => {
@@ -9,7 +9,7 @@ use Sub::Exporter -setup => {
 
 =head1 NAME
 
-FormFactory::Util - Utility subroutines that don't belong anywhere else
+Form::Factory::Util - Utility subroutines that don't belong anywhere else
 
 =head1 DESCRIPTION
 

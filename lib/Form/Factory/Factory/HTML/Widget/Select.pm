@@ -1,11 +1,11 @@
-package FormFactory::Factory::HTML::Widget::Select;
+package Form::Factory::Factory::HTML::Widget::Select;
 use Moose;
 
-extends qw( FormFactory::Factory::HTML::Widget::Element );
+extends qw( Form::Factory::Factory::HTML::Widget::Element );
 
 =head1 NAME
 
-FormFactory::Factory::HTML::Widget::Select - HTML factory widget helper
+Form::Factory::Factory::HTML::Widget::Select - HTML factory widget helper
 
 =head1 DESCRIPTION
 
@@ -47,7 +47,7 @@ has tabindex => (
 
 has available_choices => (
     is        => 'ro',
-    isa       => 'ArrayRef[FormFactory::Control::Choice]',
+    isa       => 'ArrayRef[Form::Factory::Control::Choice]',
     required  => 1,
     default   => sub { [] },
 );

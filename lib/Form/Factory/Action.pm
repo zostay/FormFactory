@@ -1,21 +1,21 @@
-package FormFactory::Action;
+package Form::Factory::Action;
 use Moose::Role;
 
-use FormFactory::Feature::Functional;
-use FormFactory::Result::Gathered;
-use FormFactory::Result::Single;
-use FormFactory::Util qw( class_name_from_name );
+use Form::Factory::Feature::Functional;
+use Form::Factory::Result::Gathered;
+use Form::Factory::Result::Single;
+use Form::Factory::Util qw( class_name_from_name );
 
 #requires qw( run );
 
 =head1 NAME
 
-FormFactory::Action - Role implemented by actions
+Form::Factory::Action - Role implemented by actions
 
 =head2 SYNOPSIS
 
   package MyApp::Action::Foo;
-  use FormFactory::Processor;
+  use Form::Factory::Processor;
 
   has_control bar => (
       type => 'text',
@@ -37,13 +37,13 @@ All form actions have the following attributes.
 
 =head2 form_factory
 
-This is the L<FormFactory::Factory> that constructed this action. If you need to get at the implementation directly for some reason, here it is. This is mostly used by the action itself when calling the L</render> and L</consume> methods.
+This is the L<Form::Factory::Factory> that constructed this action. If you need to get at the implementation directly for some reason, here it is. This is mostly used by the action itself when calling the L</render> and L</consume> methods.
 
 =cut
 
 has form_factory => (
     is        => 'ro',
-    does      => 'FormFactory::Factory',
+    does      => 'Form::Factory::Factory',
     required  => 1,
 );
 
@@ -62,7 +62,7 @@ has globals => (
 
 =head2 results
 
-This is a L<FormFactory::Result::Gathered> object that tracks the general success, failure, messages, and output from the execution of this action.
+This is a L<Form::Factory::Result::Gathered> object that tracks the general success, failure, messages, and output from the execution of this action.
 
 Actions delegate a number of methods to this object. See L</RESULTS>.
 
@@ -70,10 +70,10 @@ Actions delegate a number of methods to this object. See L</RESULTS>.
 
 has results => (
     is        => 'rw',
-    isa       => 'FormFactory::Result',
+    isa       => 'Form::Factory::Result',
     required  => 1,
     lazy      => 1,
-    default   => sub { FormFactory::Result::Gathered->new },
+    default   => sub { Form::Factory::Result::Gathered->new },
     handles   => [ qw(
         is_valid is_success is_failure
         is_validated is_outcome_known
@@ -89,7 +89,7 @@ has results => (
 
 =head2 result
 
-This is a L<FormFactory::Result::Single> used to record general outcome.
+This is a L<Form::Factory::Result::Single> used to record general outcome.
 
 Actions delegate a number of methods to this object. See L</RESULTS>.
 
@@ -97,10 +97,10 @@ Actions delegate a number of methods to this object. See L</RESULTS>.
 
 has result => (
     is        => 'rw',
-    isa       => 'FormFactory::Result::Single',
+    isa       => 'Form::Factory::Result::Single',
     required  => 1,
     lazy      => 1,
-    default   => sub { FormFactory::Result::Single->new },
+    default   => sub { Form::Factory::Result::Single->new },
     handles   => [ qw(
         success failure
 
@@ -112,7 +112,7 @@ has result => (
 
 =head2 features
 
-This is a list of L<FormFactory::Feature> objects used to modify the object. This will always contain the features that are attached to the class itself. Additional features may be added here.
+This is a list of L<Form::Factory::Feature> objects used to modify the object. This will always contain the features that are attached to the class itself. Additional features may be added here.
 
 =cut
 
@@ -132,7 +132,7 @@ sub _meta_features {
     my @features;
     for my $feature_name (keys %$all_features) {
         my $feature_options = $all_features->{ $feature_name };
-        my $feature_class = 'FormFactory::Feature::' 
+        my $feature_class = 'Form::Factory::Feature::' 
                           . class_name_from_name($feature_name);
         unless (Class::MOP::load_class($feature_class)) {
             die $@ if $@;
@@ -182,7 +182,7 @@ sub _build_controls {
             my $value = $options{$key};
 
             next OPTION unless blessed $value;
-            next OPTION unless $value->isa('FormFactory::Processor::DeferredValue');
+            next OPTION unless $value->isa('Form::Factory::Processor::DeferredValue');
 
             $options{$key} = $value->code->($self, $key);
         }
@@ -194,7 +194,7 @@ sub _build_controls {
 
         my $meta_features = $meta_control->features;
         for my $feature_name (keys %$meta_features) {
-            my $feature_class = 'FormFactory::Feature::Control::' 
+            my $feature_class = 'Form::Factory::Feature::Control::' 
                               . class_name_from_name($feature_name);
             unless (Class::MOP::load_class($feature_class)) {
                 die $@ if $@;
@@ -222,7 +222,7 @@ sub _build_controls {
 
   $action->stash($moniker);
 
-Given a C<$moniker> (a key under which to store the information related to this form), this will stash the form's stashable information under that name using the L<FormFactory::Stasher> associated with the L</form_factory>.
+Given a C<$moniker> (a key under which to store the information related to this form), this will stash the form's stashable information under that name using the L<Form::Factory::Stasher> associated with the L</form_factory>.
 
 The globals, stashable parts of controls, and the results are stashed. This allows those values to be recovered across requests or between process calls or whatever the implementation requires.
 
@@ -284,8 +284,8 @@ sub unstash {
         }
     }
 
-    $self->results($stash->{results} || FormFactory::Result::Gathered->new);
-    $self->result($stash->{result} || FormFactory::Result::Single->new);
+    $self->results($stash->{results} || Form::Factory::Result::Gathered->new);
+    $self->result($stash->{result} || Form::Factory::Result::Single->new);
 }
 
 =head2 clear
@@ -310,7 +310,7 @@ sub clear {
 
     $self->results->clear_messages;
     $self->results->clear_results;
-    $self->result(FormFactory::Result::Single->new);
+    $self->result(Form::Factory::Result::Single->new);
 }
 
 =head2 render
@@ -327,7 +327,7 @@ This is a list of control names to render. If not given, all controls will be re
 
 =back
 
-Any other options will be passed on to the L<FormFactory::Factory/render_control> method.
+Any other options will be passed on to the L<Form::Factory::Factory/render_control> method.
 
 =cut
 
@@ -378,7 +378,7 @@ This is a list of names of controls to consume. Any not listed here will not be 
 
 =back
 
-Any additional options will be passed to the L<FormFactory::Factory/consume_control> method call.
+Any additional options will be passed to the L<Form::Factory::Factory/consume_control> method call.
 
 =cut
 
@@ -400,7 +400,7 @@ sub consume {
 
 Takes the values consumed from the user and cleans them up. For example, if you allow users to type in a phone number, this can be used to clear out any unwanted or incorrect punctuation and format the phone number properly.
 
-This method runs through all the requested L<FormFactory::Feature> objects in L</features> and runs the L<FormFactory::Feature/clean> method for each.
+This method runs through all the requested L<Form::Factory::Feature> objects in L</features> and runs the L<Form::Factory::Feature/clean> method for each.
 
 The following options are used:
 
@@ -408,7 +408,7 @@ The following options are used:
 
 =item controls
 
-This is the list of controls to clean. If not given, all features will be run. If given, only the control-features (those implementing L<FormFactory::Feature::Role::Control> attached to the named controls) will be run. Any form-features or unlisted control-features will not be run.
+This is the list of controls to clean. If not given, all features will be run. If given, only the control-features (those implementing L<Form::Factory::Feature::Role::Control> attached to the named controls) will be run. Any form-features or unlisted control-features will not be run.
 
 =back
 
@@ -425,7 +425,7 @@ sub _run_features {
         my %names = map { $_ => 1 } @{ $params{controls} };
 
         for my $feature (@$features) {
-            next unless $feature->does('FormFactory::Feature::Role::Control');
+            next unless $feature->does('Form::Factory::Feature::Role::Control');
             next unless $names{ $feature->control->name };
 
             $feature->$method;
@@ -451,7 +451,7 @@ sub clean {
 
 The C<check> method is responsible for verifying the correctness of the input. It assumes that L</clean> has already run.
 
-It runs the L<FormFactory::Feature/check> method of all the selected L</features> attached to the action. It also sets the C<is_valid> flag to true if no errors have been recored yet or to false if they have.
+It runs the L<Form::Factory::Feature/check> method of all the selected L</features> attached to the action. It also sets the C<is_valid> flag to true if no errors have been recored yet or to false if they have.
 
 The following options are used:
 
@@ -459,7 +459,7 @@ The following options are used:
 
 =item controls
 
-This is the list of controls to check. If not given, all features will be run. If given, only the control-features (those implementing L<FormFactory::Feature::Role::Control> attached to the named controls) will be run. Any form-features or unlisted control-features will not be run.
+This is the list of controls to check. If not given, all features will be run. If given, only the control-features (those implementing L<Form::Factory::Feature::Role::Control> attached to the named controls) will be run. Any form-features or unlisted control-features will not be run.
 
 =back
 
@@ -481,7 +481,7 @@ sub check {
 
 This does nothing if the action did not validate.
 
-In the case the action is valid, this will use L</set_attributes_from_controls> to copy the control values to the action attributes, run the L<FormFactory::Feature/pre_process> methods for all form-features and control-features, call the L</run> method, run the L<FormFactory::Feature/post_process> methods for all form-features and control-features, and set the C<is_success> flag to true if no errors are recorded or false if there are.
+In the case the action is valid, this will use L</set_attributes_from_controls> to copy the control values to the action attributes, run the L<Form::Factory::Feature/pre_process> methods for all form-features and control-features, call the L</run> method, run the L<Form::Factory::Feature/post_process> methods for all form-features and control-features, and set the C<is_success> flag to true if no errors are recorded or false if there are.
 
 =cut
 
@@ -568,9 +568,9 @@ sub gather_results {
 
 =head1 RESULTS
 
-Actions are tied closely to L<FormFactory::Result>s. As such, a number of methods are delegated to result classes.
+Actions are tied closely to L<Form::Factory::Result>s. As such, a number of methods are delegated to result classes.
 
-The following methods are delegated to L</results> in L<FormFactory::Result::Gathered>.
+The following methods are delegated to L</results> in L<Form::Factory::Result::Gathered>.
 
 =over
 
@@ -612,7 +612,7 @@ The following methods are delegated to L</results> in L<FormFactory::Result::Gat
 
 =back
 
-These methods are delegated to L<result> in L<FormFactory::Result::Single>.
+These methods are delegated to L<result> in L<Form::Factory::Result::Single>.
 
 =over
 
@@ -681,7 +681,7 @@ Once the user has submitted the form, you will want to process the input and per
       # Go render the form again and show the errors
   }
 
-We request an instance of the form again and then call L</unstash> to recover any stashed setup. We then call the L</consume_and_clean_and_check_and_process> method, which will consume all the input. Here we use something that looks like a L<CGI> request for the source of input, but it should be whatever is appropriate to your environment and the L<FormFactory::Factory> implementation used. 
+We request an instance of the form again and then call L</unstash> to recover any stashed setup. We then call the L</consume_and_clean_and_check_and_process> method, which will consume all the input. Here we use something that looks like a L<CGI> request for the source of input, but it should be whatever is appropriate to your environment and the L<Form::Factory::Factory> implementation used. 
 
 At the end, we check to see if the action checked out and then that the L</run> method ran without problems. If so, we can show the success page or the record view or whatever is appropriate after filling this form.
 

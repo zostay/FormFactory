@@ -1,18 +1,18 @@
-package FormFactory;
+package Form::Factory;
 use Moose;
 
-use FormFactory::Util qw( class_name_from_name );
+use Form::Factory::Util qw( class_name_from_name );
 
 our $VERSION = '0.001';
 
 =head1 NAME
 
-FormFactory - a general-purpose form handling API
+Form::Factory - a general-purpose form handling API
 
 =head1 SYNOPSIS
 
   ### CGI, HTML example
-  my $factory = FormFactory->new_factory('HTML');
+  my $factory = Form::Factory->new_factory('HTML');
   my $action  = $factory->new_action('MyApp::Action::Login');
 
   ### Drawing the form contents
@@ -42,6 +42,8 @@ FormFactory - a general-purpose form handling API
   }
 
 =head1 DESCRIPTION
+
+B<ALPHA API>. This code is not fully tested (if you look in the test files you will see a long list of tests planned, but no yet implemented). It is currently being employed on a non-production project. The API I<will> change. See L</TODO> for more.
 
 This API is designed to be a general purpose API for showing and processing forms. This has been done before. I know. However, I believe this provides some distinct advantages. However, you should definitely check out the alternatives because this might be more complex than you really need.
 
@@ -75,11 +77,11 @@ Forms and controls can be extended with common features. These features can clea
 
 =head2 new_factory
 
-  my $factory = FormFactory->new_factory($name, \%options);
+  my $factory = Form::Factory->new_factory($name, \%options);
 
-This creates a L<FormFactory::Factory> object with the given options. This is, more or less, a shortcut for:
+This creates a L<Form::Factory::Factory> object with the given options. This is, more or less, a shortcut for:
 
-  my $factory_class = 'FormFactory::Factory::' . $name;
+  my $factory_class = 'Form::Factory::Factory::' . $name;
   my $factory       = $factory_class->new(\%options);
 
 =cut
@@ -87,7 +89,7 @@ This creates a L<FormFactory::Factory> object with the given options. This is, m
 sub new_factory {
     my $class = shift;
     my $name  = shift;
-    my $class_name = 'FormFactory::Factory::' . $name;
+    my $class_name = 'Form::Factory::Factory::' . $name;
     unless (Class::MOP::load_class($class_name)) {
         die $@ if $@;
         die "cannot load form factory $class_name";
@@ -97,7 +99,7 @@ sub new_factory {
 
 =head2 control_class
 
-  my $class_name = FormFactory->control_class('full_text');
+  my $class_name = Form::Factory->control_class('full_text');
 
 Returns the control class for the named control.
 
@@ -106,7 +108,7 @@ Returns the control class for the named control.
 sub control_class {
     my $name = $_[1];
 
-    my $class_name = 'FormFactory::Control::' . class_name_from_name($name);
+    my $class_name = 'Form::Factory::Control::' . class_name_from_name($name);
 
     unless (Class::MOP::load_class($class_name)) {
         warn $@ if $@;
@@ -116,9 +118,43 @@ sub control_class {
     return $class_name;
 }
 
+=head1 TODO
+
+This is not definite, but some things I know as of right now I'm not happy with:
+
+=over
+
+=item *
+
+I will be renaming the L<Form::Factory::Factory> classes to L<Form::Factory::Interface> in a future release. This name made more sense before I chose to use C<Form::Factory> as the top package name (rather than C<FormFactory>).
+
+=item *
+
+There are lots of tweaks coming to controls, especially L<Form::Factory::Control::Button>. I'm not very happy with how this is done right now, so something will change.
+
+=item *
+
+Features do not do very much yet, but they must do more, especially control features. I want features to be able to modify control construction, add factory-specific functionality for rendering and consuming, etc. They will be bigger and badder, but this might mean who knows what needs to change elsewhere.
+
+=item *
+
+The factories (soon to be interfaces) are kind of stupid at this point. They probably need a place to put their brains so they can some more interesting work.
+
+=back
+
+=head1 CODE REPOSITORY
+
+If you would like to take a look at the latest progress on this software, please see the Github repository: L<http://github.com/zostay/FormFactory>
+
+=head1 BUGS
+
+Please report any bugs you find to the Github issue tracker: L<http://github.com/zostay/FormFactory/issues>
+
+If you need help getting started or something (the documentation was originally thrown together over my recent vacation, so it's probably lacking and wonky), you can also contact me on Twitter (L<http://twitter.com/zostay>) or by L</AUTHOR|email>.
+
 =head1 SEE ALSO
 
-L<FormFactory::Factory::HTML>
+L<Form::Factory::Factory::HTML>
 
 =head1 AUTHOR
 

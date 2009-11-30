@@ -1,15 +1,15 @@
-package FormFactory::Control::FullText;
+package Form::Factory::Control::FullText;
 use Moose;
 
 with qw(
-    FormFactory::Control
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::FullText - The full_text control
+Form::Factory::Control::FullText - The full_text control
 
 =head1 SYNOPSIS
 

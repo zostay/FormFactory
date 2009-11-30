@@ -1,15 +1,15 @@
-package FormFactory::Control::Value;
+package Form::Factory::Control::Value;
 use Moose;
 
 with qw(
-    FormFactory::Control
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::Value - A read-only value control
+Form::Factory::Control::Value - A read-only value control
 
 =head1 SYNOPSIS
 
@@ -26,7 +26,7 @@ FormFactory::Control::Value - A read-only value control
 
 A read-only value. These may be displayed in the form or just passed through the stash. They might be passed by form submission as well (depending on the factory, but this should be avoided).
 
-This control implements L<FormFactory::Control>, L<FormFactory::Control::Role::Labeled>, L<FormFactory::Control::Role::ScalarValue>.
+This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
 
 =head1 ATTRIBUTES
 

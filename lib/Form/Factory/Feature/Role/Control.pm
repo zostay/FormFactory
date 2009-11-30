@@ -1,4 +1,4 @@
-package FormFactory::Feature::Role::Control;
+package Form::Factory::Feature::Role::Control;
 use Moose::Role;
 
 use Scalar::Util qw( blessed );
@@ -7,14 +7,14 @@ requires qw( check_control );
 
 =head1 NAME
 
-FormFactory::Feature::Role::Control - Form features tied to particular controls
+Form::Factory::Feature::Role::Control - Form features tied to particular controls
 
 =head1 SYNOPSIS
 
-  package FormFactory::Feature::Control::Color;
+  package Form::Factory::Feature::Control::Color;
   use Moose;
 
-  with qw( FormFactory::Feature FormFactory::Feature::Role::Control );
+  with qw( Form::Factory::Feature Form::Factory::Feature::Role::Control );
 
   has recognized_colors => (
       is        => 'ro',
@@ -27,7 +27,7 @@ FormFactory::Feature::Role::Control - Form features tied to particular controls
       my ($self, $control) = @_;
 
       die "color feature is only for scalar valued controls"
-          unless $control->does('FormFactory::Control::Role::ScalarValue');
+          unless $control->does('Form::Factory::Control::Role::ScalarValue');
   }
 
   sub check_value {
@@ -41,13 +41,13 @@ FormFactory::Feature::Role::Control - Form features tied to particular controls
 And then used in an action via:
 
   package MyApp::Action::Foo;
-  use FormFactory::Processor;
+  use Form::Factory::Processor;
 
   has_control favorite_primary_color => (
       control  => 'select_one',
       options  => {
           available_choices => [
-              map { FormFactory::Control::Choice->new($_, ucfirst $_) }
+              map { Form::Factory::Control::Choice->new($_, ucfirst $_) }
                 qw( red yellow blue )
           ],
       },
@@ -72,7 +72,7 @@ This is the control object the feature has been attached to.
 
 has control => (
     is          => 'ro',
-    does        => 'FormFactory::Control',
+    does        => 'Form::Factory::Control',
     required    => 1,
     weak_ref    => 1,
     initializer => sub {
@@ -132,7 +132,7 @@ sub post_process {
 
   my $formatted_message = $feature->format_message($unformatted_message);
 
-Given a message containing a single C<%s> placeholder, it fills that placeholder with the control's label. If the control does not implement L<FormFactory::Control::Role::Labeled>, the control's name is used instead.
+Given a message containing a single C<%s> placeholder, it fills that placeholder with the control's label. If the control does not implement L<Form::Factory::Control::Role::Labeled>, the control's name is used instead.
 
 =cut
 
@@ -142,7 +142,7 @@ sub format_message {
     my $control = $self->control;
 
     my $control_label 
-        = $control->does('FormFactory::Control::Role::Labeled') ? $control->label
+        = $control->does('Form::Factory::Control::Role::Labeled') ? $control->label
         :                                                         $control->name
         ;
 

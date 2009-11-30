@@ -1,14 +1,14 @@
-package FormFactory::Action::Meta::Class;
+package Form::Factory::Action::Meta::Class;
 use Moose::Role;
 
 =head1 NAME
 
-FormFactory::Action::Meta::Class - The meta-class for form actions
+Form::Factory::Action::Meta::Class - The meta-class for form actions
 
 =head1 SYNOPSIS
 
   package MyApp::Action::Foo;
-  use FormFactory::Processor;
+  use Form::Factory::Processor;
 
 =head1 DESCRIPTION
 
@@ -35,7 +35,7 @@ has features => (
 
   my @attributes = $action->meta->get_controls(@names);
 
-Returns all the controls for this action. This includes controls inherited from parent classes as well. This returns a list of attributes which do L<FormFactory::Action::Meta::Attribute::Control>.
+Returns all the controls for this action. This includes controls inherited from parent classes as well. This returns a list of attributes which do L<Form::Factory::Action::Meta::Attribute::Control>.
 
 You may pass a list of control names if you only want a subset of the available controls. If no list is given, all controls are returned.
 
@@ -54,7 +54,7 @@ sub get_controls {
     }
 
     @controls = sort { $a->placement <=> $b->placement }
-                grep { $_->does('FormFactory::Action::Meta::Attribute::Control') } 
+                grep { $_->does('Form::Factory::Action::Meta::Attribute::Control') } 
                        @controls;
 }
 
@@ -75,7 +75,7 @@ sub get_all_features {
 
         next unless $other_meta->can('meta');
         next unless $other_meta->meta->can('does_role');
-        next unless $other_meta->meta->does_role('FormFactory::Action::Meta::Class');
+        next unless $other_meta->meta->does_role('Form::Factory::Action::Meta::Class');
 
         %all_features = (%{ $other_meta->features }, %all_features);
     }
@@ -85,7 +85,7 @@ sub get_all_features {
 
 =head1 SEE ALSO
 
-L<FormFactory::Action>, L<FormFactory::Control>, L<FormFactory::Feature>, L<FormFactory::Processor>
+L<Form::Factory::Action>, L<Form::Factory::Control>, L<Form::Factory::Feature>, L<Form::Factory::Processor>
 
 =head1 AUTHOR
 

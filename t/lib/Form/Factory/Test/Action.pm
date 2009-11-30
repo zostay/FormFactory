@@ -1,17 +1,17 @@
-package FormFactory::Test::Action;
+package Form::Factory::Test::Action;
 use Test::Able::Role;
 
 has factory => (
     is         => 'ro',
-    does       => 'FormFactory::Factory',
+    does       => 'Form::Factory::Factory',
     required   => 1,
     lazy       => 1,
-    default    => sub { FormFactory->new_factory('HTML') },
+    default    => sub { Form::Factory->new_factory('HTML') },
 );
 
 has action => (
     is         => 'ro',
-    does       => 'FormFactory::Action',
+    does       => 'Form::Factory::Action',
     required   => 1,
 );
 1;

@@ -1,11 +1,11 @@
-package FormFactory::Control::Role::ScalarValue;
+package Form::Factory::Control::Role::ScalarValue;
 use Moose::Role;
 
 requires qw( current_value );
 
 =head1 NAME
 
-FormFactory::Control::Role::ScalarValue - scalar valued controls
+Form::Factory::Control::Role::ScalarValue - scalar valued controls
 
 =head1 DESCRIPTION
 

@@ -1,15 +1,15 @@
-package FormFactory::Control::Button;
+package Form::Factory::Control::Button;
 use Moose;
 
 with qw(
-    FormFactory::Control
-    FormFactory::Control::Role::Labeled
-    FormFactory::Control::Role::ScalarValue
+    Form::Factory::Control
+    Form::Factory::Control::Role::Labeled
+    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
 
-FormFactory::Control::Button - The button control
+Form::Factory::Control::Button - The button control
 
 =head1 SYNOPSIS
 
@@ -22,7 +22,7 @@ FormFactory::Control::Button - The button control
 
 =head1 DESCRIPTION
 
-A control representing a submit button. This control implements L<FormFactory::Control>, L<FormFactory::Control::Role::Labeled>, L<FormFactory::Control::Role::ScalarValue>.
+A control representing a submit button. This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
 
 =head1 METHODS
 

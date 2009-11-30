@@ -1,17 +1,17 @@
 package Moose::Meta::Attribute::Custom::Trait::Form::Control;
-sub register_implementation { 'FormFactory::Action::Meta::Attribute::Control' }
+sub register_implementation { 'Form::Factory::Action::Meta::Attribute::Control' }
 
-package FormFactory::Action::Meta::Attribute::Control;
+package Form::Factory::Action::Meta::Attribute::Control;
 use Moose::Role;
 
 =head1 NAME
 
-FormFactory::Action::Meta::Attribute::Control - Form control attribute-traits
+Form::Factory::Action::Meta::Attribute::Control - Form control attribute-traits
 
 =head1 SYNOPSIS
 
   package MyApp::Action::Foo;
-  use FormFactory::Processor;
+  use Form::Factory::Processor;
 
   has_control name => (
       control   => 'text',
@@ -29,7 +29,7 @@ FormFactory::Action::Meta::Attribute::Control - Form control attribute-traits
 
 =head1 DESCRIPTION
 
-Any control attribute created with the L<FormFactory::Processor/has_control> subroutine, will have this trait assigned.
+Any control attribute created with the L<Form::Factory::Processor/has_control> subroutine, will have this trait assigned.
 
 =head1 ATTRIBUTES
 
@@ -48,7 +48,7 @@ has placement => (
 
 =head2 control
 
-This is the short name of the control. See L<FormFactory::Factory/CONTROLS> for a list of built-in controls.
+This is the short name of the control. See L<Form::Factory::Factory/CONTROLS> for a list of built-in controls.
 
 =cut
 
@@ -87,7 +87,7 @@ has features => (
 
 =head1 SEE ALSO
 
-L<FormFactory::Processor>
+L<Form::Factory::Processor>
 
 =head1 AUTHOR
 

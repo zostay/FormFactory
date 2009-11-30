@@ -1,8 +1,8 @@
-package FormFactory::Test::Factory::HTML;
+package Form::Factory::Test::Factory::HTML;
 use Test::Able;
 use Test::More;
 
-with qw( FormFactory::Test::Factory );
+with qw( Form::Factory::Test::Factory );
 
 has '+name' => (
     default => 'HTML',
