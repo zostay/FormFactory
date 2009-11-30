@@ -6,6 +6,7 @@ has_control button => (
     options   => {
         label => 'Foo',
     },
+    documentation => 'a button',
 );
 
 has_control checkbox => (
@@ -14,14 +15,17 @@ has_control checkbox => (
         checked_value   => 'xyz',
         unchecked_value => 'abc',
     },
+    documentation => 'a checkbox',
 );
 
 has_control full_text => (
     control   => 'full_text',
+    documentation => 'some text',
 );
 
 has_control password  => (
     control   => 'password',
+    documentation => 'a password',
 );
 
 has_control select_many => (
@@ -32,6 +36,7 @@ has_control select_many => (
               qw( one two three four five )
         ],
     },
+    documentation => 'select a few',
 );
 
 has_control select_one => (
@@ -42,15 +47,19 @@ has_control select_one => (
               qw( ay bee see dee ee )
         ],
     },
+    documentation => 'pick one',
 );
 
-has_control text => ();
+has_control text => (
+    documentation => 'short text',
+);
 
 has_control value => (
     control   => 'value',
     options   => {
         value => 'galaxy',
     },
+    documentation => 'a value',
 );
 
 sub run {

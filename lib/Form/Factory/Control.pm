@@ -28,6 +28,18 @@ has name => (
     required  => 1,
 );
 
+=head2 documentation
+
+This holds a copy the documentation attribute of the original meta attribute.
+
+=cut
+
+has documentation => (
+    is        => 'ro',
+    isa       => 'Str',
+    predicate => 'has_documentation',
+);
+
 =head2 feature
 
 This is the list of L<Form::Factory::Feature::Role::Control> features associated with the control.

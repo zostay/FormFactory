@@ -188,7 +188,9 @@ sub _build_controls {
         }
 
         my $control = $factory->new_control($meta_control->control => {
-            name => $meta_control->name,
+            name          => $meta_control->name,
+            ($meta_control->has_documentation 
+                ? (documentation => $meta_control->documentation) : ()),
             %options,
         });
 
