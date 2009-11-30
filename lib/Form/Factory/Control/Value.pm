@@ -3,6 +3,7 @@ use Moose;
 
 with qw(
     Form::Factory::Control
+    Form::Factory::Control::Role::HiddenValue
     Form::Factory::Control::Role::Labeled
     Form::Factory::Control::Role::PresetValue
     Form::Factory::Control::Role::ScalarValue
