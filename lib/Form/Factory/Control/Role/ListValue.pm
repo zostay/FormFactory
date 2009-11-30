@@ -3,6 +3,8 @@ use Moose::Role;
 
 requires qw( current_values );
 
+excludes qw( FormFactory::Control::Role::ScalarValue );
+
 =head1 NAME
 
 Form::Factory::Control::Role::ListValue - list-valued controls
