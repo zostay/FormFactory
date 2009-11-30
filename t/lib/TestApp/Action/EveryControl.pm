@@ -12,8 +12,8 @@ has_control button => (
 has_control checkbox => (
     control   => 'checkbox',
     options   => {
-        checked_value   => 'xyz',
-        unchecked_value => 'abc',
+        true_value  => 'xyz',
+        false_value => 'abc',
     },
     documentation => 'a checkbox',
 );
