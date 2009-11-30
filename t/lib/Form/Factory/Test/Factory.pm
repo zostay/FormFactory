@@ -17,12 +17,23 @@ has class_name => (
     default   => sub { 'Form::Factory::Factory::' . shift->name },
 );
 
+has factory_options => (
+    is        => 'ro',
+    does      => 'HashRef',
+    required  => 1,
+    lazy      => 1,
+    default   => sub { {} },
+);
+
 has factory => (
     is        => 'ro',
     does      => 'Form::Factory::Factory',
     required  => 1,
-    default   => sub { Form::Factory->new_factory('HTML') },
     lazy      => 1,
+    default   => sub { 
+        my $self = shift;
+        Form::Factory->new_factory($self->name, $self->factory_options);
+    },
 );
 
 test plan => 4, factory_ok => sub { 

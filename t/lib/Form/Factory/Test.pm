@@ -10,6 +10,7 @@ has test_packages => (
     default   => sub { [ qw(
         Form::Factory::Test::Action::Basic
         Form::Factory::Test::Action::Controls
+        Form::Factory::Test::Factory::CLI
         Form::Factory::Test::Factory::HTML
     ) ] },
 );
