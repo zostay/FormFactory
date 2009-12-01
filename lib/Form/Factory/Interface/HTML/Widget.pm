@@ -1,11 +1,11 @@
-package Form::Factory::Factory::HTML::Widget;
+package Form::Factory::Interface::HTML::Widget;
 use Moose::Role;
 
 requires qw( render_control consume_control );
 
 =head1 NAME
 
-Form::Factory::Factory::HTML::Widget - rendering/consuming HTML controls
+Form::Factory::Interface::HTML::Widget - rendering/consuming HTML controls
 
 =head1 DESCRIPTION
 

@@ -7,7 +7,7 @@ with qw( Form::Factory::Test::Action );
 
 has '+action' => (
     lazy       => 1,
-    default    => sub { shift->factory->new_action('TestApp::Action::EveryControl') },
+    default    => sub { shift->interface->new_action('TestApp::Action::EveryControl') },
 );
 
 test plan => 8, run_action => sub {

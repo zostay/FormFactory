@@ -1,11 +1,11 @@
-package Form::Factory::Factory::HTML::Widget::Element;
+package Form::Factory::Interface::HTML::Widget::Element;
 use Moose;
 
-with qw( Form::Factory::Factory::HTML::Widget );
+with qw( Form::Factory::Interface::HTML::Widget );
 
 =head1 NAME
 
-Form::Factory::Factory::HTML::Widget::Element - HTML factory widget helper
+Form::Factory::Interface::HTML::Widget::Element - HTML interface widget helper
 
 =head1 DESCRIPTION
 

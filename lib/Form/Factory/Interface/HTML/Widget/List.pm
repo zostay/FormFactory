@@ -1,11 +1,11 @@
-package Form::Factory::Factory::HTML::Widget::List;
+package Form::Factory::Interface::HTML::Widget::List;
 use Moose;
 
-extends qw( Form::Factory::Factory::HTML::Widget::Element );
+extends qw( Form::Factory::Interface::HTML::Widget::Element );
 
 =head1 NAME
 
-Form::Factory::Factory::HTML::Widget::List - HTML factory widget helper
+Form::Factory::Interface::HTML::Widget::List - HTML interface widget helper
 
 =head1 DESCRIPTION
 
@@ -19,7 +19,7 @@ has '+tag_name' => (
 
 has items => (
     is        => 'ro',
-    isa       => 'ArrayRef[Form::Factory::Factory::HTML::Widget::ListItem]',
+    isa       => 'ArrayRef[Form::Factory::Interface::HTML::Widget::ListItem]',
     required  => 1,
     default   => sub { [] },
 );

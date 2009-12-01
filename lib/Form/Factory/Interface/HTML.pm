@@ -1,22 +1,22 @@
-package Form::Factory::Factory::HTML;
+package Form::Factory::Interface::HTML;
 use Moose;
 
-with qw( Form::Factory::Factory );
+with qw( Form::Factory::Interface );
 
 use Scalar::Util qw( blessed );
 
-use Form::Factory::Factory::HTML::Widget::Div;
-use Form::Factory::Factory::HTML::Widget::Input;
-use Form::Factory::Factory::HTML::Widget::Label;
-use Form::Factory::Factory::HTML::Widget::List;
-use Form::Factory::Factory::HTML::Widget::ListItem;
-use Form::Factory::Factory::HTML::Widget::Select;
-use Form::Factory::Factory::HTML::Widget::Span;
-use Form::Factory::Factory::HTML::Widget::Textarea;
+use Form::Factory::Interface::HTML::Widget::Div;
+use Form::Factory::Interface::HTML::Widget::Input;
+use Form::Factory::Interface::HTML::Widget::Label;
+use Form::Factory::Interface::HTML::Widget::List;
+use Form::Factory::Interface::HTML::Widget::ListItem;
+use Form::Factory::Interface::HTML::Widget::Select;
+use Form::Factory::Interface::HTML::Widget::Span;
+use Form::Factory::Interface::HTML::Widget::Textarea;
 
 =head1 NAME
 
-Form::Factory::Factory::HTML - Simple HTML form factory
+Form::Factory::Interface::HTML - Simple HTML form interface
 
 =head1 SYNOPSIS
 
@@ -77,7 +77,7 @@ has consumer => (
 
 =head2 new_widget_for_control
 
-Returns a L<Form::Factory::Factory::HTML::Widget> implementation for the given control.
+Returns a L<Form::Factory::Interface::HTML::Widget> implementation for the given control.
 
 =cut
 
@@ -103,7 +103,7 @@ sub new_widget_for_control {
 sub _wrapper($$@) {
     my ($name, $type, @widgets) = @_;
 
-    return Form::Factory::Factory::HTML::Widget::Div->new(
+    return Form::Factory::Interface::HTML::Widget::Div->new(
         id      => $name . '-wrapper',
         classes => [ qw( widget wrapper ), $type ],
         widgets => \@widgets,
@@ -113,7 +113,7 @@ sub _wrapper($$@) {
 sub _label($$$;$) {
     my ($name, $type, $label, $is_required) = @_;
 
-    return Form::Factory::Factory::HTML::Widget::Label->new(
+    return Form::Factory::Interface::HTML::Widget::Label->new(
         id      => $name . '-label',
         classes => [ qw( widget label ), $type ],
         for     => $name,
@@ -125,7 +125,7 @@ sub _required_marker($) {
     my ($is_required) = @_;
     
     if ($is_required) {
-        return Form::Factory::Factory::HTML::Widget::Span->new(
+        return Form::Factory::Interface::HTML::Widget::Span->new(
             classes => [ qw( required ) ],
             content => '*',
         )->render;
@@ -138,7 +138,7 @@ sub _required_marker($) {
 sub _input($$$;$%) {
     my ($name, $type, $input_type, $value, %args) = @_;
 
-    return Form::Factory::Factory::HTML::Widget::Input->new(
+    return Form::Factory::Interface::HTML::Widget::Input->new(
         id      => $name,
         name    => $name,
         type    => $input_type,
@@ -151,7 +151,7 @@ sub _input($$$;$%) {
 sub _alerts($$@) {
     my ($name, $type, @items) = @_;
 
-    return Form::Factory::Factory::HTML::Widget::List->new(
+    return Form::Factory::Interface::HTML::Widget::List->new(
         id      => $name . '-alerts',
         classes => [ qw( widget alerts ), $type ],
         items   => \@items,
@@ -165,7 +165,7 @@ sub _alerts_for_control {
     my $count = 0;
     my @messages = $results->field_messages($name);
     for my $message (@messages) {
-        push @items, Form::Factory::Factory::HTML::Widget::ListItem->new(
+        push @items, Form::Factory::Interface::HTML::Widget::ListItem->new(
             id      => $name . '-message-' . ++$count,
             classes => [ qw( widget message ), $type, $message->type ],
             content => $message->english_message,
@@ -216,7 +216,7 @@ sub new_widget_for_fulltext {
     return _wrapper($control->name, 'full-text',
         _label($control->name, 'full-text', $control->label, 
             $control->has_feature('required')),
-        Form::Factory::Factory::HTML::Widget::Textarea->new(
+        Form::Factory::Interface::HTML::Widget::Textarea->new(
             id      => $control->name,
             name    => $control->name,
             classes => [ qw( widget field full-text ) ],
@@ -263,7 +263,7 @@ sub new_widget_for_selectmany {
     return _wrapper($control->name, 'select-many',
         _label($control->name, 'select-many', $control->label,
             $control->has_feature('required')),
-        Form::Factory::Factory::HTML::Widget::Div->new(
+        Form::Factory::Interface::HTML::Widget::Div->new(
             id      => $control->name . '-list',
             classes => [ qw( widget list select-many ) ],
             widgets => \@checkboxes,
@@ -284,7 +284,7 @@ sub new_widget_for_selectone {
     return _wrapper($control->name, 'select-one',
         _label($control->name, 'select-one', $control->label,
             $control->has_feature('required')),
-        Form::Factory::Factory::HTML::Widget::Select->new(
+        Form::Factory::Interface::HTML::Widget::Select->new(
             id       => $control->name,
             name     => $control->name,
             classes  => [ qw( widget field select-one ) ],
@@ -325,7 +325,7 @@ sub new_widget_for_value {
     if ($control->is_visible) {
         return _wrapper($control->name, 'value',
             _label($control->name, 'value', $control->label),
-            Form::Factory::Factory::HTML::Widget::Span->new(
+            Form::Factory::Interface::HTML::Widget::Span->new(
                 id      => $control->name,
                 content => $control->value,
                 classes => [ qw( widget field value ) ],
@@ -362,7 +362,7 @@ sub consume_control {
 
     die "no request option passed" unless defined $options{request};
 
-    die "HTML factory does not know how to consume values for $control"
+    die "HTML interface does not know how to consume values for $control"
         unless $control->does('Form::Factory::Control::Role::ScalarValue')
             or $control->does('Form::Factory::Control::Role::ListValue');
 
@@ -389,7 +389,7 @@ They will probably be removed in a future release.
 
 =head1 SEE ALSO
 
-L<Form::Factory::Factory>
+L<Form::Factory::Interface>
 
 =head1 AUTHOR
 

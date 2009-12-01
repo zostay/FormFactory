@@ -1,4 +1,4 @@
-package Form::Factory::Factory;
+package Form::Factory::Interface;
 use Moose::Role;
 
 use Form::Factory::Stasher::Memory;
@@ -7,14 +7,14 @@ requires qw( render_control consume_control );
 
 =head1 NAME
 
-Form::Factory::Factory - Interface for form factory implementations
+Form::Factory::Interface - Role for form interface implementations
 
 =head1 SYNOPSIS
 
-  package Form::Factory::Factory::MyFactory;
+  package Form::Factory::Interface::MyFactory;
   use Moose;
 
-  with qw( Form::Factory::Factory );
+  with qw( Form::Factory::Interface );
 
   sub render_control {
       my ($self, $control, %options) = @_;
@@ -30,7 +30,7 @@ Form::Factory::Factory - Interface for form factory implementations
 
 =head1 DESCRIPTION
 
-Defines the abstract interface for a form factory. 
+Defines the contract form interface classes must fulfill.
 
 =head1 ATTRIBUTES
 
@@ -58,9 +58,9 @@ See L<Form::Factory::Stash>.
 
 =head2 new_action
 
-  my $action = $factory->new_action('Some::Action::Class', \%options);
+  my $action = $interface->new_action('Some::Action::Class', \%options);
 
-Given the name of an action class, it initializes the class for use with this factory. The C<%options> are passed to the constructor.
+Given the name of an action class, it initializes the class for use with this interface. The C<%options> are passed to the constructor.
 
 =cut
 
@@ -70,12 +70,12 @@ sub new_action {
     Class::MOP::load_class($class_name)
         or die "cannot load $class_name: $@";
 
-    return $class_name->new( %$args, form_factory => $self );
+    return $class_name->new( %$args, form_interface => $self );
 }
 
 =head2 new_control
 
-  my $control = $factory->new_control($name, \%options);
+  my $control = $interface->new_control($name, \%options);
 
 Given the short name for a control and a hash reference of initialization arguments, return a fully initialized control.
 
@@ -96,13 +96,13 @@ The following methods need to implement the following methods.
 
 =head2 render_control
 
-  $factory->render_control($control, %options);
+  $interface->render_control($control, %options);
 
 This method is used to render the control in the current form.
 
 =head2 consume_control
 
-  $factory->consume_control($control, %options);
+  $interface->consume_control($control, %options);
 
 This method is used to consume the values input for a current form.
 

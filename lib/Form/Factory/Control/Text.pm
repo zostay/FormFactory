@@ -25,7 +25,7 @@ Form::Factory::Control::Text - A single line text field
 
 A regular text box.
 
-This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, and L<Formfactory::Control::Role::ScalarValue>.
+This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, and L<Form::Factory::Control::Role::ScalarValue>.
 
 =head1 ATTRIBUTES
 

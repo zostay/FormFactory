@@ -48,7 +48,7 @@ has placement => (
 
 =head2 control
 
-This is the short name of the control. See L<Form::Factory::Factory/CONTROLS> for a list of built-in controls.
+This is the short name of the control. See L<Form::Factory::Interface/CONTROLS> for a list of built-in controls.
 
 =cut
 

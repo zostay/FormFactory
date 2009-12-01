@@ -10,8 +10,8 @@ has test_packages => (
     default   => sub { [ qw(
         Form::Factory::Test::Action::Basic
         Form::Factory::Test::Action::Controls
-        Form::Factory::Test::Factory::CLI
-        Form::Factory::Test::Factory::HTML
+        Form::Factory::Test::Interface::CLI
+        Form::Factory::Test::Interface::HTML
     ) ] },
 );
 
@@ -57,7 +57,7 @@ Test to make sure that actions cope with inheritance correctly.
 
 Test to make sure that acitons cope with role composition correctly.
 
-=head2 Form::Factory::Test::Factory::HTML
+=head2 Form::Factory::Test::Interface::HTML
 
 Make sure it renders each control (properly).
 

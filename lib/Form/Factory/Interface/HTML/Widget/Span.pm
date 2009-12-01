@@ -1,11 +1,11 @@
-package Form::Factory::Factory::HTML::Widget::ListItem;
+package Form::Factory::Interface::HTML::Widget::Span;
 use Moose;
 
-extends qw( Form::Factory::Factory::HTML::Widget::Element );
+extends qw( Form::Factory::Interface::HTML::Widget::Element );
 
 =head1 NAME
 
-Form::Factory::Factory::HTML::Widget::ListItem - HTML factory widget helper
+Form::Factory::Interface::HTML::Widget::Span - HTML interface widget helper
 
 =head1 DESCRIPTION
 
@@ -14,7 +14,7 @@ Move along. Nothing to see here.
 =cut
 
 has '+tag_name' => (
-    default   => 'li',
+    default   => 'span',
 );
 
 has '+content' => (

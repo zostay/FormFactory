@@ -1,11 +1,11 @@
-package Form::Factory::Factory::CLI;
+package Form::Factory::Interface::CLI;
 use Moose;
 
-with qw( Form::Factory::Factory );
+with qw( Form::Factory::Interface );
 
 =head1 NAME
 
-Form::Factory::Factory::CLI - Command-line interface builder for form factory
+Form::Factory::Interface::CLI - Command-line interface builder for form factory
 
 =head1 SYNOPSIS
 
@@ -15,7 +15,7 @@ Form::Factory::Factory::CLI - Command-line interface builder for form factory
 
   use Form::Factory;
 
-  my $cli = Form::Factory->new_factory('CLI');
+  my $cli = Form::Factory->new_interface('CLI');
   my $action = $cli->new_action(shift @ARGV);
   
   $action->consume_and_clean_and_check_and_process;
@@ -65,7 +65,7 @@ has get_args => (
 
 =head2 get_file
 
-This is a subroutine responsible for returning the contents of files used on the command-line. It is passed the factory object and then the name of the file to load. The default implementation slurps up the named file or, in the case of the name begin "-", returns the contents of C<STDIN>.
+This is a subroutine responsible for returning the contents of files used on the command-line. It is passed the interface object and then the name of the file to load. The default implementation slurps up the named file or, in the case of the name begin "-", returns the contents of C<STDIN>.
 
 =cut
 
@@ -75,7 +75,7 @@ has get_file => (
     required  => 1,
     default   => sub { 
         sub { 
-            my ($factory, $name) = @_;
+            my ($interface, $name) = @_;
             my $fh;
 
             if ($name eq '-') {
@@ -138,7 +138,7 @@ Consumes the command-line arguments and files specified on the command-line to f
 sub consume_control {
     my ($self, $control, %options) = @_;
 
-    die "CLI factory does not know how to consume values for $control"
+    die "CLI interface does not know how to consume values for $control"
         unless $control->does('Form::Factory::Control::Role::ScalarValue')
             or $control->does('Form::Factory::Control::Role::ListValue');
 

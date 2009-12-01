@@ -35,15 +35,15 @@ This is the role implemented by all form actions.
 
 All form actions have the following attributes.
 
-=head2 form_factory
+=head2 form_interface
 
-This is the L<Form::Factory::Factory> that constructed this action. If you need to get at the implementation directly for some reason, here it is. This is mostly used by the action itself when calling the L</render> and L</consume> methods.
+This is the L<Form::Factory::Interface> that constructed this action. If you need to get at the implementation directly for some reason, here it is. This is mostly used by the action itself when calling the L</render> and L</consume> methods.
 
 =cut
 
-has form_factory => (
+has form_interface => (
     is        => 'ro',
-    does      => 'Form::Factory::Factory',
+    does      => 'Form::Factory::Interface',
     required  => 1,
 );
 
@@ -171,7 +171,7 @@ has controls => (
 
 sub _build_controls {
     my $self = shift;
-    my $factory  = $self->form_factory;
+    my $interface  = $self->form_interface;
     my $features = $self->features;
 
     my %controls;
@@ -187,7 +187,7 @@ sub _build_controls {
             $options{$key} = $value->code->($self, $key);
         }
 
-        my $control = $factory->new_control($meta_control->control => {
+        my $control = $interface->new_control($meta_control->control => {
             name          => $meta_control->name,
             ($meta_control->has_documentation 
                 ? (documentation => $meta_control->documentation) : ()),
@@ -224,7 +224,7 @@ sub _build_controls {
 
   $action->stash($moniker);
 
-Given a C<$moniker> (a key under which to store the information related to this form), this will stash the form's stashable information under that name using the L<Form::Factory::Stasher> associated with the L</form_factory>.
+Given a C<$moniker> (a key under which to store the information related to this form), this will stash the form's stashable information under that name using the L<Form::Factory::Stasher> associated with the L</form_interface>.
 
 The globals, stashable parts of controls, and the results are stashed. This allows those values to be recovered across requests or between process calls or whatever the implementation requires.
 
@@ -251,7 +251,7 @@ sub stash {
         result   => $self->result,
     );
 
-    $self->form_factory->stash($moniker => \%stash);
+    $self->form_interface->stash($moniker => \%stash);
 }
 
 =head2 unstash
@@ -265,7 +265,7 @@ Given a C<$moniker> previously named in a call to L</stash>, it restores the pre
 sub unstash {
     my ($self, $moniker) = @_;
 
-    my $stash = $self->form_factory->unstash($moniker);
+    my $stash = $self->form_interface->unstash($moniker);
     return unless defined $stash;
 
     my $globals = $stash->{globals} || {};
@@ -319,7 +319,7 @@ sub clear {
 
   $action->render(%options);
 
-Renders the form using the associated L</form_factory>. You may specify the following options:
+Renders the form using the associated L</form_interface>. You may specify the following options:
 
 =over
 
@@ -329,7 +329,7 @@ This is a list of control names to render. If not given, all controls will be re
 
 =back
 
-Any other options will be passed on to the L<Form::Factory::Factory/render_control> method.
+Any other options will be passed on to the L<Form::Factory::Interface/render_control> method.
 
 =cut
 
@@ -344,7 +344,7 @@ sub render {
     $params{results} = $self->results;
 
     my $controls = $self->controls;
-    $self->form_factory->render_control($controls->{$_}, %params) for @names;
+    $self->form_interface->render_control($controls->{$_}, %params) for @names;
     return;
 }
 
@@ -361,8 +361,8 @@ sub render_control {
 
     $params{results} = $self->results;
 
-    $self->form_factory->render_control(
-        $self->form_factory->new_control($name => $options), %params
+    $self->form_interface->render_control(
+        $self->form_interface->new_control($name => $options), %params
     );
 }
 
@@ -380,7 +380,7 @@ This is a list of names of controls to consume. Any not listed here will not be 
 
 =back
 
-Any additional options will be passed to the L<Form::Factory::Factory/consume_control> method call.
+Any additional options will be passed to the L<Form::Factory::Interface/consume_control> method call.
 
 =cut
 
@@ -393,7 +393,7 @@ sub consume {
                ;
 
     my $controls = $self->controls;
-    $self->form_factory->consume_control($controls->{$_}, %params) for @names;
+    $self->form_interface->consume_control($controls->{$_}, %params) for @names;
 }
 
 =head2 clean
@@ -648,7 +648,7 @@ The action workflow typically goes like this. There are two phases.
 
 Phase 1 is responsible for showing the form to the user. This phase might be skipped altogether in situations where automatic processing is taking place where the robot doing the work already knows what inputs are expected for the action. However, typically, you do something like this:
 
-  my $action = $factory->new_action('Foo');
+  my $action = $interface->new_action('Foo');
   $action->unstash('foo');
   $action->render;
   $action->render_control(button => {
@@ -657,9 +657,9 @@ Phase 1 is responsible for showing the form to the user. This phase might be ski
   });
   $action->stash('foo');
 
-This tells the factory that you want to prepare a form object for class "Foo." 
+This tells the interface that you want to prepare a form object for class "Foo." 
 
-The call to L</unstash> then pulls in any state saved from the user's prior entry. This will cause any errors that occurred on a previous validation or process execution to show up (assuming that your factory does that work for you). This also means that any previously stashed values entered should reappear in the form so that a failure to save or something won't cause the field information to be lost forever.
+The call to L</unstash> then pulls in any state saved from the user's prior entry. This will cause any errors that occurred on a previous validation or process execution to show up (assuming that your interface does that work for you). This also means that any previously stashed values entered should reappear in the form so that a failure to save or something won't cause the field information to be lost forever.
 
 The call to L</render> causes all of the controls of the form to be rendered for input.
 
@@ -671,7 +671,7 @@ The call to L</stash> returns the form's stashable information back to the stash
 
 Once the user has submitted the form, you will want to process the input and perform the action. This typically looks like this:
 
-  my $action = $factory->new_action('Foo');
+  my $action = $interface->new_action('Foo');
   $action->unstash('foo');
   $action->consume_and_clean_and_check_and_process( request => $q->Vars );
 
@@ -683,7 +683,7 @@ Once the user has submitted the form, you will want to process the input and per
       # Go render the form again and show the errors
   }
 
-We request an instance of the form again and then call L</unstash> to recover any stashed setup. We then call the L</consume_and_clean_and_check_and_process> method, which will consume all the input. Here we use something that looks like a L<CGI> request for the source of input, but it should be whatever is appropriate to your environment and the L<Form::Factory::Factory> implementation used. 
+We request an instance of the form again and then call L</unstash> to recover any stashed setup. We then call the L</consume_and_clean_and_check_and_process> method, which will consume all the input. Here we use something that looks like a L<CGI> request for the source of input, but it should be whatever is appropriate to your environment and the L<Form::Factory::Interface> implementation used. 
 
 At the end, we check to see if the action checked out and then that the L</run> method ran without problems. If so, we can show the success page or the record view or whatever is appropriate after filling this form.
 

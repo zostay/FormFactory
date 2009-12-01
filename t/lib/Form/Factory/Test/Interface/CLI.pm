@@ -1,22 +1,22 @@
-package Form::Factory::Test::Factory::CLI;
+package Form::Factory::Test::Interface::CLI;
 use Test::Able;
 use Test::More;
 use Test::Moose;
 
-with qw( Form::Factory::Test::Factory );
+with qw( Form::Factory::Test::Interface );
 
 has '+name' => (
     default => 'CLI',
 );
 
-has '+factory_options' => (
+has '+interface_options' => (
     default => sub {
         my $self = shift;
         {
             renderer => sub { shift; $self->output(join '', $self->output, @_) },
             get_args => sub { $self->argv },
             get_file => sub { 
-                my ($factory, $name) = @_;
+                my ($interface, $name) = @_;
                 $self->files->{$name};
             },
         } 
@@ -46,7 +46,7 @@ has files => (
 
 test plan => 7, render_usage => sub {
     my $self = shift;
-    my $action = $self->factory->new_action('TestApp::Action::EveryControl');
+    my $action = $self->interface->new_action('TestApp::Action::EveryControl');
 
     $action->render;
 
@@ -67,7 +67,7 @@ test plan => 7, render_usage => sub {
 
 test plan => 8, consume_values => sub {
     my $self = shift;
-    my $action = $self->factory->new_action('TestApp::Action::EveryControl');
+    my $action = $self->interface->new_action('TestApp::Action::EveryControl');
 
     $self->argv([ qw(
         --checkbox    xyz

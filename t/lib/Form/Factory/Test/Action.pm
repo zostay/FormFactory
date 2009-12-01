@@ -1,12 +1,12 @@
 package Form::Factory::Test::Action;
 use Test::Able::Role;
 
-has factory => (
+has interface => (
     is         => 'ro',
-    does       => 'Form::Factory::Factory',
+    does       => 'Form::Factory::Interface',
     required   => 1,
     lazy       => 1,
-    default    => sub { Form::Factory->new_factory('HTML') },
+    default    => sub { Form::Factory->new_interface('HTML') },
 );
 
 has action => (

@@ -26,7 +26,7 @@ Form::Factory::Control::Value - A read-only value control
 
 =head1 DESCRIPTION
 
-A read-only value. These may be displayed in the form or just passed through the stash. They might be passed by form submission as well (depending on the factory, but this should be avoided).
+A read-only value. These may be displayed in the form or just passed through the stash. They might be passed by form submission as well (depending on the interface, but this should be avoided).
 
 This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
 

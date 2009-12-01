@@ -12,8 +12,8 @@ Form::Factory - a general-purpose form handling API
 =head1 SYNOPSIS
 
   ### CGI, HTML example
-  my $factory = Form::Factory->new_factory('HTML');
-  my $action  = $factory->new_action('MyApp::Action::Login');
+  my $interface = Form::Factory->new_interface('HTML');
+  my $action  = $interface->new_action('MyApp::Action::Login');
 
   ### Drawing the form contents
   $action->unstash('login');
@@ -61,9 +61,9 @@ The goal here is to create self-contained actions that specify what they are in 
 
 =head2 MULTIPLE IMPLEMENTATIONS
 
-An action presents a blueprint for the data it needs to work. A form factory then takes that blueprint and builds the UI to present the user and consume the input from the user to present back to the action.
+An action presents a blueprint for the data it needs to work. A form interface takes that blueprint and builds the UI to present the user and consume the input from the user to present back to the action.
 
-As mentioned above, a factory could be any kind of UI. The way the factory and action is used will depend on the factory implementation, but the action itself should not need to care overmuch about that. It might specify something related to a specific factory, but it would still work with a different factory anyway.
+As mentioned above, a form interface could be any kind of UI. The way the form interface and action is used will depend on the form interface implementation, but the action itself should not need to care overmuch about that. It might specify something related to a specific interface, but it would still work with a different interface anyway.
 
 =head2 CONTROLS VERSUS WIDGETS
 
@@ -75,24 +75,24 @@ Forms and controls can be extended with common features. These features can clea
 
 =head1 METHODS
 
-=head2 new_factory
+=head2 new_interface
 
-  my $factory = Form::Factory->new_factory($name, \%options);
+  my $interface = Form::Factory->new_interface($name, \%options);
 
-This creates a L<Form::Factory::Factory> object with the given options. This is, more or less, a shortcut for:
+This creates a L<Form::Factory::Interface> object with the given options. This is, more or less, a shortcut for:
 
-  my $factory_class = 'Form::Factory::Factory::' . $name;
-  my $factory       = $factory_class->new(\%options);
+  my $interface_class = 'Form::Factory::Interface::' . $name;
+  my $interface       = $interface_class->new(\%options);
 
 =cut
 
-sub new_factory {
+sub new_interface {
     my $class = shift;
     my $name  = shift;
-    my $class_name = 'Form::Factory::Factory::' . $name;
+    my $class_name = 'Form::Factory::Interface::' . $name;
     unless (Class::MOP::load_class($class_name)) {
         die $@ if $@;
-        die "cannot load form factory $class_name";
+        die "cannot load form interface $class_name";
     }
     return $class_name->new(@_);
 }
@@ -126,19 +126,15 @@ This is not definite, but some things I know as of right now I'm not happy with:
 
 =item *
 
-I will be renaming the L<Form::Factory::Factory> classes to L<Form::Factory::Interface> in a future release. This name made more sense before I chose to use C<Form::Factory> as the top package name (rather than C<FormFactory>).
-
-=item *
-
 There are lots of tweaks coming to controls, especially L<Form::Factory::Control::Button>. I'm not very happy with how this is done right now, so something will change.
 
 =item *
 
-Features do not do very much yet, but they must do more, especially control features. I want features to be able to modify control construction, add factory-specific functionality for rendering and consuming, etc. They will be bigger and badder, but this might mean who knows what needs to change elsewhere.
+Features do not do very much yet, but they must do more, especially control features. I want features to be able to modify control construction, add interface-specific functionality for rendering and consuming, etc. They will be bigger and badder, but this might mean who knows what needs to change elsewhere.
 
 =item *
 
-The factories (soon to be interfaces) are kind of stupid at this point. They probably need a place to put their brains so they can some more interesting work.
+The interfaces are kind of stupid at this point. They probably need a place to put their brains so they can some more interesting work.
 
 =back
 
@@ -150,11 +146,11 @@ If you would like to take a look at the latest progress on this software, please
 
 Please report any bugs you find to the Github issue tracker: L<http://github.com/zostay/FormFactory/issues>
 
-If you need help getting started or something (the documentation was originally thrown together over my recent vacation, so it's probably lacking and wonky), you can also contact me on Twitter (L<http://twitter.com/zostay>) or by L</AUTHOR|email>.
+If you need help getting started or something (the documentation was originally thrown together over my recent vacation, so it's probably lacking and wonky), you can also contact me on Twitter (L<http://twitter.com/zostay>) or by L<email|/AUTHOR>.
 
 =head1 SEE ALSO
 
-L<Form::Factory::Factory::HTML>
+L<Form::Factory::Interface::CLI>, L<Form::Factory::Interface::HTML>
 
 =head1 AUTHOR
 

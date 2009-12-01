@@ -22,7 +22,7 @@ Form::Factory::Control::SelectMany - the multi-select control
           label => 'Just select some of these already...",
           available_choices => [
               Form::Factory::Control::Choice->new('one');
-              Formfactory::Control::Choice->new('two');
+              Form::Factory::Control::Choice->new('two');
               Form::Factory::Control::Choice->new('three');
           ],
           default_selected_choices => [ qw( one three ) ],

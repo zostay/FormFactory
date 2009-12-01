@@ -4,7 +4,7 @@ use warnings;
 
 use Form::Factory;
 
-my $cli = Form::Factory->new_factory('CLI');
+my $cli = Form::Factory->new_interface('CLI');
 my $action = $cli->new_action(shift @ARGV);
 
 $action->consume_and_clean_and_check_and_process;
