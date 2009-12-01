@@ -1,6 +1,3 @@
-package Moose::Meta::Attribute::Custom::Trait::Form::Control;
-sub register_implementation { 'Form::Factory::Action::Meta::Attribute::Control' }
-
 package Form::Factory::Action::Meta::Attribute::Control;
 use Moose::Role;
 
@@ -101,5 +98,8 @@ This library is free software. You can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
+
+package Moose::Meta::Attribute::Custom::Trait::Form::Control;
+sub register_implementation { 'Form::Factory::Action::Meta::Attribute::Control' }
 
 1;
