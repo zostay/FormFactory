@@ -1,6 +1,7 @@
 0.002   November 30, 2009
 
-    * Adding a CLI factory for developing command-line interfaces
+    * Renamed Form::Factory::Factory to Form::Factory::Interface
+    * Adding a CLI interface for developing command-line interfaces
     * Adding several helpful control roles: BooleanValue, HiddenValue,
       MultiLine, and PresetValue
     * Made the ScalarValue and ListValue control roles mutually exclusive
