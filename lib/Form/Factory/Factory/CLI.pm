@@ -16,18 +16,19 @@ Form::Factory::Factory::CLI - Command-line interface builder for form factory
   use Form::Factory;
 
   my $cli = Form::Factory->new_factory('CLI');
+  my $action = $cli->new_action(shift @ARGV);
   
-  $cli->consume_and_clean_and_check_and_process;
+  $action->consume_and_clean_and_check_and_process;
 
-  if ($cli->is_valid and $cli->is_success) {
+  if ($action->is_valid and $action->is_success) {
       print "done.\n";
   }
   else {
-      my $messages = $cli->results->all_messages;
+      my $messages = $action->results->all_messages;
       print $messages;
       print "usage: $0 OPTIONS\n\n";
       print "Options:\n";
-      $cli->render;
+      $action->render;
   }
 
 =head1 DESCRIPTION
