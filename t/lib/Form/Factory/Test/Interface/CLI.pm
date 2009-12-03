@@ -52,7 +52,7 @@ test plan => 7, render_usage => sub {
 
     my $output = $self->output;
     like($output, qr{--button\s+a button}, 'usage includes button');
-    like($output, qr{--checkbox \[ xyz \| abc \]\s+a checkbox}, 
+    like($output, qr{--checkbox\s+a checkbox}, 
         'usage includes checkbox');
     like($output, qr{--full_text FILE\s+some text},
         'usage includes full_text');
@@ -70,7 +70,8 @@ test plan => 8, consume_values => sub {
     my $action = $self->interface->new_action('TestApp::Action::EveryControl');
 
     $self->argv([ qw(
-        --checkbox    xyz
+        --button
+        --checkbox
         --full_text   -
         --password    secret
         --select_many one

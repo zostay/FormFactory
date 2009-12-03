@@ -99,8 +99,53 @@ test plan => 13, control_name => sub {
     is($control->current_value, 'Superbark', 'control current value is Superbark');
 };
 
+test plan => 5, render_control => sub {
+    my $self = shift;
+    my $action = $self->action;
+
+    my $control = $action->render_control(button => {
+        name  => 'submit',
+        label => 'Testing',
+    });
+
+    ok(length($self->output) > 0, 'got some output');
+    ok($control, 'got a control back');
+    isa_ok($control, 'Form::Factory::Control::Button');
+    is($control->label, 'Testing', 'button label is Testing');
+    is($control->current_value, '', 'current_value is empty');
+};
+
+test plan => 4, consume_control_empty => sub {
+    my $self = shift;
+    my $action = $self->action;
+
+    my $control = $action->consume_control(button => {
+        name  => 'submit',
+        label => 'Testing',
+    }, request => {});
+
+    ok($control, 'got a control back');
+    isa_ok($control, 'Form::Factory::Control::Button');
+    is($control->label, 'Testing', 'button label is Testing');
+    is($control->current_value, '', 'current_value is empty');
+};
+
+test plan => 4, consume_control_full => sub {
+    my $self = shift;
+    my $action = $self->action;
+
+    my $control = $action->consume_control(button => {
+        name  => 'submit',
+        label => 'Testing',
+    }, request => { submit => 'Testing' });
+
+    ok($control, 'got a control back');
+    isa_ok($control, 'Form::Factory::Control::Button');
+    is($control->label, 'Testing', 'button label is Testing');
+    is($control->current_value, 'Testing', 'current_value is Testing');
+};
+
 # TODO test stash_and_clear_and_unstash => sub { ... }
 # TODO test render => sub { ... }
-# TODO test render_control => sub { ... }
 
 1;
