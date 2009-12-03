@@ -350,9 +350,11 @@ sub render {
 
 =head2 render_control
 
-  $action->render_control($name, \%options);
+  my $control = $action->render_control($name, \%options);
 
 Creates and renders a one time control. This is mostly useful for attaching buttons to a form. The control is not added to the list of controls on the action and will not be processed later.
+
+This method returns the control object that was just rendered.
 
 =cut
 
@@ -401,9 +403,11 @@ sub consume {
 
 =head2 consume_control
 
-  $action->consume_control($name, \%options, %params);
+  my $control = $action->consume_control($name, \%options, %params);
 
 Consumes the value of a one time control. This is useful for testing to see if a form submitted using a one-time control has been submitted or not.
+
+This method returns the control object that was consumed.
 
 =cut
 

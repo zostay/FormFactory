@@ -23,7 +23,15 @@ Form::Factory::Control::Button - The button control
 
 =head1 DESCRIPTION
 
-A control representing a submit button. This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
+A control representing a submit button. This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::BooleanValue>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
+
+=head1 ATTRIBUTES
+
+=head2 true_value
+
+See L<Form::Factory::Control::Role::BooleanValue>. By default, this value is set
+to the label. If you change this to something else, the button might not work
+correctly anymore.
 
 =cut
 
@@ -37,7 +45,7 @@ has '+true_value' => (
 
 =head2 current_value
 
-The current value is always the same as the C<label>.
+The current value expects the L</true_value> to be passed to set the L<Form::Factory::Control::Role::BooleanValue/is_true> attribute. This method returns either the L</true_value> or L<Form::Factory::Control::Role::BooleanValue/false_value>.
 
 =cut
 
