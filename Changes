@@ -1,3 +1,7 @@
+0.003   Month Day, Year
+
+    * Adding a consume_control() method to the Action role
+
 0.002   November 30, 2009
 
     * Renamed Form::Factory::Factory to Form::Factory::Interface

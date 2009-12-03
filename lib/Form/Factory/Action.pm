@@ -396,6 +396,24 @@ sub consume {
     $self->form_interface->consume_control($controls->{$_}, %params) for @names;
 }
 
+=head2 consume_control
+
+  $action->consume_control($name, \%options, %params);
+
+Consumes the value of a one time control. This is useful for testing to see if a form submitted using a one-time control has been submitted or not.
+
+=cut
+
+sub consume_control {
+    my ($self, $name, $options, %params) = @_;
+
+    $params{results} = $self->results;
+
+    $self->form_interface->consume_control(
+        $self->form_interface->new_control($name => $options), %params
+    );
+}
+
 =head2 clean
 
   $action->clean(%options);
