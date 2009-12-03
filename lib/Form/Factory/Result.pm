@@ -60,7 +60,7 @@ sub _return(&@) {
     my ($filter, @messages) = @_;
     
     my @filtered = grep { $filter->() } @messages;
-    return wantarray ? @filtered : join "\n", @filtered;
+    return wantarray ? @filtered : join "\n", map { $_->message } @filtered;
 }
 
 sub all_messages {
