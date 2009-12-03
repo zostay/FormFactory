@@ -1,3 +1,13 @@
+0.004   December 3, 2009
+
+    * The render_control() and consume_control() methods now return the control
+      object rendered or consumed.
+    * The Button control is now a boolean value rather than a preset value to
+      make it much more useful
+    * The CLI interface does not consume arguments from boolean values anymore,
+      it just flips them on or off based on the fact they are present or not
+    * Added unit tests for render_control() and consume_control()
+
 0.003   December 3, 2009
 
     * Adding a consume_control() method to the Action role

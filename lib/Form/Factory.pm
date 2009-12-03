@@ -3,8 +3,6 @@ use Moose;
 
 use Form::Factory::Util qw( class_name_from_name );
 
-our $VERSION = '0.003';
-
 =head1 NAME
 
 Form::Factory - a general-purpose form handling API
