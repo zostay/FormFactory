@@ -361,9 +361,12 @@ sub render_control {
 
     $params{results} = $self->results;
 
-    $self->form_interface->render_control(
-        $self->form_interface->new_control($name => $options), %params
-    );
+    my $interface = $self->form_interface;
+    my $control   = $interface->new_control($name => $options);
+
+    $interface->render_control($control, %params);
+
+    return $control;
 }
 
 =head2 consume
@@ -409,9 +412,12 @@ sub consume_control {
 
     $params{results} = $self->results;
 
-    $self->form_interface->consume_control(
-        $self->form_interface->new_control($name => $options), %params
-    );
+    my $interface = $self->form_interface;
+    my $control   = $interface->new_control($name => $options);
+
+    $interface->consume_control($control, %params);
+
+    return $control;
 }
 
 =head2 clean

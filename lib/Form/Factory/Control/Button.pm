@@ -3,8 +3,8 @@ use Moose;
 
 with qw(
     Form::Factory::Control
+    Form::Factory::Control::Role::BooleanValue
     Form::Factory::Control::Role::Labeled
-    Form::Factory::Control::Role::PresetValue
     Form::Factory::Control::Role::ScalarValue
 );
 
@@ -25,6 +25,14 @@ Form::Factory::Control::Button - The button control
 
 A control representing a submit button. This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
 
+=cut
+
+has '+true_value' => (
+    isa       => 'Str',
+    lazy      => 1,
+    default   => sub { shift->label },
+);
+
 =head1 METHODS
 
 =head2 current_value
@@ -35,7 +43,13 @@ The current value is always the same as the C<label>.
 
 sub current_value { 
     my $self = shift;
-    return $self->label;
+
+    if (@_) {
+        my $value = shift;
+        $self->is_true($self->true_value eq $value);
+    }
+
+    return $self->is_true ? $self->true_value : $self->false_value;
 }
 
 =head1 AUTHOR

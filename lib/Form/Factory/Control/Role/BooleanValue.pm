@@ -32,7 +32,7 @@ The string value the control should have when the control is not L</is_true>.
 has false_value => (
     is        => 'ro',
     required  => 1,
-    default   => 0,
+    default   => '',
 );
 
 =head2 is_true
