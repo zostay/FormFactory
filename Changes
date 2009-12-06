@@ -1,3 +1,10 @@
+0.005   December 6, 2009
+
+    * Make sure get_all_features() in the meta class does not clobber feature
+      config when a parent class uses the same feature with a different
+      configuration. This might need some more tweaking since we do want to
+      avoid running an identical feature multiple times.
+
 0.004   December 3, 2009
 
     * The render_control() and consume_control() methods now return the control
