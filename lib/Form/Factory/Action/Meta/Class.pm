@@ -77,7 +77,11 @@ sub get_all_features {
         next unless $other_meta->meta->can('does_role');
         next unless $other_meta->meta->does_role('Form::Factory::Action::Meta::Class');
 
-        %all_features = (%{ $other_meta->features }, %all_features);
+        # Make sure inherited features don't clobber each other
+        while (my ($name, $feature_config) = each %{ $other_meta->features }) {
+            my $full_name = join('#', $name, $other_meta->name);
+            $all_features{$full_name} = $feature_config;
+        }
     }
 
     return \%all_features;
