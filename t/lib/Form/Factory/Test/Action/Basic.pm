@@ -58,7 +58,7 @@ test plan => 3, meta_class_all_features => sub {
     my $features = $self->action->meta->get_all_features;
 
     ok($features, 'has features');
-    is_deeply([ sort keys %{ $features } ], [ qw( functional#TestApp::Action::Basic ) ], 
+    is_deeply([ sort keys %{ $features } ], [ 'functional#TestApp::Action::Basic' ], 
         'has one feature');
     is_deeply([ sort keys %{ $features->{'functional#TestApp::Action::Basic'} } ],
         [ qw( checker_code cleaner_code post_processor_code pre_processor_code ) ],
