@@ -4,6 +4,7 @@ use Moose;
 with qw( 
     Form::Factory::Feature 
     Form::Factory::Feature::Role::Control
+    Form::Factory::Feature::Role::CustomControlMessage
 );
 
 =head1 NAME

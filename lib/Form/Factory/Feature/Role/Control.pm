@@ -128,63 +128,6 @@ sub post_process {
     $self->post_process_value(@_) if $self->can('post_process_value');
 }
 
-=head2 format_message
-
-  my $formatted_message = $feature->format_message($unformatted_message);
-
-Given a message containing a single C<%s> placeholder, it fills that placeholder with the control's label. If the control does not implement L<Form::Factory::Control::Role::Labeled>, the control's name is used instead.
-
-=cut
-
-sub format_message {
-    my $self    = shift;
-    my $message = $self->message || shift;
-    my $control = $self->control;
-
-    my $control_label 
-        = $control->does('Form::Factory::Control::Role::Labeled') ? $control->label
-        :                                                         $control->name
-        ;
-
-    sprintf $message, $control_label;
-}
-
-=head2 control_info
-
-Reports an informational message automatically filtered through L</format_message>.
-
-=cut
-
-sub control_info {
-    my $self    = shift;
-    my $message = $self->format_message(shift);
-    $self->result->field_info($self->control->name, $message);
-}
-
-=head2 control_warning
-
-Reports a warning automatically filtered through L</format_message>.
-
-=cut
-
-sub control_warning {
-    my $self = shift;
-    my $message = $self->format_message(shift);
-    $self->result->field_warning($self->control->name, $message);
-}
-
-=head2 control_error
-
-Reports an error automatically filtered through L</format_error>.
-
-=cut
-
-sub control_error {
-    my $self = shift;
-    my $message = $self->format_message(shift);
-    $self->result->field_error($self->control->name, $message);
-}
-
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
