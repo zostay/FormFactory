@@ -5,18 +5,6 @@ use Moose::Role;
 
 Form::Factory::Feature::Role::CustomMessage - features with custom messages
 
-=head1 SYNOPSIS
-
-  has_control foo => (
-      control   => 'text',
-      features  => {
-          match_code => {
-              message => 'Foo values must be even',
-              code    => sub { $_[0] % 2 == 0 },
-          },
-      },
-  );
-
 =head1 DESCRIPTION
 
 A feature may consume this role in order to allow the user to specify a custom message on failure.
