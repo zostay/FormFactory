@@ -84,20 +84,6 @@ has action => (
     weak_ref  => 1,
 );
 
-=head2 message
-
-This is a custom error message for failures. This message is used instead of the one the feature specifies when L</feature_info>, L</feature_warning>, and L</feature_error> are called.
-
-This is inadequate. It should be fixed in the future.
-
-=cut
-
-has message => (
-    is        => 'ro',
-    isa       => 'Str',
-    predicate => 'has_message',
-);
-
 =head2 result
 
 This is the L<Form::Factory::Result::Single> recording the success or failure of the parts of this feature.
@@ -110,50 +96,6 @@ has result => (
     required  => 1,
     default   => sub { Form::Factory::Result::Single->new },
 );
-
-=head1 METHODS
-
-=head2 feature_info
-
-  $feature->feature_info($message);
-
-Record an info feature message.
-
-=cut
-
-sub feature_info {
-    my $self    = shift;
-    my $message = $self->message || shift;
-    $self->result->info($message);
-}
-
-=head2 feature_warning
-
-  $feature->feature_warning($message);
-
-Record a warning feature message.
-
-=cut
-
-sub feature_warning {
-    my $self    = shift;
-    my $message = $self->message || shift;
-    $self->result->warning($message);
-}
-
-=head2 feature_error
-
-  $feature->feature_error($message);
-
-Record an error feature message.
-
-=cut
-
-sub feature_error {
-    my $self    = shift;
-    my $message = $self->message || shift;
-    $self->result->error($message);
-}
 
 =head1 AUTHOR
 
