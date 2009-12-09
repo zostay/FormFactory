@@ -3,6 +3,7 @@ use Moose;
 
 with qw( 
     Form::Factory::Feature 
+    Form::Factory::Feature::Role::Check
     Form::Factory::Feature::Role::Control
     Form::Factory::Feature::Role::CustomControlMessage
 );
@@ -49,13 +50,13 @@ sub check_control {
     die "the match_available_feature does not know hwo to check the value of $control";
 }
 
-=head2 check_value
+=head2 check
 
 Verifies that the value or values set match one or more of the available values.
 
 =cut
 
-sub check_value {
+sub check {
     my $self    = shift;
     my $control = $self->control;
 

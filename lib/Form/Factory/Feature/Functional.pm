@@ -1,7 +1,13 @@
 package Form::Factory::Feature::Functional;
 use Moose;
 
-with qw( Form::Factory::Feature );
+with qw( 
+    Form::Factory::Feature 
+    Form::Factory::Feature::Role::Clean
+    Form::Factory::Feature::Role::Check
+    Form::Factory::Feature::Role::PreProcess
+    Form::Factory::Feature::Role::PostProcess
+);
 
 =head1 NAME
 

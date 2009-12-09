@@ -3,6 +3,7 @@ use Moose;
 
 with qw( 
     Form::Factory::Feature 
+    Form::Factory::Feature::Role::Check
     Form::Factory::Feature::Role::Control
     Form::Factory::Feature::Role::CustomControlMessage
 );
@@ -41,13 +42,13 @@ sub check_control {
     die "the required feature does not know how to check the value of $control";
 }
 
-=head2 check_value
+=head2 check
 
 Reports an error if a scalar value does not have a length greater than 0. Reports an error if a list value has 0 items in the list.
 
 =cut
 
-sub check_value {
+sub check {
     my $self    = shift;
     my $control = $self->control;
 

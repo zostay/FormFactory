@@ -1,8 +1,6 @@
 package Form::Factory::Feature::Role::Control;
 use Moose::Role;
 
-use Scalar::Util qw( blessed );
-
 requires qw( check_control );
 
 =head1 NAME
@@ -14,7 +12,12 @@ Form::Factory::Feature::Role::Control - Form features tied to particular control
   package Form::Factory::Feature::Control::Color;
   use Moose;
 
-  with qw( Form::Factory::Feature Form::Factory::Feature::Role::Control );
+  with qw( 
+      Form::Factory::Feature 
+      Form::Factory::Feature::Role::Check
+      Form::Factory::Feature::Role::Control 
+      Form::Factory::Feature::Role::CustomControlMessage
+  );
 
   has recognized_colors => (
       is        => 'ro',
@@ -30,7 +33,7 @@ Form::Factory::Feature::Role::Control - Form features tied to particular control
           unless $control->does('Form::Factory::Control::Role::ScalarValue');
   }
 
-  sub check_value {
+  sub check {
       my $self  = shift;
       my $value = $self->control->current_value;
 
@@ -81,52 +84,6 @@ has control => (
         $set->($value);
     },
 );
-
-=head1 METHODS
-
-=head2 clean
-
-Checks to see if a C<clean_value> method is defined and calls it if it is.
-
-=cut
-
-sub clean {
-    my $self = shift;
-    $self->clean_value(@_) if $self->can('clean_value');
-}
-
-=head2 check
-
-Checks to see if a C<check_value> method is defined and calls it if it is.
-
-=cut
-
-sub check {
-    my $self = shift;;
-    $self->check_value(@_) if $self->can('check_value');
-}
-
-=head2 pre_process
-
-Checks to see if a C<pre_process_value> method is deifned and calls it if it is.
-
-=cut
-
-sub pre_process {
-    my $self = shift;
-    $self->pre_process_value(@_) if $self->can('pre_process_value');
-}
-
-=head2 post_process
-
-Checks to see if a C<post_process_value> method is deifned an calls it if it is.
-
-=cut
-
-sub post_process {
-    my $self = shift;
-    $self->post_process_value(@_) if $self->can('post_process_value');
-}
 
 =head1 AUTHOR
 

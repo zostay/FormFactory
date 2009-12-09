@@ -3,6 +3,7 @@ use Moose;
 
 with qw( 
     Form::Factory::Feature 
+    Form::Factory::Feature::Role::Check
     Form::Factory::Feature::Role::Control
     Form::Factory::Feature::Role::CustomControlMessage
 );
@@ -57,13 +58,13 @@ sub check_control {
     die "the match_regex feature only works with scalar value controls, not $control";
 }
 
-=head2 check_value
+=head2 check
 
 Runs the regular expression against the current value of the control and reports an error if it does not match.
 
 =cut
 
-sub check_value {
+sub check {
     my $self  = shift;
     my $value = $self->control->current_value;
 

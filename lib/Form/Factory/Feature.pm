@@ -3,8 +3,6 @@ use Moose::Role;
 
 use Scalar::Util qw( blessed );
 
-requires qw( clean check pre_process post_process );
-
 =head1 NAME
 
 Form::Factory::Feature - Interface for objects that modify how actions work
@@ -15,30 +13,6 @@ Form::Factory::Feature - Interface for objects that modify how actions work
   use Moose;
 
   with qw( Form::Factory::Feature );
-
-  sub clean {
-      my $self = shift;
-
-      # clean the input...
-  }
-
-  sub check {
-      my $self = shift;
-
-      # check the input...
-  }
-
-  sub pre_process {
-      my $self = shift;
-
-      # run before the process...
-  }
-
-  sub post_process {
-      my $self = shift;
-
-      # run after the process...
-  }
 
 =head1 DESCRIPTION
 
@@ -94,6 +68,7 @@ has result => (
     is        => 'ro',
     isa       => 'Form::Factory::Result::Single',
     required  => 1,
+    lazy      => 1,
     default   => sub { Form::Factory::Result::Single->new },
 );
 

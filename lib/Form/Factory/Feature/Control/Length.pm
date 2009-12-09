@@ -3,6 +3,7 @@ use Moose;
 
 with qw( 
     Form::Factory::Feature 
+    Form::Factory::Feature::Role::Check
     Form::Factory::Feature::Role::Control
     Form::Factory::Feature::Role::CustomControlMessage
 );
@@ -81,13 +82,13 @@ sub check_control {
     die "the length feature only works with scalar values\n";
 }
 
-=head2 check_value
+=head2 check
 
 Verifies that the value of the control is not too short or too long.
 
 =cut
 
-sub check_value {
+sub check {
     my $self  = shift;
     my $value = $self->control->current_value;
 
