@@ -13,6 +13,7 @@ has test_packages => (
         Form::Factory::Test::Action::Inheritance
         Form::Factory::Test::Feature::Control::Length
         Form::Factory::Test::Feature::Control::Required
+        Form::Factory::Test::Feature::Control::Trim
         Form::Factory::Test::Interface::CLI
         Form::Factory::Test::Interface::HTML
     ) ] },
