@@ -63,4 +63,8 @@ test plan => 5, basic_feature_checks => sub {
     }
 };
 
+teardown clear_messages => sub {
+    my $self = shift;
+    $self->action->results->clear_all;
+};
 1;
