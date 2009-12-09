@@ -4,6 +4,22 @@
       config when a parent class uses the same feature with a different
       configuration. This might need some more tweaking since we do want to
       avoid running an identical feature multiple times.
+    * The feature role has been split into 5 roles:
+        * Form::Factory::Feature is now mostly a marker class for features
+          (still adds common attributes, such as result)
+        * Form::Factory::Feature::Role::Clean requires the clean method
+        * Form::Factory::Feature::Role::Check requires the check method
+        * Form::Factory::Feature::Role::PreProcess requires the pre_process
+          method
+        * Form::Factory::Feature::Role::PostProcess requires the post_process
+          method
+    * Moved custom message handling for features into separate roles:
+      Form::Factory::Feature::Role::CustomMessage and
+      Form::Factory::Feature::Role::CustomControlMessage
+    * Added a new type of feature, the build_attribute feature allows a control
+      feature to modify attributes when the meta-class is being setup
+    * Features should now set is_valid() explicitly for success and failure
+    * Added more unit tests
 
 0.004   December 3, 2009
 
