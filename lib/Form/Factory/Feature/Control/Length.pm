@@ -98,13 +98,17 @@ sub check {
         $self->control_error(
             "the %s must be at least @{[$self->minimum]} characters long"
         );
+        $self->result->is_valid(0);
     }
 
     if ($self->has_maximum and length($value) > $self->maximum) {
         $self->control_error(
             "the %s must be no longer than @{[$self->maximum]} characters"
         );
+        $self->result->is_valid(0);
     }
+
+    $self->result->is_valid(1) unless $self->result->is_validated;
 }
 
 =head1 AUTHOR

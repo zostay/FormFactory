@@ -57,6 +57,10 @@ sub check {
         my $value = $control->current_value;
         unless (length($value) > 0) {
             $self->control_error('the %s is required');
+            $self->result->is_valid(0);
+        }
+        else {
+            $self->result->is_valid(1);
         }
     }
 
@@ -65,6 +69,10 @@ sub check {
         my $values = $control->current_values;
         unless (@$values > 0) {
             $self->control_error('at least one value for %s is required');
+            $self->result->is_valid(0);
+        }
+        else {
+            $self->result->is_valid(1);
         }
     }
 }
