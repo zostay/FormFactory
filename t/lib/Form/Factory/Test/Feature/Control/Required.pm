@@ -15,7 +15,7 @@ has '+feature' => (
     },
 );
 
-test plan => 1, required_ok => sub {
+test plan => 1, scalar_required_ok => sub {
     my $self = shift;
     my $action = $self->action;
 
@@ -29,7 +29,7 @@ test plan => 1, required_ok => sub {
     ok($action->is_valid, qq{string "foo" is OK});
 };
 
-test plan => 1, required_not_ok => sub {
+test plan => 1, scalar_required_not_ok => sub {
     my $self = shift;
     my $action = $self->action;
 
