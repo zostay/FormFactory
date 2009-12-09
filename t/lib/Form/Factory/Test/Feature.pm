@@ -28,11 +28,18 @@ has feature => (
     required   => 1,
 );
 
-test plan => 5, basic_feature_checks => sub {
+test plan => 6, basic_feature_checks => sub {
     my $self = shift;
     my $feature = $self->feature;
 
     does_ok($feature, 'Form::Factory::Feature');
+
+    if ($feature->does('Form::Factory::Feature::Role::BuildAttribute')) {
+        can_ok($feature, qw( build_attribute ));
+    }
+    else {
+        pass('not a cleaner');
+    }
 
     if ($feature->does('Form::Factory::Feature::Role::Clean')) {
         can_ok($feature, qw( clean ));
