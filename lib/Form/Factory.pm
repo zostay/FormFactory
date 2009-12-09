@@ -124,7 +124,7 @@ This is not definite, but some things I know as of right now I'm not happy with:
 
 =item *
 
-There are lots of tweaks coming to controls, especially L<Form::Factory::Control::Button>. I'm not very happy with how this is done right now, so something will change.
+There are lots of tweaks coming to controls.
 
 =item *
 
