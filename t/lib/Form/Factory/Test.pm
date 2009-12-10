@@ -8,6 +8,7 @@ has test_packages => (
     isa       => 'ArrayRef[Str]',
     required  => 1,
     default   => sub { [ qw(
+        Form::Factory::Test::Action::AllControls
         Form::Factory::Test::Action::Basic
         Form::Factory::Test::Action::Controls
         Form::Factory::Test::Action::Inheritance

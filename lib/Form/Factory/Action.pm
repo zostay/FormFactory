@@ -468,6 +468,10 @@ This is the list of controls to clean. If not given, all features will be run. I
         # Run all features now
         else {
             for my $feature (@$features) {
+                next unless $feature->does(
+                    class_name_from_name('Feature::Role', $method)
+                );
+
                 $feature->$method;
             }
         }
