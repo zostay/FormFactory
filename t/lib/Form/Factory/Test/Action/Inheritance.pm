@@ -31,7 +31,7 @@ test plan => 5, inherited_checks => sub {
 
     ok(!$action->is_valid, 'action does not validate');
     
-    my @errors = sort $action->results->regular_error_messages;
+    my @errors = sort { $a->message cmp $b->message } $action->results->regular_error_messages;
     is(scalar @errors, 3, 'got three errors');
 
     like($errors[0]->message, qr/lowercase letters/, 'got lowercase letters error');
