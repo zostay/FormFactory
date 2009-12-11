@@ -1,9 +1,16 @@
-0.005   December 6, 2009
+0.007   December 11, 2009
 
-    * Make sure get_all_features() in the meta class does not clobber feature
-      config when a parent class uses the same feature with a different
-      configuration. This might need some more tweaking since we do want to
-      avoid running an identical feature multiple times.
+    * Correcting Changes. I must have been half-asleep when I wrote up the
+      change log for 0.006
+    * Fixing the broken action inheritance test because some objects were sorted
+      improperly
+    * Adds a test to find a bug related to running the clean() or
+      check() or process() method on an action. If the "controls" parameter was
+      not passed, it did not work correctly. It worked as if the changes to
+      feature roles made in 0.006 had not been done. This has been corrected.
+
+0.006   December 8, 2009
+
     * The feature role has been split into 5 roles:
         * Form::Factory::Feature is now mostly a marker class for features
           (still adds common attributes, such as result)
@@ -20,6 +27,13 @@
       feature to modify attributes when the meta-class is being setup
     * Features should now set is_valid() explicitly for success and failure
     * Added more unit tests
+
+0.005   December 6, 2009
+
+    * Make sure get_all_features() in the meta class does not clobber feature
+      config when a parent class uses the same feature with a different
+      configuration. This might need some more tweaking since we do want to
+      avoid running an identical feature multiple times.
 
 0.004   December 3, 2009
 
