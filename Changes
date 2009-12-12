@@ -1,3 +1,10 @@
+0.008   December 12, 2009
+
+    * It is now possible to extend interfaces, controls, features, and control
+      features using your application interface. To do so you need to create a
+      Form::Factory::<type>::Custom::<your-name> class which has a
+      register_implementation class returning the name of the actual class.
+
 0.007   December 11, 2009
 
     * Correcting Changes. I must have been half-asleep when I wrote up the
