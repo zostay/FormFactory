@@ -10,6 +10,46 @@ requires qw( default_isa );
 
 Form::Factory::Control - high-level API for working with form controls
 
+=head1 SYNOPSIS
+
+  package MyApp::Control::Slider;
+  use Moose;
+
+  with qw(
+      Form::Feature::Control
+      Form::Feature::Control::Role::ScalarValue
+  );
+
+  has minimum_value => (
+      is        => 'rw',
+      isa       => 'Num',
+      required  => 1,
+      default   => 0,
+  );
+
+  has maximum_value => (
+      is        => 'rw',
+      isa       => 'Num',
+      required  => 1,
+      default   => 100,
+  );
+
+  has value => (
+      is        => 'rw',
+      isa       => 'Num',
+      required  => 1,
+      default   => 50,
+  );
+
+  sub current_value {
+      my $self = shift
+      if (@_) { $self->value(shift) }
+      return $self->value;
+  }
+
+  package Form::Factory::Control::Custom::Slider;
+  sub register_implementation { 'MyApp::Control::Slider' }
+
 =head1 DESCRIPTION
 
 Allows for high level processing, validation, filtering, etc. of form control information.

@@ -4,7 +4,6 @@ use Moose::Role;
 use Form::Factory::Feature::Functional;
 use Form::Factory::Result::Gathered;
 use Form::Factory::Result::Single;
-use Form::Factory::Util qw( class_name_from_name );
 
 #requires qw( run );
 
@@ -132,11 +131,7 @@ sub _meta_features {
     my @features;
     for my $feature_name (keys %$all_features) {
         my $feature_options = $all_features->{ $feature_name };
-        my $feature_class = class_name_from_name('Feature', $feature_name);
-        unless (Class::MOP::load_class($feature_class)) {
-            die $@ if $@;
-            die "cannot load feature class $feature_class";
-        }
+        my $feature_class = Form::Factory->feature_class($feature_name);
 
         my $feature = $feature_class->new(
             %$feature_options,
@@ -195,12 +190,7 @@ sub _build_controls {
 
         my $meta_features = $meta_control->features;
         for my $feature_name (keys %$meta_features) {
-            my $feature_class 
-                = class_name_from_name('Feature::Control', $feature_name);
-            unless (Class::MOP::load_class($feature_class)) {
-                die $@ if $@;
-                die "cannot load control feature $feature_name\n";
-            }
+            my $feature_class = Form::Factory->control_feature_class($feature_name);
 
             my $feature = $feature_class->new(
                 %{ $meta_features->{$feature_name} },
@@ -457,7 +447,7 @@ This is the list of controls to clean. If not given, all features will be run. I
             for my $feature (@$features) {
                 next unless $feature->does('Form::Factory::Feature::Role::Control');
                 next unless $feature->does(
-                    class_name_from_name('Feature::Role', $method)
+                    Form::Factory::_class_name_from_name('Feature::Role', $method)
                 );
                 next unless $names{ $feature->control->name };
 
@@ -469,7 +459,7 @@ This is the list of controls to clean. If not given, all features will be run. I
         else {
             for my $feature (@$features) {
                 next unless $feature->does(
-                    class_name_from_name('Feature::Role', $method)
+                    Form::Factory::_class_name_from_name('Feature::Role', $method)
                 );
 
                 $feature->$method;

@@ -11,7 +11,7 @@ Form::Factory::Interface - Role for form interface implementations
 
 =head1 SYNOPSIS
 
-  package Form::Factory::Interface::MyFactory;
+  package MyApp::Interface::MyUI;
   use Moose;
 
   with qw( Form::Factory::Interface );
@@ -27,6 +27,9 @@ Form::Factory::Interface - Role for form interface implementations
 
       # Consume values from user to fill $control
   }
+
+  package Form::Factory::Interface::Custom::MyUI;
+  sub register_implementation { 'MyApp::Interface::MyUI' }
 
 =head1 DESCRIPTION
 

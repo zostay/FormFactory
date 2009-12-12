@@ -14,6 +14,9 @@ Form::Factory::Feature - Interface for objects that modify how actions work
 
   with qw( Form::Factory::Feature );
 
+  package Form::Factory:;Feature::Custom::Foo;
+  sub register_implementation { 'MyApp::Feature::Foo' }
+
 =head1 DESCRIPTION
 
 A feature modifies what the form does during processing.

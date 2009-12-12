@@ -9,7 +9,7 @@ Form::Factory::Feature::Role::Control - Form features tied to particular control
 
 =head1 SYNOPSIS
 
-  package Form::Factory::Feature::Control::Color;
+  package MyApp::Feature::Control::Color;
   use Moose;
 
   with qw( 
@@ -40,6 +40,9 @@ Form::Factory::Feature::Role::Control - Form features tied to particular control
       $self->control_error('the %s does not look like a color')
           unless grep { $value eq $_ } @{ $self->recognized_colors };
   }
+
+  package Form::Factory::Feature::Control::Custom::Color;
+  sub register_implementation { 'MyApp::Feature::Control::Color' }
 
 And then used in an action via:
 

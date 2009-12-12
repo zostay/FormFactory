@@ -1,7 +1,7 @@
 package Form::Factory;
 use Moose;
 
-use Form::Factory::Util qw( class_name_from_name );
+use Carp ();
 
 =head1 NAME
 
@@ -87,13 +87,19 @@ This creates a L<Form::Factory::Interface> object with the given options. This i
 sub new_interface {
     my $class = shift;
     my $name  = shift;
-    my $class_name = 'Form::Factory::Interface::' . $name;
-    unless (Class::MOP::load_class($class_name)) {
-        die $@ if $@;
-        die "cannot load form interface $class_name";
-    }
+    my $class_name = $class->interface_class($name);
     return $class_name->new(@_);
 }
+
+=head2 interface_class
+
+  my $class_name = Form::Factory->interface_class('HTML');
+
+Returns the interface class for the named interface.
+
+=cut
+
+sub interface_class { _load_class_from_name(Interface => $_[1]) }
 
 =head2 control_class
 
@@ -103,17 +109,71 @@ Returns the control class for the named control.
 
 =cut
 
-sub control_class {
-    my $name = $_[1];
+sub control_class { _load_class_from_name(Control => $_[1]) }
 
-    my $class_name = class_name_from_name('Control', $name);
+=head2 feature_class
 
-    unless (Class::MOP::load_class($class_name)) {
-        warn $@ if $@;
-        return;
+  my $class_name = Form::Factory->feature_class('functional');
+
+Returns the feature class for the named feature.
+
+=cut
+
+sub feature_class { _load_class_from_name(Feature => $_[1]) }
+
+=head2 control_feature_class
+
+  my $class_name = Form::Factory->control_feature_class('required');
+
+Returns the control feature class for the named control feature.
+
+=cut
+
+sub control_feature_class { _load_class_from_name('Feature::Control' => $_[1]) }
+
+sub _class_name_from_name {
+    my ($prefix, $name) = @_;
+
+    # Remove anything like #Foo, which is used to differentiate between features
+    # added by different classes in get_all_features()
+    $name =~ s/\#(.*)$//;
+
+    # Turn a foo_bar_baz name into FooBarBaz
+    $name =~ s/(?:[^A-Za-z]+|^)([A-Za-z])/\U$1/g;
+
+    return join('::', 'Form::Factory', $prefix, ucfirst $name);
+}
+
+sub _load_class_from_name {
+    my ($given_type, $name) = @_;
+    my $ERROR;
+
+    my $custom_type = join('::', $given_type, 'Custom');
+    for my $type ($given_type, $custom_type) {
+        my $class_name = _class_name_from_name($type, $name);
+
+        if (not eval { Class::MOP::load_class($class_name) }) {
+            $ERROR ||= $@ if $@;
+            $ERROR ||= "failed to load $type class named $name";;
+        }
+        elsif ($type eq $custom_type) {
+            $class_name = $class_name->register_implementation;
+
+            if (eval { Class::MOP::load_class($class_name) }) {
+                return $class_name;
+            }
+            else {
+                undef $ERROR;
+                $ERROR ||= $@ if $@;
+                $ERROR ||= "failed to load $type class named $name";;
+            }
+        }
+        else {
+            return $class_name;
+        }
     }
 
-    return $class_name;
+    Carp::croak($ERROR);
 }
 
 =head1 TODO
