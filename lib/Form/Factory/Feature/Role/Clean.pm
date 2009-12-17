@@ -24,6 +24,9 @@ Form::Factory::Feature::Role::Clean - features that clean up control values
       $self->control->{something}->current_value('Foo');
   }
 
+  package Form::Factory::Feature::Foo;
+  sub register_implementation { 'MyApp::Feature::Foo' }
+
 =head1 DESCRIPTION
 
 This is for features that run during the clean phase. This runs immediately after the input has been consumed and before it is checked. These features should avoid reporting errors. The intention is for these features to clean up the input automatically before it is checked for errors. This should work with the control values rather than the action attributes directly, since those won't be set yet.

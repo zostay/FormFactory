@@ -31,6 +31,9 @@ Form::Factory::Feature::Role::Check - features that check control values
       }
   }
 
+  package Form::Factory::Feature::Custom::Bar;
+  sub register_implementation { 'MyApp::Feature::Bar' }
+
 =head1 DESCRIPTION
 
 Features that check the correctness of control values implement this role. This runs after input has been consumed and cleaned and before it is processed. The check here is meant to verify whether the input is valid and ready for processing. Mark the result as invalid to prevent processing. In general, it's a good idea to return an error if you do that. This is also a good place to return warnings.

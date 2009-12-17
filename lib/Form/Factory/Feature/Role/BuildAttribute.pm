@@ -23,6 +23,9 @@ Form::Factory::Feature::Role::BuildAttribute - control features that modify the 
       $attr->{predicate} = 'has_' . $name;
   }
 
+  package Form::Factory::Feature::Control::Custom::AddPredicate;
+  sub register_implementation { 'MyApp::Feature::FillFromRecord' }
+
 =head1 DESCRIPTION
 
 Control features that implement this role are given the opportunity to directly modify the action attribute just before it is added to the meta-class. 

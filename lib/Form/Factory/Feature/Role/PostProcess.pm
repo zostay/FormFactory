@@ -22,6 +22,9 @@ Form::Factory::Feature::Role::PostProcess - features that run just after process
       MyApp::Logger->info('Ending the process.');
   }
 
+  package Form::Factory::Feature::Custom::Qux;
+  sub register_implementation { 'MyApp::Feature::Qux' }
+
 =head1 DESCRIPTION
 
 Features that run something immediately after the action runs may implement this role. This feature will run after the action does whether it succeeds or not. It will not run if an exception is thrown.
