@@ -159,12 +159,12 @@ sub has_control {
 
     unshift @{ $args->{traits} }, 'Form::Control';
 
-    for my $name (keys %{ $args->{features} }) {
-        my $feature_class = Form::Factory->control_feature_class($name);
+    for my $feature_name (keys %{ $args->{features} }) {
+        my $feature_class = Form::Factory->control_feature_class($feature_name);
         next unless $feature_class->does('Form::Factory::Feature::Role::BuildAttribute');
 
         $feature_class->build_attribute(
-            $args->{features}{$name}, $meta, $name, $args
+            $args->{features}{$feature_name}, $meta, $name, $args
         );
     }
 
