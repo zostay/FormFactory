@@ -68,7 +68,7 @@ sub build_attribute {
 
     unless ($options->{no_warn}) {
         warn "the $name attribute is read-only, but the fill_on_assignment feature is enabled for it, are you sure this is correct?"
-            if $attr->{is} eq 'ro';
+            if $attr->{is} eq 'ro' or $attr->{is} eq 'bare';
     }
 
     $attr->{trigger} = sub {
