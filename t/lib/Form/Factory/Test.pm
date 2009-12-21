@@ -13,6 +13,7 @@ has test_packages => (
         Form::Factory::Test::Action::Controls
         Form::Factory::Test::Action::Inheritance
         Form::Factory::Test::CustomClassNames
+        Form::Factory::Test::Feature::Control::BuildControl
         Form::Factory::Test::Feature::Control::FillOnAssignment
         Form::Factory::Test::Feature::Control::Length
         Form::Factory::Test::Feature::Control::Required

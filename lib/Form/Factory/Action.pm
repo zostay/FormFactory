@@ -181,16 +181,35 @@ sub _build_controls {
             $options{$key} = $value->code->($self, $key);
         }
 
-        my $control = $interface->new_control($meta_control->control => {
-            name          => $meta_control->name,
-            ($meta_control->has_documentation 
-                ? (documentation => $meta_control->documentation) : ()),
-            %options,
-        });
+        my %control_args = (
+            control => $meta_control->control,
+            options => {
+                name => $meta_control->name,
+                ($meta_control->has_documentation 
+                    ? (documentation => $meta_control->documentation) : ()),
+                %options,
+            },
+        );
 
+        my %feature_classes;
         my $meta_features = $meta_control->features;
         for my $feature_name (keys %$meta_features) {
             my $feature_class = Form::Factory->control_feature_class($feature_name);
+            $feature_classes{$feature_name} = $feature_class;
+
+            next unless $feature_class->does('Form::Factory::Feature::Role::BuildControl');
+
+            $feature_class->build_control(
+                $meta_features->{$feature_name}, \%control_args
+            );
+        }
+
+        my $control = $interface->new_control(
+            $control_args{control} => $control_args{options},
+        );
+
+        for my $feature_name (keys %$meta_features) {
+            my $feature_class = $feature_classes{$feature_name};
 
             my $feature = $feature_class->new(
                 %{ $meta_features->{$feature_name} },
