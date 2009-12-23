@@ -4,6 +4,11 @@
       features using your application interface. To do so you need to create a
       Form::Factory::<type>::Custom::<your-name> class which has a
       register_implementation class returning the name of the actual class.
+    * Features may not modify attribute construction via the BuildAttribute role
+    * Features may now modify control construction via the BuildControl role
+    * A new fill_on_assignment control feature has been added
+    * Make sure we warn about read-only attributes when is => bare as well as
+      when is => ro.
 
 0.007   December 11, 2009
 
