@@ -1,6 +1,13 @@
 package Form::Factory::Control::Role::BooleanValue;
 use Moose::Role;
 
+with qw( Form::Factory::Control::Role::Value );
+
+excludes qw(
+    Form::Factory::Control::Role::ListValue
+    Form::Factory::Control::Role::ScalarValue
+);
+
 =head1 NAME
 
 Form::Factory::Control::Role::BooleanValue - boolean valued controls
@@ -35,18 +42,26 @@ has false_value => (
     default   => '',
 );
 
+=head1 METHODS
+
 =head2 is_true
 
-Whether or not the control is currently set.
+Returns a true value when the C<current_value> is set to L</true_value> or a false value when the C<current_value> is set to L</false_value>.
+
+This method returns C<undef> if it is neither true nor false.
 
 =cut
 
-has is_true => (
-    is        => 'rw',
-    isa       => 'Bool',
-    required  => 1,
-    default   => 0,
-);
+sub is_true {
+    my $self = shift;
+
+    # blow off these warnings rather than test for them
+    no warnings 'uninitialized'; 
+
+    return 1  if $self->current_value eq $self->true_value;
+    return '' if $self->current_value eq $self->false_value;
+    return scalar undef;
+}
 
 =head1 AUTHOR
 

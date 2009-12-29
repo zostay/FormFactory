@@ -32,16 +32,10 @@ A select control that allows a single selection. A list of radio buttons or a dr
 
 =head1 ATTRIBUTES
 
-=head2 value
-
-The current value of the control.
-
 =cut
 
-has value => (
-    is        => 'rw',
+has '+value' => (
     isa       => 'Str',
-    predicate => 'has_value',
 );
 
 =head2 default_value

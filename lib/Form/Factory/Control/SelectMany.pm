@@ -37,28 +37,16 @@ This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Rol
 
 =head1 ATTRIBUTES
 
-=head2 selected_choices
+=head2 default_value
 
-This is a list of currently selected choices.
-
-=cut
-
-has selected_choices => (
-    is        => 'rw',
-    isa       => 'ArrayRef[Str]',
-    predicate => 'has_selected_choices',
-);
-
-=head2 default_choices
-
-This s a list of the default selection.
+This is a list of the default selection.
 
 =cut
 
-has default_selected_choices => (
+has default_value => (
     is        => 'rw',
     isa       => 'ArrayRef[Str]',
-    predicate => 'has_default_selected_choices',
+    predicate => 'has_default_value',
 );
 
 =head2 stashable_keys
@@ -73,18 +61,38 @@ has '+stashable_keys' => (
 
 =head1 METHODS
 
-=head2 current_values
+=head2 selected_choices
 
-Returns the L</selected_choices>, if set. Failing that, it returns the L</default_selected_choices>, if set. Failnig that, it returns an empty list.
+This is a synonym for C<value>.
 
 =cut
 
-sub current_values {
+sub selected_choices { shift->value(@_) }
+
+sub has_selected_choices { shift->has_value(@_) }
+
+=head2 default_selected_choices
+
+This is a synonym for C<default_value>.
+
+=cut
+
+sub default_selected_choices { shift->default_value(@_) }
+
+sub has_default_selected_choices { shift->has_default_value(@_) }
+
+=head2 current_values
+
+Returns the L</value>, if set. Failing that, it returns the L</default_value>, if set. Failing that, it returns an empty list.
+
+=cut
+
+sub current_value {
     my $self = shift;
-    $self->selected_choices(shift) if @_;
-    return $self->has_selected_choices         ? $self->selected_choices
-         : $self->has_default_selected_choices ? $self->default_selected_choices
-         :                                       []
+    $self->value(@_) if @_;
+    return $self->has_value         ? $self->value
+         : $self->has_default_value ? $self->default_value
+         :                            []
          ;
 }
 

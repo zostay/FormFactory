@@ -29,17 +29,11 @@ This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Rol
 
 =head1 ATTRIBUTES
 
-=head2 value
-
-The current value of the control.
-
 =cut
 
 
-has value => (
-    is        => 'rw',
+has '+value' => (
     isa       => 'Str',
-    predicate => 'has_value',
 );
 
 =head2 default_value

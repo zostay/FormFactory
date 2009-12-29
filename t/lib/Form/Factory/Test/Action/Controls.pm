@@ -27,7 +27,7 @@ test plan => 8, run_action => sub {
         value       => 'universe',
     });
 
-    is($action->content->{button}, '', 'button is blank');
+    is($action->content->{button}, undef, 'button is undef');
     is($action->content->{checkbox}, 'xyz', 'checkbox is xyz');
     is($action->content->{full_text}, "This is a test.\nTesting 1. 2. 3.", 
         'full_text is correct');

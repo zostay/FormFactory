@@ -45,14 +45,7 @@ has is_visible => (
     default   => 0,
 );
 
-=head2 value
-
-The value the control should have.
-
-=cut
-
-has value => (
-    is        => 'rw',
+has '+value' => (
     isa       => 'Str',
     required  => 1,
 );
@@ -77,7 +70,7 @@ Returns the L</value>.
 
 sub current_value { 
     my $self = shift;
-    $self->value(shift) if @_;
+    $self->value(@_) if @_;
     return $self->value;
 };
 

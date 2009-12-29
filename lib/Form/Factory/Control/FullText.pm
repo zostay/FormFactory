@@ -29,16 +29,10 @@ This is a multi-line text control.
 
 =head1 ATTRIBUTES
 
-=head2 value
-
-The current value of the control.
-
 =cut
 
-has value => (
-    is        => 'rw',
+has '+value' => (
     isa       => 'Str',
-    predicate => 'has_value',
 );
 
 =head2 default_value

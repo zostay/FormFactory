@@ -5,7 +5,6 @@ with qw(
     Form::Factory::Control
     Form::Factory::Control::Role::BooleanValue
     Form::Factory::Control::Role::Labeled
-    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
@@ -41,11 +40,31 @@ has '+true_value' => (
     default   => sub { shift->label },
 );
 
+=head2 value
+
+See L<Form::Factory::Control::Role::Value>.
+
+=cut
+
+has '+value' => (
+    isa       => 'Str',
+);
+
 =head1 METHODS
+
+=head2 default_isa
+
+Boolean values default to C<Bool>.
+
+=cut
+
+use constant default_isa => 'Str';
 
 =head2 current_value
 
 The current value expects the L</true_value> to be passed to set the L<Form::Factory::Control::Role::BooleanValue/is_true> attribute. This method returns either the L</true_value> or L<Form::Factory::Control::Role::BooleanValue/false_value>.
+
+If the control is neither true nor false, it returns C<undef>.
 
 =cut
 
@@ -53,11 +72,15 @@ sub current_value {
     my $self = shift;
 
     if (@_) {
-        my $value = shift;
-        $self->is_true($self->true_value eq $value);
+        $self->value(@_);
     }
 
-    return $self->is_true ? $self->true_value : $self->false_value;
+    # blow off these warnings rather than test for them
+    no warnings 'uninitialized';
+
+    return $self->true_value  if $self->true_value  eq $self->value;
+    return $self->false_value if $self->false_value eq $self->value;
+    return;
 }
 
 =head1 AUTHOR

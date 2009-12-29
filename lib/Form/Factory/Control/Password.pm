@@ -21,18 +21,10 @@ head1 DESCRIPTION
 
 This is a password control. It is similar to a text control, but does not stash anything and has no default value.
 
-=head1 ATTRIBUTES
-
-=head2 value
-
-This is the current value of the password control.
-
 =cut
 
-has value => (
-    is        => 'rw',
+has '+value' => (
     isa       => 'Str',
-    predicate => 'has_value',
 );
 
 =head1 METHODS

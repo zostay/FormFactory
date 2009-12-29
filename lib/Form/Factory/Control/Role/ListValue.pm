@@ -1,9 +1,12 @@
 package Form::Factory::Control::Role::ListValue;
 use Moose::Role;
 
-requires qw( current_values );
+with qw( Form::Factory::Control::Role::Value );
 
-excludes qw( FormFactory::Control::Role::ScalarValue );
+excludes qw( 
+    Form::Factory::Control::Role::BooleanValue
+    Form::Factory::Control::Role::ScalarValue 
+);
 
 =head1 NAME
 
@@ -23,18 +26,13 @@ List valued controls are "ArrayRef[Str]" by default.
 
 use constant default_isa => 'ArrayRef[Str]';
 
-=head2 set_attribute_value
+=head2 current_values
 
-  $control->set_attribute_value($action, $attribute);
-
-Sets the value of the action attribute with current value of teh control.
+This is a synonym for C<current_value>.
 
 =cut
 
-sub set_attribute_value {
-    my ($self, $action, $attribute) = @_;
-    $attribute->set_value($action, $self->current_values);
-}
+sub current_values { shift->current_value(@_) }
 
 =head1 AUTHOR
 

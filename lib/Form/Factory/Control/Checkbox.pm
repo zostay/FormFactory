@@ -5,7 +5,6 @@ with qw(
     Form::Factory::Control
     Form::Factory::Control::Role::BooleanValue
     Form::Factory::Control::Role::Labeled
-    Form::Factory::Control::Role::ScalarValue
 );
 
 =head1 NAME
@@ -37,6 +36,10 @@ has '+false_value' => (
     isa       => 'Str',
 );
 
+has '+value' => (
+    isa       => 'Str',
+);
+
 =head2 stashable_keys
 
 The L</is_true> attribute is stashed.
@@ -49,21 +52,35 @@ has '+stashable_keys' => (
 
 =head1 METHODS
 
+=head2 default_isa
+
+Boolean values default to C<Bool>.
+
+=cut
+
+use constant default_isa => 'Str';
+
 =head2 current_value
 
 Returns the L</true_value> if L</is_true> is true. Returns L</false_value> otherwise.
 
+If the control is neither true nor false, it returns C<undef>.
+
 =cut
 
-sub current_value {
+sub current_value { 
     my $self = shift;
 
     if (@_) {
-        my $true = shift;
-        $self->is_true($self->true_value eq $true);
+        $self->value(@_);
     }
 
-    return $self->is_true ? $self->true_value : $self->false_value;
+    # blow off these warnings rather than test for them
+    no warnings 'uninitialized';
+
+    return $self->true_value  if $self->true_value  eq $self->value;
+    return $self->false_value if $self->false_value eq $self->value;
+    return;
 }
 
 =head1 AUTHOR
