@@ -65,6 +65,10 @@ has '+stashable_keys' => (
 
 This is a synonym for C<value>.
 
+=head2 has_selected_choices
+
+This is a synonyms for C<has_selected_choices>.
+
 =cut
 
 sub selected_choices { shift->value(@_) }
@@ -75,13 +79,17 @@ sub has_selected_choices { shift->has_value(@_) }
 
 This is a synonym for C<default_value>.
 
+=head2 has_default_selected_choices
+
+This is a synonym for C<has_default_selected_choices>.
+
 =cut
 
 sub default_selected_choices { shift->default_value(@_) }
 
 sub has_default_selected_choices { shift->has_default_value(@_) }
 
-=head2 current_values
+=head2 current_value
 
 Returns the L</value>, if set. Failing that, it returns the L</default_value>, if set. Failing that, it returns an empty list.
 
