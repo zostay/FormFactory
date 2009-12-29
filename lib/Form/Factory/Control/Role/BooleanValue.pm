@@ -50,10 +50,21 @@ Returns a true value when the C<current_value> is set to L</true_value> or a fal
 
 This method returns C<undef> if it is neither true nor false.
 
+If passed a value:
+
+  $self->is_true(1);
+
+This will set the C<value> attribute. If a true value is given, the C<value> will be set to L</true_value>. Otherwise, it will cause C<value> to take on the contents of L</false_value>.
+
 =cut
 
 sub is_true {
     my $self = shift;
+
+    if (@_) {
+        my $is_true = shift;
+        $self->value($is_true ? $self->true_value : $self->false_value);
+    }
 
     # blow off these warnings rather than test for them
     no warnings 'uninitialized'; 
