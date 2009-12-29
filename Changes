@@ -1,3 +1,11 @@
+0.010   ???
+
+    * COMPATIBILITY: Breaks compatibility with 0.009 in the way the BuildControl
+      features work.
+    * Changed the API for BuildControl to be more useful
+    * Added documentation to BuildControl to explain how it works
+    * Changed fill_on_assignment to update the control on construction
+
 0.009   December 29, 2009
 
     * Refactored ScalarValue, ListValue, and BooleanValue and added a shared
