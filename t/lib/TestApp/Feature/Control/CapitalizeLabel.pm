@@ -10,7 +10,7 @@ with qw(
 sub check_control { }
 
 sub build_control {
-    my ($class, $options, $control) = @_;
+    my ($class, $options, $action, $name, $control) = @_;
     $control->{options}{label} = uc $control->{options}{label};
 }
 

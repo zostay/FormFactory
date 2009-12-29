@@ -19,7 +19,7 @@ Form::Factory::Feature::Role::BuildControl - control features that modify contro
   );
 
   sub build_control {
-      my ($class, $options, $control) = @_;
+      my ($class, $options, $action, $name, $control) = @_;
 
       # could modify the control type too:
       # $control->{control} = 'full_text';
@@ -35,6 +35,45 @@ Form::Factory::Feature::Role::BuildControl - control features that modify contro
 Control features that do this role are given the opportunity to modify how the control is build for the attribute. Any modifications to the C<$options> hash given, whether to the control or to the options themselves will be passed on when creating the control.
 
 In the life cycle of actions, this happens immediately before the control is created, but after any deferred values are evaluated. This means that the given hash should now look exactly as it will before being passed to the C<new_control> method of the interface.
+
+=head1 ROLE METHODS
+
+=head2 build_control
+
+A feature implementing this role must provide this method. It is defined as follows:
+
+  sub build_control {
+      my ($class, $options, $action, $name, $control) = @_;
+      
+      # do something...
+  }
+
+This is called in by the action class immediately before the control is instantiated and gives the feature the opportunity to modify how the control is created.
+
+The C<$class> argument is the name of the feature class. The feature will not have been constructed yet.
+
+The C<$options> argument is the hash of options passed to C<has_control> for this feature. For example, if your feature is named "foo_bar" and you used your feature like this:
+
+  has_control foo_bar => (
+      features => {
+          foo_bar => {
+              framiss_size   => 12,
+              trunnion_speed => 42,
+          },
+      },
+  );
+
+The C<$options> would be passed as:
+
+  $options = { framiss_size => 12, trunnion_speed => 42 };
+
+If the feature is just "turned on" with a 1 passed, then the hash reference will be empty (but still passed as a hash reference).
+
+The C<$action> argument is the current action object as of the moment the control is being created.
+
+The C<$name> argument is the name of the control (and action attribute) that this feature is attached to.
+
+The C<$control> argument is a hash reference containing two keys. The "control" key will name the type of control this is. The "options" contains a copy of the options that are about to be passed to the control's constructor. You may modify either of these to modify which control class is constructed (by modifying "control") or the options passed to that constructor (by modifying the "options").
 
 =head1 AUTHOR
 

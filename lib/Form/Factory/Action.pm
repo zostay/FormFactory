@@ -181,10 +181,11 @@ sub _build_controls {
             $options{$key} = $value->code->($self, $key);
         }
 
+        my $control_name = $meta_control->name;
         my %control_args = (
             control => $meta_control->control,
             options => {
-                name => $meta_control->name,
+                name => $control_name,
                 ($meta_control->has_documentation 
                     ? (documentation => $meta_control->documentation) : ()),
                 %options,
@@ -200,7 +201,7 @@ sub _build_controls {
             next unless $feature_class->does('Form::Factory::Feature::Role::BuildControl');
 
             $feature_class->build_control(
-                $meta_features->{$feature_name}, \%control_args
+                $meta_features->{$feature_name}, $self, $control_name, \%control_args
             );
         }
 

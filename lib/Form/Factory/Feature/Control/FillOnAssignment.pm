@@ -4,6 +4,7 @@ use Moose;
 with qw(
     Form::Factory::Feature
     Form::Factory::Feature::Role::BuildAttribute
+    Form::Factory::Feature::Role::BuildControl
     Form::Factory::Feature::Role::Control
 );
 
@@ -51,8 +52,7 @@ This works with L<Form::Factory::Control::Role::ScalarValue> and L<Form::Factory
 sub check_control {
     my ($self, $control) = @_;
 
-    return if $control->does('Form::Factory::Control::Role::ScalarValue');
-    return if $control->does('Form::Factory::Control::Role::ListValue');
+    return if $control->does('Form::Factory::Control::Role::Value');
 
     die "the fill_on_assignment feature does not know how to fill in the value of $control";
 }
@@ -74,13 +74,23 @@ sub build_attribute {
     $attr->{trigger} = sub {
         my ($self, $value) = @_;
         my $control = $self->controls->{$name};
-        if ($control->does('Form::Factory::Control::Role::ScalarValue')) {
-            $self->controls->{$name}->current_value($value);
-        }
-        elsif ($control->does('Form::Factory::Control::Role::ListValue')) {
-            $self->controls->{$name}->current_values($value);
-        }
+        $self->controls->{$name}->current_value($value);
     };
+}
+
+=head2 build_control
+
+This modifies the control such that it will be initialized to the correct value when the control is created.
+
+=cut
+
+sub build_control {
+    my ($class, $options, $action, $name, $control) = @_;
+
+    my $attr  = $action->meta->get_attribute($name);
+    my $value = $attr->get_value($action);
+
+    $control->{options}{value} = $value if defined $value;
 }
 
 =head1 AUTHOR
