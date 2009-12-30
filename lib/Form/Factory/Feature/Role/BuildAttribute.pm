@@ -34,6 +34,30 @@ This is done by implementing the C<build_attribute> class method. This method wi
 
 You may use these arguments to manipulate the attribute before it is created, create additional attributes, etc.
 
+=head1 ROLE METHODS
+
+=head2 build_attribute
+
+The C<build_attribute> method should be implemented something like this:
+
+  sub build_attribute {
+      my ($class, $options, $meta, $name, $attr) = @_;
+
+      # do something ...
+  }
+
+This method is called while the action class is being compiled. This method can be used to modify how the action attribute is created.
+
+The C<$class> is the feature class this subroutine belongs to. The feature will not have been created nearly this early.
+
+The C<$options> are the feature options passed to the C<has_control> statement.
+
+The C<$meta> is the metaclass object that the attribute is about to be added to.
+
+The C<$name> is the name of the attribute being added to the metaclass.
+
+The C<$attr> is the arguments that are about to be passed to the attribute constructor. This the hash of argumentst that will be passed to the attribute constructor shortly. Modifying this hash will change the attribute construction.
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

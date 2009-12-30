@@ -38,6 +38,14 @@ Form::Factory::Feature::Role::Check - features that check control values
 
 Features that check the correctness of control values implement this role. This runs after input has been consumed and cleaned and before it is processed. The check here is meant to verify whether the input is valid and ready for processing. Mark the result as invalid to prevent processing. In general, it's a good idea to return an error if you do that. This is also a good place to return warnings.
 
+=head1 ROLE METHODS
+
+=head2 check
+
+The check method is run after the data has been cleaned up and is intended for checking whether or not the data given is ready to be processed. A feature checking the input for valdation should set the C<is_valid> flag on the result. If you do not set C<is_valid>, then you will not influence whether or not the action is considered valid and ready to move on to the processing stage.
+
+This method is passed no arguments other than the object it is being called on. The return value is ignored. If you check method needs to output anything, it should do so through the attached C<result> object.
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

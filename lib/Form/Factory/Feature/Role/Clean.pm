@@ -33,6 +33,14 @@ This is for features that run during the clean phase. This runs immediately afte
 
 It is possible for the C<clean> method to stop processing by marking the result as invalid, but it is better to do that using L<Form::Factory::Feature::Role::Clean>.
 
+=head1 ROLE METHODS
+
+=head2 clean
+
+This is called immediately after input has been consumed and before the input is checked for errors. This method should be used to clean up the input. It should not be used to validate the input since other clean methods may run after this one and the input is not yet in its final state.
+
+The method will receive no arguments except the object it is called upon and the return value is ignored. Any output it needs to send should be placed in the C<result> object.
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

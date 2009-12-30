@@ -88,6 +88,24 @@ has control => (
     },
 );
 
+=head1 ROLE METHODS
+
+=head2 check_control
+
+All features implementing this role must implement a C<check_control> method. This method is called when the L</control> attribute is initialized during construction. It should be defined like this:
+
+  sub check_control {
+      my ($self, $control) = @_;
+
+      # do something...
+  }
+
+Here C<$self> is the feature object. Be careful when using this, though, since this object is not fully constructed.
+
+The C<$control> argument is the control this feature is being attached to. You are expected to verify that your feature is compatible with the control given.
+
+The return value of this method is ignored. If the control is incompatible with your feature, your feature should die with a message explaining the problem.
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
