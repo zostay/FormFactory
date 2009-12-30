@@ -68,6 +68,7 @@ sub check {
         VALUE: for my $value (@$values) {
             unless ($available_values{ $value }) {
                 $self->control_error('one of the values given for %s is not in the list of available choices');
+                $self->result->is_valid(0);
                 last VALUE;
             }
         }
@@ -76,8 +77,10 @@ sub check {
     # Deal with scalar valued controls
     else {
         my $value = $control->current_value;
-        $self->control_error('the given value for %s is not one of the available choices')
-            unless $available_values{ $value };
+        unless ($available_values{ $value }) {
+            $self->control_error('the given value for %s is not one of the available choices');
+            $self->is_valid(0);
+        }
     }
 
     # If not already validated

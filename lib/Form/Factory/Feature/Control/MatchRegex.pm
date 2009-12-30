@@ -71,6 +71,7 @@ sub check {
     my $regex = $self->regex;
     unless ($value =~ /$regex/) {
         $self->control_error("the %s does not match $regex");
+        $self->result->is_valid(0);
     }
 
     $self->result->is_valid(1) unless $self->result->is_validated;

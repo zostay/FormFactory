@@ -74,14 +74,11 @@ sub control_warning {
 
 Reports an error automatically filtered through L</format_error>.
 
-This also sets C</is_valid> on the result to false.
-
 =cut
 
 sub control_error {
     my $self = shift;
     my $message = $self->format_message(shift);
-    $self->result->is_valid(0);
     $self->result->field_error($self->control->name, $message);
 }
 

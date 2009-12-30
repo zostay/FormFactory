@@ -71,6 +71,7 @@ sub check {
 
     unless ($self->code->($value)) {
         $self->control_error('the %s is not correct');
+        $self->result->is_valid(0);
     }
 
     $self->result->is_valid(1) unless $self->result->is_validated;

@@ -37,8 +37,10 @@ Form::Factory::Feature::Role::Control - Form features tied to particular control
       my $self  = shift;
       my $value = $self->control->current_value;
 
-      $self->control_error('the %s does not look like a color')
-          unless grep { $value eq $_ } @{ $self->recognized_colors };
+      unless (grep { $value eq $_ } @{ $self->recognized_colors }) {
+          $self->control_error('the %s does not look like a color');
+          $self->result->is_valid(0);
+      }
   }
 
   package Form::Factory::Feature::Control::Custom::Color;
