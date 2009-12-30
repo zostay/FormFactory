@@ -6,6 +6,8 @@
       but this is no longer the case.
     * Updated the built in features to be more consistent with the control value
       refactoring that took place in 0.009
+    * Corrected the isa check to a does check on the action attribute of
+      features.
 
 0.010   December 29, 2009
 
