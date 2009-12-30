@@ -56,7 +56,7 @@ The action this feature has been attached to.
 
 has action => (
     is        => 'ro',
-    isa       => 'Form::Factory::Action',
+    does      => 'Form::Factory::Action',
     required  => 1,
     weak_ref  => 1,
 );
