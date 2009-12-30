@@ -44,8 +44,7 @@ sub check_control {
     die "the match_available_options feature only works for controls that have available choices, not $control"
         unless $control->does('Form::Factory::Control::Role::AvailableChoices');
 
-    return if $control->does('Form::Factory::Control::Role::ListValue');
-    return if $control->does('Form::Factory::Control::Role::ScalarValue');
+    return if $control->does('Form::Factory::Control::Role::Value');
 
     die "the match_available_feature does not know hwo to check the value of $control";
 }
@@ -63,15 +62,8 @@ sub check {
     my %available_values = map { $_->value => 1 } 
         @{ $self->control->available_choices };
 
-    # Deal with scalar valued controls
-    if ($control->does('Form::Factory::Control::Role::ScalarValue')) {
-        my $value = $control->current_value;
-        $self->control_error('the given value for %s is not one of the available choices')
-            unless $available_values{ $value };
-    }
-
     # Deal with list valued controls
-    else {
+    if ($control->does('Form::Factory::Control::Role::ListValue')) {
         my $values = $control->current_values;
         VALUE: for my $value (@$values) {
             unless ($available_values{ $value }) {
@@ -79,6 +71,13 @@ sub check {
                 last VALUE;
             }
         }
+    }
+
+    # Deal with scalar valued controls
+    else {
+        my $value = $control->current_value;
+        $self->control_error('the given value for %s is not one of the available choices')
+            unless $available_values{ $value };
     }
 }
 

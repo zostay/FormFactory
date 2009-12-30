@@ -36,8 +36,7 @@ Only works with scalar and list valued controls.
 sub check_control {
     my ($self, $control) = @_;
 
-    return if $control->does('Form::Factory::Control::Role::ScalarValue');
-    return if $control->does('Form::Factory::Control::Role::ListValue');
+    return if $control->does('Form::Factory::Control::Role::Value');
 
     die "the required feature does not know how to check the value of $control";
 }
@@ -52,11 +51,11 @@ sub check {
     my $self    = shift;
     my $control = $self->control;
 
-    # Handle scalar value controls
-    if ($control->does('Form::Factory::Control::Role::ScalarValue')) {
-        my $value = $control->current_value;
-        unless (length($value) > 0) {
-            $self->control_error('the %s is required');
+    # Handle list value controls
+    if ($control->does('Form::Factory::Control::Role::ListValue')) {
+        my $values = $control->current_values;
+        unless (@$values > 0) {
+            $self->control_error('at least one value for %s is required');
             $self->result->is_valid(0);
         }
         else {
@@ -64,11 +63,11 @@ sub check {
         }
     }
 
-    # Handle list value controls
+    # Handle scalar value controls
     else { 
-        my $values = $control->current_values;
-        unless (@$values > 0) {
-            $self->control_error('at least one value for %s is required');
+        my $value = $control->current_value;
+        unless (length($value) > 0) {
+            $self->control_error('the %s is required');
             $self->result->is_valid(0);
         }
         else {
