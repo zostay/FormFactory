@@ -5,7 +5,7 @@ with qw( Form::Factory::Feature::Role::CustomMessage );
 
 =head1 NAME
 
-Form::Factory::Feature::role::CustomControlMessage - control features with custom messages
+Form::Factory::Feature::Role::CustomControlMessage - control features with custom messages
 
 =head1 SYNOPSIS
 
