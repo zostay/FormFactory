@@ -72,6 +72,8 @@ sub check {
     unless ($value =~ /$regex/) {
         $self->control_error("the %s does not match $regex");
     }
+
+    $self->result->is_valid(1) unless $self->result->is_validated;
 }
 
 =head1 AUTHOR

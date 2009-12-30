@@ -51,8 +51,10 @@ Form::Factory::Processor - Moos-ish helper for action classes
       my $self = shift;
       my $value = $self->controls->{name}->current_value;
 
-      $self->error('i do not like names start with "R," get a new name')
-          if $value =~ /^R/i;
+      if ($value =~ /^R/i) {
+          $self->error('i do not like names start with "R," get a new name');
+          $self->result->is_valid(0);
+      }
   };
 
   has_pre_processor log_start => sub {

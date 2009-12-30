@@ -79,6 +79,9 @@ sub check {
         $self->control_error('the given value for %s is not one of the available choices')
             unless $available_values{ $value };
     }
+
+    # If not already validated
+    $self->result->is_valid(1) unless $self->result->is_validated;
 }
 
 =head1 AUTHOR

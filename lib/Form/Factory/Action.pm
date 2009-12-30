@@ -518,9 +518,6 @@ sub check {
     $self->_run_features(check => @_);
 
     $self->gather_results;
-
-    my @errors = $self->error_messages;
-    $self->result->is_valid(@errors == 0);
 }
 
 =head2 process
