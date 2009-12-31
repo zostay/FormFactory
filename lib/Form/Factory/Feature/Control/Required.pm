@@ -51,28 +51,13 @@ sub check {
     my $self    = shift;
     my $control = $self->control;
 
-    # Handle list value controls
-    if ($control->does('Form::Factory::Control::Role::ListValue')) {
-        my $values = $control->current_values;
-        unless (@$values > 0) {
-            $self->control_error('at least one value for %s is required');
-            $self->result->is_valid(0);
-        }
-        else {
-            $self->result->is_valid(1);
-        }
+    if ($control->has_current_value) {
+        $self->result->is_valid(1);
     }
 
-    # Handle scalar value controls
-    else { 
-        my $value = $control->current_value;
-        unless (length($value) > 0) {
-            $self->control_error('the %s is required');
-            $self->result->is_valid(0);
-        }
-        else {
-            $self->result->is_valid(1);
-        }
+    else {
+        $self->control_error('the %s is required');
+        $self->result->is_valid(0);
     }
 }
 

@@ -40,7 +40,7 @@ sub format_message {
 
     my $control_label 
         = $control->does('Form::Factory::Control::Role::Labeled') ? $control->label
-        :                                                         $control->name
+        :                                                           $control->name
         ;
 
     sprintf $message, $control_label;
