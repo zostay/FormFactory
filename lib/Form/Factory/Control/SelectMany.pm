@@ -122,6 +122,19 @@ sub is_choice_selected {
     return any { $_ eq $choice->value } @{ $self->current_values };
 }
 
+=head2 has_current_value
+
+If more than zero values have been selected, we have a useful value.
+
+=cut
+
+sub has_current_value {
+    my $self = shift;
+
+    my $values = $self->current_value;
+    return scalar(@$values) > 0;
+}
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

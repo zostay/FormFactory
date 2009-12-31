@@ -8,6 +8,8 @@ with qw(
 
 sub current_value { }
 
+sub has_current_value { }
+
 package Form::Factory::Control::Custom::Null;
 sub register_implementation { 'TestApp::Control::Null' }
 

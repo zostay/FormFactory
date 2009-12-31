@@ -74,6 +74,14 @@ sub current_value {
     return $self->value;
 };
 
+=head2 has_current_value
+
+We always have a useful value here since we require one to be set.
+
+=cut
+
+sub has_current_value { 1 }
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

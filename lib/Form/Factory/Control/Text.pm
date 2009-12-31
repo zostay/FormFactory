@@ -74,6 +74,17 @@ sub current_value {
          :                            '';
 }
 
+=head1 has_current_value
+
+We have a useful current value when it is defined and the length of the string is greater than zero.
+
+=cut
+
+sub has_current_value {
+    my $self = shift;
+    return length($self->current_value) > 0;
+}
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

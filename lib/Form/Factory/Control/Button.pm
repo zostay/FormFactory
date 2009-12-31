@@ -83,6 +83,19 @@ sub current_value {
     return;
 }
 
+=head2 has_current_value
+
+If the value is true or false, it has a current value. Otherwise, it does not.
+
+=cut
+
+sub has_current_value {
+    my $self = shift;
+
+    return ($self->true_value  eq $self->value
+         || $self->false_value eq $self->value);
+}
+
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
