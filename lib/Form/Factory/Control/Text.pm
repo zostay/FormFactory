@@ -74,7 +74,7 @@ sub current_value {
          :                            '';
 }
 
-=head1 has_current_value
+=head2 has_current_value
 
 We have a useful current value when it is defined and the length of the string is greater than zero.
 
