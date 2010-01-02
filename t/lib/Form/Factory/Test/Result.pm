@@ -22,7 +22,6 @@ has result => (
 test plan => 2, basic_result_checks => sub {
     my $self = shift;
     my $result = $self->result;
-    diag explain $result;
 
     does_ok($result, 'Form::Factory::Result');
 
