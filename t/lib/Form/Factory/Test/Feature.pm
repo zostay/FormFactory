@@ -70,8 +70,8 @@ test plan => 6, basic_feature_checks => sub {
     }
 };
 
-teardown clear_messages => sub {
+teardown clear_action => sub {
     my $self = shift;
-    $self->action->results->clear_all;
+    $self->action->clear;
 };
 1;

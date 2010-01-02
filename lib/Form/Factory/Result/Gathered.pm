@@ -80,6 +80,17 @@ sub gather_results {
     }
 }
 
+=head2 clear_state
+
+Clears the state of all gathered results. It just calls C<clear_state> recursively on all results.
+
+=cut
+
+sub clear_state {
+    my $self = shift;
+    $_->clear_state for $self->results;
+}
+
 =head2 clear_results
 
 Clears the list of results. L</results> will return an empty list after this is called.
@@ -125,6 +136,7 @@ Clears all messages on the gathered results (via L</clear_message>) and then cle
 
 sub clear_all {
     my $self = shift;
+    $self->clear_state;
     $self->clear_messages;
     $self->clear_results;
 }

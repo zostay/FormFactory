@@ -319,8 +319,7 @@ sub clear {
         }
     }
 
-    $self->results->clear_messages;
-    $self->results->clear_results;
+    $self->results->clear_all;
     $self->result(Form::Factory::Result::Single->new);
 }
 
