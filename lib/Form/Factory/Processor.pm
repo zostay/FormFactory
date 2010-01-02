@@ -10,7 +10,7 @@ use Form::Factory::Processor::DeferredValue;
 Moose::Exporter->setup_import_methods(
     as_is     => [ qw( deferred_value ) ],
     with_meta => [ qw(
-        has_control
+        has_control use_feature
         has_cleaner has_checker has_pre_processor has_post_processor
     ) ],
     also      => 'Moose',
@@ -173,6 +173,30 @@ sub has_control {
     $meta->add_attribute( $name => $args );
 }
 
+=head2 use_feature
+
+This function is used to make an action use a particular form feature. It's usage is as follows:
+
+  use_feature $name => \%options;
+
+The C<%options> are optional. So,
+
+  use_feature $name;
+
+will also work if you do not need to pass any features.
+
+The C<$name> is a short name for the feature class. For example, the name "require_none_or_all" will load the feature defined in L<Form::Factory::Feature::RequireNoneOrAll>.
+
+=cut
+
+sub use_feature {
+    my $meta = shift;
+    my $name = shift;
+    my $args = @_ == 1 ? shift : { @_ };
+
+    $meta->features->{$name} = $args;
+}
+
 =head2 deferred_value
 
   has_control publish_on => (
@@ -223,16 +247,16 @@ Adds some code called during the post-process phase.
 
 =cut
 
-sub _add_feature {
+sub _add_function {
     my ($type, $meta, $name, $code) = @_;
     die "bad code given for $type $name" unless defined $code;
     $meta->features->{functional}{$type . '_code'}{$name} = $code;
 }
 
-sub has_cleaner        { _add_feature('cleaner', @_) }
-sub has_checker        { _add_feature('checker', @_) }
-sub has_pre_processor  { _add_feature('pre_processor', @_) }
-sub has_post_processor { _add_feature('post_processor', @_) }
+sub has_cleaner        { _add_function('cleaner', @_) }
+sub has_checker        { _add_function('checker', @_) }
+sub has_pre_processor  { _add_function('pre_processor', @_) }
+sub has_post_processor { _add_function('post_processor', @_) }
 
 =head1 SEE ALSO
 
