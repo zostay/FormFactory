@@ -1,4 +1,4 @@
-0.011   ???
+0.011   January 1, 2010
 
     * COMPATIBILITY: Break compatability with previous versions in that all
       checks must explicitly set is_valid on the result to affect validation.
@@ -8,6 +8,19 @@
       refactoring that took place in 0.009
     * Corrected the isa check to a does check on the action attribute of
       features.
+    * Added the has_current_value() method to controls with values to determine
+      if the control actually contains a value after consumption.
+    * The required control feature depends on has_current_value() now
+      Gathered results will die if you try to gather itself, does not 
+      prevent grandchildren from causing a recursive loop, though
+    * Added more tests and test classes are now run in a random order
+    * Added the clear_state() method to result classes for clearing success,
+      validity, and content attributes
+    * Added the use_feature statement to Form::Factory::Processor for adding
+      form features to forms
+    * Added the require_none_or_all form feature to allow controls to be grouped
+      such that one field being filled requires all related fields to be filled
+      (such as might be useful on a password change form)
 
 0.010   December 29, 2009
 
