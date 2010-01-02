@@ -1,5 +1,6 @@
 package Form::Factory::Test;
 use Test::Able;
+use List::Util qw( shuffle );
 
 use Form::Factory;
 
@@ -7,7 +8,7 @@ has test_packages => (
     is        => 'ro',
     isa       => 'ArrayRef[Str]',
     required  => 1,
-    default   => sub { [ qw(
+    default   => sub { [ shuffle qw(
         Form::Factory::Test::Action::AllControls
         Form::Factory::Test::Action::Basic
         Form::Factory::Test::Action::Controls
