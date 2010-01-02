@@ -18,6 +18,7 @@ has test_packages => (
         Form::Factory::Test::Feature::Control::Length
         Form::Factory::Test::Feature::Control::Required
         Form::Factory::Test::Feature::Control::Trim
+        Form::Factory::Test::Feature::RequireNoneOrAll
         Form::Factory::Test::Interface::CLI
         Form::Factory::Test::Interface::HTML
         Form::Factory::Test::Result::Gathered
