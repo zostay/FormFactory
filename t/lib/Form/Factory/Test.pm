@@ -20,6 +20,8 @@ has test_packages => (
         Form::Factory::Test::Feature::Control::Trim
         Form::Factory::Test::Interface::CLI
         Form::Factory::Test::Interface::HTML
+        Form::Factory::Test::Result::Gathered
+        Form::Factory::Test::Result::Single
     ) ] },
 );
 
