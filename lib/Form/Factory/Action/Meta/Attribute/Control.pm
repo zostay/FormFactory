@@ -82,6 +82,42 @@ has features => (
     default     => sub { {} },
 );
 
+=head1 METHODS
+
+=head2 legal_options_for_inheritance
+
+Modifies the L<Moose::Meta::Attribute> version to also allow L<features> to be modified.
+
+=cut
+
+around legal_options_for_inheritance => sub {
+    my $next    = shift;
+    my $self    = shift;
+    my @options = $self->$next(@_);
+    push @options, 'features';
+    return @options;
+};
+
+=head2 clone_and_inherit_options
+
+Modifies the L<Moose::Meta::Attribute> version to handle the merging of L<features>.
+
+=cut
+
+around clone_and_inherit_options => sub {
+    my ($next, $self, %options) = @_;
+
+    # Merge features
+    if ($options{features}) {
+        my $parent_features = $self->features;
+        my $child_features  = $options{features};
+
+        $options{features}  = { %$parent_features, %$child_features }
+    }
+
+    $self->$next(%options);
+};
+
 =head1 SEE ALSO
 
 L<Form::Factory::Processor>

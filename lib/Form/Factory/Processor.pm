@@ -148,27 +148,30 @@ sub has_control {
     my $name = shift;
     my $args = @_ == 1 ? shift : { @_ };
 
-    $args->{control}  ||= 'text';
-    $args->{options}  ||= {};
-    $args->{features} ||= {};
-    $args->{traits}   ||= [];
+    # Setup default unless this is an inherited control attribute
+    unless ($name =~ /^\+/) {
+        $args->{control}  ||= 'text';
+        $args->{options}  ||= {};
+        $args->{features} ||= {};
+        $args->{traits}   ||= [];
 
-    $args->{is}       ||= 'ro';
-    $args->{isa}      ||= Form::Factory->control_class($args->{control})->default_isa;
+        $args->{is}       ||= 'ro';
+        $args->{isa}      ||= Form::Factory->control_class($args->{control})->default_isa;
 
-    for my $value (values %{ $args->{features} }) {
-        $value = {} unless ref $value;
-    }
+        for my $value (values %{ $args->{features} }) {
+            $value = {} unless ref $value;
+        }
 
-    unshift @{ $args->{traits} }, 'Form::Control';
+        unshift @{ $args->{traits} }, 'Form::Control';
 
-    for my $feature_name (keys %{ $args->{features} }) {
-        my $feature_class = Form::Factory->control_feature_class($feature_name);
-        next unless $feature_class->does('Form::Factory::Feature::Role::BuildAttribute');
+        for my $feature_name (keys %{ $args->{features} }) {
+            my $feature_class = Form::Factory->control_feature_class($feature_name);
+            next unless $feature_class->does('Form::Factory::Feature::Role::BuildAttribute');
 
-        $feature_class->build_attribute(
-            $args->{features}{$feature_name}, $meta, $name, $args
-        );
+            $feature_class->build_attribute(
+                $args->{features}{$feature_name}, $meta, $name, $args
+            );
+        }
     }
 
     $meta->add_attribute( $name => $args );

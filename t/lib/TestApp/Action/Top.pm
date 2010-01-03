@@ -3,6 +3,9 @@ use Form::Factory::Processor;
 
 has_control foo => (
     control   => 'text',
+    features  => {
+        trim => 1,
+    },
 );
 
 has_checker foo_must_not_have_uppercase_letters => sub {

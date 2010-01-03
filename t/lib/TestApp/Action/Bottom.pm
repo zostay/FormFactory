@@ -3,6 +3,14 @@ use Form::Factory::Processor;
 
 extends qw( TestApp::Action::Middle );
 
+has_control '+foo' => (
+    features   => {
+        length => {
+            maximum => 20,
+        },
+    },
+); 
+
 has_control baz => (
     control    => 'text',
 );
