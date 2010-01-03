@@ -1,3 +1,11 @@
+0.012   January 2, 2010
+
+    * Adding support for the has_control '+name' syntax to allow sub-classes to
+      override inherited attributes. This allows features to be modified, turned
+      on, and turned off in child classes.
+    * Prefer carp and croak rather than warn and die
+    * Corrected some of the documentation
+
 0.011   January 1, 2010
 
     * COMPATIBILITY: Break compatability with previous versions in that all
