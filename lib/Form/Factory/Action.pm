@@ -292,7 +292,6 @@ sub unstash {
         for my $key (@$keys) {
             next unless exists $state->{$key};
             eval { $control->$key($state->{$key}) };
-            #warn "unstash partially failed: $@" if $@;
         }
     }
 
