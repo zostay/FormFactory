@@ -113,7 +113,7 @@ sub init_meta {
       features => \%control_features,
   );
 
-This works very similar to L<Moose/has>. This also applies the L<Form::Factory::Action::Meta::Attribute::Control> trait to the attribute and sets up other defaults.
+This works very similar to L<Moose/has>. This applies the L<Form::Factory::Action::Meta::Attribute::Control> trait to the attribute and sets up other defaults.
 
 The following defaults are set:
 
@@ -140,6 +140,34 @@ An empty hash reference is used by default.
 An empty hash references is used by default.
 
 =back
+
+You may pass any options you could pass to C<has> as well as the additional options for features, control options, etc. This also supports the C<'+name'> syntax for altering attributes that are inherited from a parent class. Currently, only the C<features> option is supported for this, which allows you to add new features or even to turn off features from the parent class. For example, if a control is setup in a parent like this:
+
+  has_control name => (
+      control   => 'text',
+      features  => {
+          trim     => 1,
+          required => 1,
+          length   => {
+              maximum => 20,
+              minimum => 3,
+           },
+      },
+  );
+
+A child class may choose to turn the required off and change the length checks by placing this in the subclass definition:
+
+  has_control '+name' => (
+      features => {
+          required => 0,
+          length   => {
+              maximum => 20,
+              minimum => 10,
+          },
+      },
+  );
+
+The C<trim> feature in the parent would remain in place as originally defined, the required feature is now turned off in the child class, and the length feature options have been replaced. This is done with a shallow merge, so top-level keys in the child class will replace top-level keys in the parent, but any listed in the parent, but not the child remain unchanged.
 
 =cut
 
