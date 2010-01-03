@@ -5,7 +5,8 @@ extends qw( TestApp::Action::Middle );
 
 has_control '+foo' => (
     features   => {
-        length => {
+        required => 0,
+        length   => {
             maximum => 20,
         },
     },

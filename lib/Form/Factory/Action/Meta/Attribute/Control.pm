@@ -112,7 +112,10 @@ around clone_and_inherit_options => sub {
         my $parent_features = $self->features;
         my $child_features  = $options{features};
 
-        $options{features}  = { %$parent_features, %$child_features }
+        $options{features}  = { %$parent_features, %$child_features };
+        for my $key (keys %{ $options{features} }) {
+            delete $options{features}{$key} unless $options{features}{$key};
+        }
     }
 
     $self->$next(%options);

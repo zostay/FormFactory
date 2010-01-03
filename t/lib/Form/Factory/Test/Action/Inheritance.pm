@@ -50,7 +50,9 @@ test plan => 3, top_foo_has_features_trim => sub {
     ok($foo, 'found foo');
 
     is_deeply($foo->features, {
-        trim => {},
+        trim     => {},
+        required => {},
+        length   => { minimum => 10 },
     }, 'top foo has just trim in the features');
 };
 
@@ -63,8 +65,8 @@ test plan => 3, bottom_foo_has_features_trim_and_length => sub {
     ok($foo, 'found foo');
 
     is_deeply($foo->features, {
-        trim   => {},
-        length => { maximum => 20 },
+        trim     => {},
+        length   => { maximum => 20 },
     }, 'bottom foo has trim and length in the features');
 };
 
