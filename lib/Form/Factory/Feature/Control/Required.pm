@@ -8,6 +8,8 @@ with qw(
     Form::Factory::Feature::Role::CustomControlMessage
 );
 
+use Carp ();
+
 =head1 NAME
 
 Form::Factory::Feature::Control::Required - Makes sure a value is set on a control
@@ -38,7 +40,7 @@ sub check_control {
 
     return if $control->does('Form::Factory::Control::Role::Value');
 
-    die "the required feature does not know how to check the value of $control";
+    Carp::croak("the required feature does not know how to check the value of $control");
 }
 
 =head2 check

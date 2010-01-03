@@ -8,6 +8,8 @@ with qw(
     Form::Factory::Feature::Role::Check
 );
 
+use Carp ();
+
 =head1 NAME
 
 Form::Factory::Feature::RequireNoneOrAll - if one control has a value, all should
@@ -88,7 +90,7 @@ sub check {
         CONTROL: for my $name (@$control_names) {
             my $control = $action->controls->{$name};
 
-            die "require_none_or_all does not know how to check values on $name"
+            Carp::croak("require_none_or_all does not know how to check values on $name")
                 unless $control->does('Form::Factory::Control::Role::Value');
 
             my $has_current_value = $control->has_current_value;

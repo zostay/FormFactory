@@ -1,6 +1,7 @@
 package Form::Factory::Result::Gathered;
 use Moose;
 
+use Carp ();
 use Scalar::Util qw( blessed refaddr );
 use List::MoreUtils qw( all any );
 
@@ -72,7 +73,7 @@ sub gather_results {
 
     my $results = $self->_results;
     for my $result (@results) {
-        die 'you attempted to pass a result itself to gather_results(), but you cannot gather results recursively'
+        Carp::croak('you attempted to pass a result itself to gather_results(), but you cannot gather results recursively')
             if refaddr $result == refaddr $self;
 
         my $addr = refaddr $result;

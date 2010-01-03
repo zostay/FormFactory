@@ -7,6 +7,8 @@ with qw(
     Form::Factory::Feature::Role::Control
 );
 
+use Carp ();
+
 =head1 NAME
 
 Form::Factory::Feature::Control::Trim - Trims whitespace from a control value
@@ -37,7 +39,7 @@ sub check_control {
 
     return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
-    die "the trim feature only works on scalar values, not $control";
+    Carp::croak("the trim feature only works on scalar values, not $control");
 }
 
 =head2 clean

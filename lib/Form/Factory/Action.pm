@@ -1,6 +1,7 @@
 package Form::Factory::Action;
 use Moose::Role;
 
+use Carp ();
 use Form::Factory::Feature::Functional;
 use Form::Factory::Result::Gathered;
 use Form::Factory::Result::Single;
@@ -589,7 +590,7 @@ sub set_attributes_from_controls {
     my $controls = $self->controls;
     while (my ($name, $control) = each %$controls) {
         my $attribute = $meta->find_attribute_by_name($name);
-        die "attribute for control $name not found on $self" 
+        Carp::croak("attribute for control $name not found on $self")
             unless defined $attribute;
         $control->set_attribute_value($self, $attribute);
     }

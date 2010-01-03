@@ -8,6 +8,8 @@ with qw(
     Form::Factory::Feature::Role::CustomControlMessage
 );
 
+use Carp ();
+
 =head1 NAME
 
 Form::Factory::Feature::Control::MatchCode - Greps the control value for correctness
@@ -55,7 +57,7 @@ sub check_control {
 
     return if $control->does('Form::Factory::Control::Role::Value');
 
-    die "the match_code feature only works with valued controls";
+    Carp::croak("the match_code feature only works with valued controls");
 }
 
 =head2 check

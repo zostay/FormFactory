@@ -2,6 +2,7 @@ package Form::Factory::Processor;
 use Moose;
 use Moose::Exporter;
 
+use Carp ();
 use Form::Factory::Action;
 use Form::Factory::Action::Meta::Class;
 use Form::Factory::Action::Meta::Attribute::Control;
@@ -249,7 +250,7 @@ Adds some code called during the post-process phase.
 
 sub _add_function {
     my ($type, $meta, $name, $code) = @_;
-    die "bad code given for $type $name" unless defined $code;
+    Carp::croak("bad code given for $type $name") unless defined $code;
     $meta->features->{functional}{$type . '_code'}{$name} = $code;
 }
 

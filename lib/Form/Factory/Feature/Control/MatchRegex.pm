@@ -8,6 +8,8 @@ with qw(
     Form::Factory::Feature::Role::CustomControlMessage
 );
 
+use Carp ();
+
 =head1 NAME
 
 Form::Factory::Feature::Control::MatchRegex - Match a control value against a regex
@@ -55,7 +57,7 @@ sub check_control {
 
     return if $control->does('Form::Factory::Control::Role::ScalarValue');
 
-    die "the match_regex feature only works with scalar value controls, not $control";
+    Carp::croak("the match_regex feature only works with scalar value controls, not $control");
 }
 
 =head2 check

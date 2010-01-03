@@ -1,6 +1,7 @@
 package Form::Factory::Interface;
 use Moose::Role;
 
+use Carp ();
 use Form::Factory::Stasher::Memory;
 
 requires qw( render_control consume_control );
@@ -71,7 +72,7 @@ sub new_action {
     my ($self, $class_name, $args) = @_;
 
     Class::MOP::load_class($class_name)
-        or die "cannot load $class_name: $@";
+        or Carp::croak("cannot load $class_name: $@");
 
     return $class_name->new( %$args, form_interface => $self );
 }
