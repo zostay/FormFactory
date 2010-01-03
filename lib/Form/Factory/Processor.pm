@@ -169,6 +169,8 @@ A child class may choose to turn the required off and change the length checks b
 
 The C<trim> feature in the parent would remain in place as originally defined, the required feature is now turned off in the child class, and the length feature options have been replaced. This is done with a shallow merge, so top-level keys in the child class will replace top-level keys in the parent, but any listed in the parent, but not the child remain unchanged.
 
+B<DO NOT> use the C<required> attribute option on controls. If you try to do so, the call to C<has_control> will croak because this will not work with how attributes are setup. If you need an attribute to be required, do not use a control or use the required feature instead.
+
 =cut
 
 sub has_control {
@@ -201,6 +203,9 @@ sub has_control {
             );
         }
     }
+
+    Carp::croak(qq{the "required" setting is used on $name, but is forbidden on controls})
+        if $args->{required};
 
     $meta->add_attribute( $name => $args );
 }
