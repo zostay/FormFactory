@@ -1,3 +1,10 @@
+0.013   January 4, 2010
+
+    * COMPATIBIILTY: The "no_warn" option to the fill_on_assignment feature is
+      now named "no_warning".    
+    * Fixed a problem where feature removal was not working correctly when
+      using the new has_control +name syntax.
+
 0.012   January 2, 2010
 
     * Adding support for the has_control '+name' syntax to allow sub-classes to
