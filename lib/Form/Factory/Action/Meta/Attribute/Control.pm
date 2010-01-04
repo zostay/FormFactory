@@ -84,6 +84,32 @@ has features => (
 
 =head1 METHODS
 
+=head2 new
+
+Makes sure that features are setup properly.
+
+=cut
+
+around new => sub {
+    my ($next, $class, $name, %options) = @_;
+
+    my $meta = delete $options{__meta};
+
+    my $real_name = $name;
+       $real_name =~ s/^\+//;
+
+    for my $feature_name (keys %{ $options{features} }) {
+        my $feature_class = Form::Factory->control_feature_class($feature_name);
+        next unless $feature_class->does('Form::Factory::Feature::Role::BuildAttribute');
+
+        $feature_class->build_attribute(
+            $options{features}{$feature_name}, $meta, $real_name, \%options
+        );
+    }
+
+    $class->$next($name, %options);
+};
+
 =head2 legal_options_for_inheritance
 
 Modifies the L<Moose::Meta::Attribute> version to also allow L<features> to be modified.
@@ -94,7 +120,7 @@ around legal_options_for_inheritance => sub {
     my $next    = shift;
     my $self    = shift;
     my @options = $self->$next(@_);
-    push @options, 'features';
+    push @options, 'features', '__meta';
     return @options;
 };
 

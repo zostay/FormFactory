@@ -65,6 +65,7 @@ test plan => 3, bottom_foo_has_features_trim_and_length => sub {
     ok($foo, 'found foo');
 
     is_deeply($foo->features, {
+        fill_on_assignment => { no_warning => 1 },
         trim     => {},
         length   => { maximum => 20 },
     }, 'bottom foo has trim and length in the features');

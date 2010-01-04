@@ -188,25 +188,18 @@ sub has_control {
         $args->{is}       ||= 'ro';
         $args->{isa}      ||= Form::Factory->control_class($args->{control})->default_isa;
 
-        for my $value (values %{ $args->{features} }) {
-            $value = {} unless ref $value;
-        }
-
         unshift @{ $args->{traits} }, 'Form::Control';
 
-        for my $feature_name (keys %{ $args->{features} }) {
-            my $feature_class = Form::Factory->control_feature_class($feature_name);
-            next unless $feature_class->does('Form::Factory::Feature::Role::BuildAttribute');
-
-            $feature_class->build_attribute(
-                $args->{features}{$feature_name}, $meta, $name, $args
-            );
-        }
     }
 
     Carp::croak(qq{the "required" setting is used on $name, but is forbidden on controls})
         if $args->{required};
 
+    for my $value (values %{ $args->{features} }) {
+        $value = {} if $value and not ref $value;
+    }
+
+    $args->{__meta} = $meta;
     $meta->add_attribute( $name => $args );
 }
 
