@@ -89,7 +89,7 @@ This modifies the control such that it will be initialized to the correct value 
 sub build_control {
     my ($class, $options, $action, $name, $control) = @_;
 
-    my $attr  = $action->meta->get_attribute($name);
+    my $attr  = $action->meta->find_attribute_by_name($name);
     my $value = $attr->get_value($action);
 
     $control->{options}{value} = $value if defined $value;

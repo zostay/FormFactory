@@ -46,7 +46,9 @@ sub get_controls {
     my @controls;
 
     if (@control_names) {
-        @controls = grep { $_ } map { $meta->get_attribute($_) } @control_names;
+        @controls = grep { $_ } 
+                     map { $meta->find_attribute_by_name($_) } 
+                           @control_names;
     }
 
     else {
