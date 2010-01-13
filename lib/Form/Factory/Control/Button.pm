@@ -35,19 +35,8 @@ correctly anymore.
 =cut
 
 has '+true_value' => (
-    isa       => 'Str',
     lazy      => 1,
     default   => sub { shift->label },
-);
-
-=head2 value
-
-See L<Form::Factory::Control::Role::Value>.
-
-=cut
-
-has '+value' => (
-    isa       => 'Str',
 );
 
 =head1 METHODS

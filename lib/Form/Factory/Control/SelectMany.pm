@@ -45,7 +45,7 @@ This is a list of the default selection.
 
 has default_value => (
     is        => 'rw',
-    isa       => 'ArrayRef[Str]',
+    isa       => 'ArrayRef',
     predicate => 'has_default_value',
 );
 

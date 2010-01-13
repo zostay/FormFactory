@@ -21,12 +21,6 @@ head1 DESCRIPTION
 
 This is a password control. It is similar to a text control, but does not stash anything and has no default value.
 
-=cut
-
-has '+value' => (
-    isa       => 'Str',
-);
-
 =head1 METHODS
 
 =head2 current_value

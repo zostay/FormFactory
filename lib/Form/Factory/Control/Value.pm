@@ -46,7 +46,6 @@ has is_visible => (
 );
 
 has '+value' => (
-    isa       => 'Str',
     required  => 1,
 );
 

@@ -29,13 +29,6 @@ This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Rol
 
 =head1 ATTRIBUTES
 
-=cut
-
-
-has '+value' => (
-    isa       => 'Str',
-);
-
 =head2 default_value
 
 The default value of the control.
@@ -44,7 +37,6 @@ The default value of the control.
 
 has default_value => (
     is        => 'rw',
-    isa       => 'Str',
     predicate => 'has_default_value',
 );
 

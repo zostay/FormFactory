@@ -32,12 +32,6 @@ A select control that allows a single selection. A list of radio buttons or a dr
 
 =head1 ATTRIBUTES
 
-=cut
-
-has '+value' => (
-    isa       => 'Str',
-);
-
 =head2 default_value
 
 The defautl value of the control.
@@ -46,7 +40,6 @@ The defautl value of the control.
 
 has default_value => (
     is        => 'rw',
-    isa       => 'Str',
     predicate => 'has_default_value',
 );
 

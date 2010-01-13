@@ -29,12 +29,6 @@ This is a multi-line text control.
 
 =head1 ATTRIBUTES
 
-=cut
-
-has '+value' => (
-    isa       => 'Str',
-);
-
 =head2 default_value
 
 The default value of the control.
