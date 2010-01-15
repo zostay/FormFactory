@@ -54,7 +54,7 @@ has available_choices => (
 
 has selected_choices => (
     is        => 'ro',
-    isa       => 'ArrayRef[Str]',
+    isa       => 'ArrayRef',
     required  => 1,
     default   => sub { [] },
 );
