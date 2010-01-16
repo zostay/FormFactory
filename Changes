@@ -1,3 +1,16 @@
+0.014   January 16, 2010
+
+    * Added the set_attribute_from_control() helper method to
+      Form::Factory::Action
+    * Removed the Str type requirements from controls and related classes. This
+      causes a lot of complications that Form::Factory just doesn't need to
+      worry about. Typing should be handled by the action classes, not the
+      controls. The controls should just cope with whatever they are given (at
+      least that's the theory I'm operating with for the moment).
+    * Updated metadata to include a link to the github repository. (Thanks CPAN
+      Service <cpanservice@chorny.com>)
+    * Correcting some documentation
+
 0.013   January 4, 2010
 
     * COMPATIBIILTY: The "no_warn" option to the fill_on_assignment feature is
