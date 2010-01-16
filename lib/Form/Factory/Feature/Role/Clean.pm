@@ -14,6 +14,7 @@ Form::Factory::Feature::Role::Clean - features that clean up control values
 
   with qw(
       Form::Factory::Feature
+      Form::Factory::Feature::Role::Control
       Form::Factory::Feature::Role::Clean
   );
 
