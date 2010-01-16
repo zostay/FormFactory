@@ -576,6 +576,21 @@ This is the method that actually does the work. It takes no arguments and is exp
 
 These methods are primarily intended for internal use.
 
+=head2 set_attribute_from_control
+
+Given the name of a control, this will copy the current value in the control to the attribute.
+
+=cut
+
+sub set_attribute_from_control {
+    my ($self, $name) = @_;
+    my $meta = $self->meta;
+
+    my $control   = $self->control->{$name};
+    my $attribute = $meta->find_attribute_by_name($name);
+    $control->set_attribute_value($self, $attribute);
+}
+
 =head2 set_attributes_from_controls
 
 This method is used by L</process> to copy the values out of the controls into the form action attributes. This assumes that such a copy will work because the L</clean> and L</check> phases should have already run and passed without error.
