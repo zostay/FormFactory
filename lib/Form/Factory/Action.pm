@@ -356,6 +356,53 @@ sub render {
     return;
 }
 
+=head2 setup_and_render
+
+  $self->setup_and_render(%options);
+
+This performs the most common steps to prepare for a render and render:
+
+=over
+
+=item 1
+
+Unstashes from the given C<moniker>.
+
+=item 2
+
+Adds the given C<globals> to the globals.
+
+=item 3
+
+Renders the action.
+
+=item 4
+
+Clears the results.
+
+=item 5
+
+Stashes what we've done back into the given C<moniker>.
+
+=back
+
+=cut
+
+sub setup_and_render {
+    my ($self, %options) = @_;
+
+    $self->unstash($options{moniker});
+    my %globals = %{ $options{globals} || {} };
+    for my $key (keys %globals) {
+        $self->globals->{$key} = $globals{$key};
+    }
+    $self->render(%options);
+    $self->results->clear_all;
+    $self->stash($options{moniker});
+
+    return;
+}
+
 =head2 render_control
 
   my $control = $action->render_control($name, \%options);
