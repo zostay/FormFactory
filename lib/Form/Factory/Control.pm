@@ -56,6 +56,19 @@ Allows for high level processing, validation, filtering, etc. of form control in
 
 =head1 ATTRIBUTES
 
+=head2 action
+
+This is the action to which the control is attached. This is a weak reference to prevent memory leaks.
+
+=cut
+
+has action => (
+    is        => 'ro',
+    does      => 'Form::Factory::Action',
+    required  => 1,
+    weak_ref  => 1,
+);
+
 =head2 name
 
 This is the base name for the control.

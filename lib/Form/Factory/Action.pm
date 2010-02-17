@@ -186,7 +186,8 @@ sub _build_controls {
         my %control_args = (
             control => $meta_control->control,
             options => {
-                name => $control_name,
+                name   => $control_name,
+                action => $self,
                 ($meta_control->has_documentation 
                     ? (documentation => $meta_control->documentation) : ()),
                 %options,
@@ -416,10 +417,13 @@ This method returns the control object that was just rendered.
 sub render_control {
     my ($self, $name, $options, %params) = @_;
 
+    my %options = %{ $options || {} };
+    $options{action} = $self;
+
     $params{results} = $self->results;
 
     my $interface = $self->form_interface;
-    my $control   = $interface->new_control($name => $options);
+    my $control   = $interface->new_control($name => \%options);
 
     $interface->render_control($control, %params);
 
@@ -469,10 +473,13 @@ This method returns the control object that was consumed.
 sub consume_control {
     my ($self, $name, $options, %params) = @_;
 
+    my %options = %{ $options || {} };
+    $options{action} = $self;
+
     $params{results} = $self->results;
 
     my $interface = $self->form_interface;
-    my $control   = $interface->new_control($name => $options);
+    my $control   = $interface->new_control($name => \%options);
 
     $interface->consume_control($control, %params);
 
