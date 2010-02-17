@@ -1,3 +1,20 @@
+0.015   February 17, 2010
+
+    * COMPATIBIILTTY: Controls no longer have a stashable_keys attribute. It was
+      essentially the same for all controls and should be a metaclass attribute
+      if it needs to be added again in the future.
+    * COMPATIBILITY: Removed the Value role for controls and added a value and
+      default_value attribute directly to Control. All controls have these and
+      current_value() and friends have been updated accordingly.
+    * Added the convert_control_to_value() and convert_value_to_control()
+      methods, which use the control_to_value and value_to_control attributes as
+      well as any features implementing the ControlValueConverter role.
+    * Controls now keep a weak reference to the action to which they belong
+    * Adding a setup_and_render() method as a shortcut for the common rendering
+      tasks
+    * Make fill_on_assignment work with default_value, which is better.
+    * Now using Test::Able::Runner for tests
+
 0.014   January 16, 2010
 
     * Added the set_attribute_from_control() helper method to
