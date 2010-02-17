@@ -248,11 +248,7 @@ sub stash {
     my %controls;
     for my $control_name (keys %$controls) {
         my $control = $controls->{ $control_name };
-
-        my $keys = $control->stashable_keys;
-        for my $key (@$keys) {
-            $controls{$control_name}{$key} = $control->$key;
-        }
+        $controls{$control_name}{value} = $control->value;
     }
 
     my %stash = (
@@ -289,11 +285,7 @@ sub unstash {
     for my $control_name (keys %$controls) {
         my $state   = $controls_state->{$control_name};
         my $control = $controls->{$control_name};
-        my $keys    = $control->stashable_keys;
-        for my $key (@$keys) {
-            next unless exists $state->{$key};
-            eval { $control->$key($state->{$key}) };
-        }
+        eval { $control->value($state->{value}) };
     }
 
     $self->results($stash->{results} || Form::Factory::Result::Gathered->new);
@@ -314,10 +306,7 @@ sub clear {
     my $controls       = $self->controls;
     for my $control_name (keys %$controls) {
         my $control = $controls->{ $control_name };
-        my $keys    = $control->stashable_keys;
-        for my $key (@$keys) {
-            delete $control->{$key}; # ugly
-        }
+        delete $control->{value};
     }
 
     $self->results->clear_all;

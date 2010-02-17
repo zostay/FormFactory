@@ -26,15 +26,7 @@ Form::Factory::Control::Checkbox - the checkbox control
 
 This represents a toggle button, typically displayed as a checkbox. This control implements L<Form::Factory::Control>, L<Form::Factory::Control::Role::BooleanValue>, L<Form::Factory::Control::Role::Labeled>, L<Form::Factory::Control::Role::ScalarValue>.
 
-=head2 stashable_keys
-
-The L</is_true> attribute is stashed.
-
 =cut
-
-has '+stashable_keys' => (
-    default   => sub { [ qw( is_true ) ] },
-);
 
 has '+value' => (
     isa       => 'Str',

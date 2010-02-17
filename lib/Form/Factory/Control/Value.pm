@@ -51,10 +51,6 @@ has is_visible => (
     default   => 0,
 );
 
-has '+stashable_keys' => (
-    default   => sub { [ qw( value ) ] },
-);
-
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>

@@ -38,16 +38,6 @@ has '+default_value' => (
     default   => '',
 );
 
-=head2 stashable_keys
-
-The L</value> is stashed.
-
-=cut
-
-has '+stashable_keys' => (
-    default   => sub { [ qw( value ) ] },
-);
-
 =head1 METHODS
 
 =head2 has_current_value

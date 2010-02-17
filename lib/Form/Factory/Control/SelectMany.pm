@@ -46,16 +46,6 @@ has '+default_value' => (
     default   => sub { [] },
 );
 
-=head2 stashable_keys
-
-The L</selected_choices> are stashed.
-
-=cut
-
-has '+stashable_keys' => (
-    default   => sub { [ qw( selected_choices ) ] },
-);
-
 =head1 METHODS
 
 =head2 current_values

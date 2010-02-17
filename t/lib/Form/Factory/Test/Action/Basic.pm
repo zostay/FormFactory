@@ -79,7 +79,7 @@ test plan => 6, meta_control_name => sub {
     is_deeply($control->features, {}, 'control features are empty');
 };
 
-test plan => 13, control_name => sub {
+test plan => 12, control_name => sub {
     my $self = shift;
     my $control = $self->action->controls->{name};
 
@@ -90,8 +90,6 @@ test plan => 13, control_name => sub {
     does_ok($control, 'Form::Factory::Control::Role::ScalarValue');
     is($control->name, 'name', 'control is named name');
     is_deeply($control->features, [], 'control features are empty');
-    is_deeply($control->stashable_keys, [ qw( value ) ], 
-        'control value is stashable');
     is($control->has_value, '', 'control has no value');
     is($control->value, undef, 'control value is undef');
     is($control->has_default_value, 1, 'control has a default value');

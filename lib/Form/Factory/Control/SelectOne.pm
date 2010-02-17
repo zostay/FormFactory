@@ -40,16 +40,6 @@ has '+default_value' => (
     isa       => 'Str',
 );
 
-=head2 stashable_keys
-
-The L</value> is stashed.
-
-=cut
-
-has '+stashable_keys' => (
-    default   => sub { [ qw( value ) ] },
-);
-
 =head1 AUTHOR
 
 Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
