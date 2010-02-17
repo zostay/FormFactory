@@ -48,17 +48,11 @@ has code => (
 
 =head2 check_control
 
-Checks to make sure the control does either L<Form::Factory::Control::Role::ScalarValue> or L<Form::Factory::Control::Role::ListValue>.
+No op.
 
 =cut
 
-sub check_control { 
-    my ($self, $control) = @_;
-
-    return if $control->does('Form::Factory::Control::Role::Value');
-
-    Carp::croak("the match_code feature only works with valued controls");
-}
+sub check_control { }
 
 =head2 check
 

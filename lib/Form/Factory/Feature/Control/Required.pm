@@ -31,17 +31,11 @@ Reports a check error if the required value is not set. On scalar value controls
 
 =head2 check_control
 
-Only works with scalar and list valued controls.
+No op.
 
 =cut
 
-sub check_control {
-    my ($self, $control) = @_;
-
-    return if $control->does('Form::Factory::Control::Role::Value');
-
-    Carp::croak("the required feature does not know how to check the value of $control");
-}
+sub check_control { }
 
 =head2 check
 

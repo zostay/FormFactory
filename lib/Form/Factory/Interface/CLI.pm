@@ -139,9 +139,6 @@ Consumes the command-line arguments and files specified on the command-line to f
 sub consume_control {
     my ($self, $control, %options) = @_;
 
-    Carp::croak("CLI interface does not know how to consume values for $control")
-        unless $control->does('Form::Factory::Control::Role::Value');
-
     my @argv = @{ $self->get_args->($self) };
     my ($fetch, @values);
     for my $argv (@argv) {

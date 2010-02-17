@@ -27,18 +27,15 @@ Form::Factory::Control::FullText - The full_text control
 
 This is a multi-line text control.
 
-=head1 ATTRIBUTES
-
-=head2 default_value
-
-The default value of the control.
-
 =cut
 
-has default_value => (
-    is        => 'rw',
+has '+value' => (
     isa       => 'Str',
-    predicate => 'has_default_value',
+);
+
+has '+default_value' => (
+    isa       => 'Str',
+    default   => '',
 );
 
 =head2 stashable_keys
@@ -53,30 +50,19 @@ has '+stashable_keys' => (
 
 =head1 METHODS
 
-=head2 current_value
-
-This use the L</value> if available. It falls back to L</default_value> otherwise. It returns an empty string if neither are set.
-
-=cut
-
-sub current_value {
-    my $self = shift;
-    $self->value(shift) if @_;
-    return $self->has_value         ? $self->value
-         : $self->has_default_value ? $self->default_value
-         :                            '';
-}
-
 =head2 has_current_value
 
-We have a useful current value when it is defined and the length of the string is greater than zero.
+We have a current value if it is defined and has a non-zero string length.
 
 =cut
 
-sub has_current_value {
+around has_current_value => sub {
+    my $next = shift;
     my $self = shift;
-    return length($self->current_value) > 0;
-}
+
+    return ($self->has_value || $self->has_default_value)
+        && length($self->current_value) > 0;
+};
 
 =head1 AUTHOR
 

@@ -363,9 +363,6 @@ sub consume_control {
 
     Carp::croak("no request option passed") unless defined $options{request};
 
-    Carp::croak("HTML interface does not know how to consume values for $control")
-        unless $control->does('Form::Factory::Control::Role::Value');
-
     my $widget = $self->new_widget_for_control($control);
     return unless defined $widget;
 

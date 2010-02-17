@@ -90,9 +90,6 @@ sub check {
         CONTROL: for my $name (@$control_names) {
             my $control = $action->controls->{$name};
 
-            Carp::croak("require_none_or_all does not know how to check values on $name")
-                unless $control->does('Form::Factory::Control::Role::Value');
-
             my $has_current_value = $control->has_current_value;
             $has_a_value        ||= $has_current_value;
             $has_all_values     &&= $has_current_value;

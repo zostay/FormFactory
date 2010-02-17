@@ -1,8 +1,6 @@
 package Form::Factory::Control::Role::ScalarValue;
 use Moose::Role;
 
-with qw( Form::Factory::Control::Role::Value );
-
 excludes qw( 
     Form::Factory::Control::Role::BooleanValue
     Form::Factory::Control::Role::ListValue 

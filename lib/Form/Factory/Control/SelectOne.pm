@@ -30,17 +30,14 @@ Form::Factory::Control::SelectOne - A control for selecting a single item
 
 A select control that allows a single selection. A list of radio buttons or a drop-down box would be appropriate.
 
-=head1 ATTRIBUTES
-
-=head2 default_value
-
-The defautl value of the control.
-
 =cut
 
-has default_value => (
-    is        => 'rw',
-    predicate => 'has_default_value',
+has '+value' => (
+    isa       => 'Str',
+);
+
+has '+default_value' => (
+    isa       => 'Str',
 );
 
 =head2 stashable_keys
@@ -52,33 +49,6 @@ The L</value> is stashed.
 has '+stashable_keys' => (
     default   => sub { [ qw( value ) ] },
 );
-
-=head1 METHODS
-
-=head2 current_value
-
-If L</value> is set, use that. Otherwise, if L</default_value> is set, use that. Otherwise, returns an empty string.
-
-=cut
-
-sub current_value {
-    my $self = shift;
-    $self->value(shift) if @_;
-    return $self->has_value         ? $self->value
-         : $self->has_default_value ? $self->default_value
-         :                            '';
-}
-
-=head2 has_current_value
-
-We have a useful current value when it is defined and the length of the string is greater than zero.
-
-=cut
-
-sub has_current_value {
-    my $self = shift;
-    return length($self->current_value) > 0;
-}
 
 =head1 AUTHOR
 

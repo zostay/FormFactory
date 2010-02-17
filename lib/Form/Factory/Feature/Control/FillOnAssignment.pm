@@ -47,17 +47,11 @@ This feature adds a trigger to the control so that any assignment to the action 
 
 =head2 check_control
 
-This works with L<Form::Factory::Control::Role::ScalarValue> and L<Form::Factory::Control::Role::ListValue> controls.
+No op.
 
 =cut
 
-sub check_control {
-    my ($self, $control) = @_;
-
-    return if $control->does('Form::Factory::Control::Role::Value');
-
-    Carp::croak("the fill_on_assignment feature does not know how to fill in the value of $control");
-}
+sub check_control { }
 
 =head2 build_attribute
 

@@ -93,22 +93,135 @@ has features => (
     default   => sub { [] },
 );
 
-=head2 stashable_keys
+=head2 value
 
-This is the list of control keys that may be stashed.
+This is the value of the control. This attribute provides a C<has_value> predicate. See L</current_value>.
 
 =cut
 
-# TODO This really ought to be a meta-attribute.
-has stashable_keys => (
-    is        => 'ro',
-    isa       => 'ArrayRef',
-    required  => 1,
-    lazy      => 1,
-    default   => sub { [] },
+has value => (
+    is        => 'rw',
+    predicate => 'has_value',
+);
+
+=head2 default_value
+
+This is the default or fallback value for the control used when L</value> is not set. This attribute provides a C<has_default_value> predicate. See L</current_value>.
+
+=cut
+
+has default_value => (
+    is        => 'rw',
+    predicate => 'has_default_value',
 );
 
 =head1 METHODS
+
+=head2 current_value
+
+This is the current value of the control. If L</value> is set, then that is returned. If that is not set, but L</defautl_value> is set, then that is returned. If neither are set, then C<undef> is returned.
+
+This may also be passed a value. In which case the L</value> is set and that value is returned.
+
+=cut
+
+sub current_value {
+    my $self = shift;
+
+    $self->value(@_) if @_;
+
+    return $self->value         if $self->has_value;
+    return $self->default_value if $self->has_default_value;
+    return scalar undef;
+}
+
+=head2 has_current_value
+
+Returns true if either C<value> or C<default_value> is set.
+
+=cut
+
+sub has_current_value {
+    my $self = shift;
+    return $self->has_value || $self->has_default_value;
+}
+
+=head2 convert_value_to_control
+
+Given an attribute value, convert it to a control value. This will cause any associated L<Form::Factory::Feature::Role::ControlValueConverter> features to run and run the L</value_to_control> conversion. The value to convert should be passed as the lone argument. The converted value is returned.
+
+=cut
+
+sub convert_value_to_control {
+    my ($self, $value) = @_;
+
+    for my $feature (@{ $self->features }) {
+        next unless $feature->does('Form::Factory::Feature::Role::ControlValueConvert');
+
+        $value = $feature->value_to_control($value);
+    }
+
+    if ($self->has_value_to_control) {
+        my $converter = $self->value_to_control;
+        if (ref $converter) {
+            $value = $converter->($self->action, $self, $value);
+        }
+        else {
+            $value = $self->action->$converter($self, $value);
+        }
+    }
+
+    return $value;
+}
+
+=head2 convert_control_to_value
+
+Given a control value, convert it to an attribute value. This will run any L<Form::Factory::Feature::Role::ControlValueConverter> features and the L</control_to_value> conversion (if set). The value to convert should be passed as the only argument and the converted value is returned.
+
+=cut
+
+sub convert_control_to_value {
+    my ($self, $value) = @_;
+
+    for my $feature (@{ $self->features }) {
+        next unless $feature->does('Form::Factory::Feature::Role::ControlValueConvert');
+
+        $value = $feature->control_to_value($value);
+    }
+
+    if ($self->has_control_to_value) {
+        my $converter = $self->control_to_value;
+        if (ref $converter) {
+            $value = $converter->($self->action, $self, $value);
+        }
+        else {
+            $value = $self->action->$converter($self, $value);
+        }
+    }
+
+    return $value;
+}
+
+=head2 set_attribute_value
+
+  $control->set_attribute_value($action, $attribute);
+
+Sets the value of the action attribute with current value of teh control.
+
+=cut
+
+sub set_attribute_value {
+    my ($self, $action, $attribute) = @_;
+
+    my $value = $self->current_value;
+    if (defined $value) {
+        $value = $self->convert_control_to_value($value);
+        $attribute->set_value($action, $value);
+    }
+    else {
+        $attribute->clear_value($action);
+    }
+}
 
 =head2 get_feature_by_name
 

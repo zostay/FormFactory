@@ -112,7 +112,7 @@ test plan => 5, render_control => sub {
     ok($control, 'got a control back');
     isa_ok($control, 'Form::Factory::Control::Button');
     is($control->label, 'Testing', 'button label is Testing');
-    is($control->current_value, '', 'current_value is empty');
+    is($control->current_value, undef, 'current_value is empty');
 };
 
 test plan => 4, consume_control_empty => sub {
@@ -127,7 +127,7 @@ test plan => 4, consume_control_empty => sub {
     ok($control, 'got a control back');
     isa_ok($control, 'Form::Factory::Control::Button');
     is($control->label, 'Testing', 'button label is Testing');
-    is($control->current_value, '', 'current_value is empty');
+    is($control->current_value, undef, 'current_value is empty');
 };
 
 test plan => 4, consume_control_full => sub {
