@@ -128,6 +128,72 @@ has default_value => (
     predicate => 'has_default_value',
 );
 
+=head2 control_to_value
+
+This may be a method name or a code reference that can be run in order to coerce the control's current value to the action attribute's value during action processing. The given method or subroutine will always be called with 3 arguments:
+
+=over
+
+=item 1
+
+The action object the control has been attached to.
+
+=item 2
+
+The control object we are converting from.
+
+=item 3
+
+The current value of the control.
+
+=back
+
+The method or subroutien should return the converted value.
+
+This attribute provides a C<has_control_to_value> predicate.
+
+=cut 
+
+has control_to_value => (
+    is        => 'ro',
+    isa       => 'Str|CodeRef',
+    predicate => 'has_control_to_value',
+);
+
+=head2 value_to_control
+
+This is either a method name (to be called on the action the control is connected with) to a code reference. This method or subroutine will be called to conver the action attribute value to the control's value.
+
+The method or subroutine will always be called with three arguments:
+
+=over
+
+=item 1
+
+The action object the control belongs to.
+
+=item 2
+
+The control object that will receive the value.
+
+=item 3
+
+The value of the attribute that is being assigned to the control.
+
+=back
+
+The method or subroutine should return the converted value.
+
+This attribute provides a C<has_value_to_control> predicate.
+
+=cut
+
+has value_to_control => (
+    is        => 'ro',
+    isa       => 'Str|CodeRef',
+    predicate => 'has_value_to_control',
+);
+
 =head1 METHODS
 
 =head2 current_value
