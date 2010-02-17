@@ -4,7 +4,6 @@ use Moose;
 with qw(
     Form::Factory::Feature
     Form::Factory::Feature::Role::BuildAttribute
-    Form::Factory::Feature::Role::BuildControl
     Form::Factory::Feature::Role::Control
 );
 
@@ -55,7 +54,7 @@ sub check_control { }
 
 =head2 build_attribute
 
-This modifies the attribute being created to have a C<trigger> that causes the control to gain the value of the action's attribute on set. Unless C<no_warning> is set, this will cause a warning if the "is" setting is not set to "rw".
+This modifies the attribute being created to have a C<trigger> that causes the default value of the control to gain the value of the action's attribute on set. Unless C<no_warning> is set, this will cause a warning if the "is" setting is not set to "rw".
 
 =cut
 
@@ -70,24 +69,32 @@ sub build_attribute {
     $attr->{trigger} = sub {
         my ($self, $value) = @_;
         my $control = $self->controls->{$name};
-        $self->controls->{$name}->current_value($value);
+        $value = $control->convert_value_to_control($value);
+        $self->controls->{$name}->default_value($value);
     };
 }
 
-=head2 build_control
+=head2 BUILD
 
-This modifies the control such that it will be initialized to the correct value when the control is created.
+After building the feature, this will set the default value of the control to the value currently held by the action attribute.
 
 =cut
 
-sub build_control {
-    my ($class, $options, $action, $name, $control) = @_;
+sub BUILD {
+    my $self    = shift;
+    my $action  = $self->action;
+    my $control = $self->control;
 
-    my $attr  = $action->meta->find_attribute_by_name($name);
+    my $attr  = $action->meta->find_attribute_by_name($control->name);
     my $value = $attr->get_value($action);
 
-    $control->{options}{value} = $value if defined $value;
-}
+    if (defined $value) {
+        $value = $control->convert_value_to_control($value);
+        $control->default_value($value);
+    }
+
+    return $self;
+};
 
 =head1 AUTHOR
 
