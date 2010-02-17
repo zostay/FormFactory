@@ -80,7 +80,7 @@ has documentation => (
     predicate => 'has_documentation',
 );
 
-=head2 feature
+=head2 features
 
 This is the list of L<Form::Factory::Feature::Role::Control> features associated with the control.
 

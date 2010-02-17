@@ -29,7 +29,7 @@ Form::Factory::Action - Role implemented by actions
 
 =head1 DESCRIPTION
 
-This is the role implemented by all form actions.
+This is the role implemented by all form actions. Rather than doing so directly, you should use L<Form::Factory::Process> as demonstrated in the L</SYNOPSIS>.
 
 =head1 ATTRIBUTES
 
@@ -236,7 +236,7 @@ sub _build_controls {
 
 Given a C<$moniker> (a key under which to store the information related to this form), this will stash the form's stashable information under that name using the L<Form::Factory::Stasher> associated with the L</form_interface>.
 
-The globals, stashable parts of controls, and the results are stashed. This allows those values to be recovered across requests or between process calls or whatever the implementation requires.
+The globals, values of controls, and the results are stashed. This allows those values to be recovered across requests or between process calls or whatever the implementation requires.
 
 =cut
 

@@ -43,31 +43,31 @@ Form::Factory - a general-purpose form handling API
 
 B<ALPHA API>. This code is not fully tested (if you look in the test files you will see a long list of tests planned, but no yet implemented). It is currently being employed on a non-production project. The API I<will> change. See L</TODO> for more.
 
-This API is designed to be a general purpose API for showing and processing forms. This has been done before. I know. However, I believe this provides some distinct advantages. However, you should definitely check out the alternatives because this might be more complex than you really need.
+This API is designed to be a general purpose API for showing and processing forms. This has been done before. I know. However, I believe this provides some distinct advantages. 
 
-That said, why would you want this?
+You should check out the alternatives because this might be more complex than you really need. That said, why would you want this?
 
 =head2 MODULAR AND EXTENSIBLE
 
-This forms process makes heavy use of L<Moose>. Nearly every class is replaceable or extensible in case it does not work the way you need it to. It is initially implemented to support HTML forms, but I would like to see it support XForms, XUL, PDF forms, GUI forms via Wx or Curses, command-line interfaces, etc.
+This forms processor makes heavy use of L<Moose>. Nearly every class is replaceable or extensible in case it does not work the way you need it to. It is initially implemented to support HTML forms and command-line interfaces, but I would like to see it support XForms, XUL, PDF forms, GUI forms via Wx or Curses, etc.
 
 =head2 ENCAPSULATED ACTIONS
 
-The centerpiece of this API is the way an action is encapsulated in a single object. In a way, a form object is a glorified functor with a C<run> method responsible for taking the action. Wrapped around that is the ability to describe what kind of input is expected, how to clean up and verify the input, how to report errors so that they can be used, how entered values can be sent back to the orignal user, etc.
+The centerpiece of this API is the way an action is encapsulated in a single object. In a way, a form object is a glorified functor with a C<run> method responsible for taking the action. Wrapped around that is the ability to describe what kind of inputs are expected, how to clean up and verify the inputs, how to report errors so that they can be used, how entered values can be sent back to the orignal user, etc.
 
 The goal here is to create self-contained actions that specify what they are in fairly generic terms, take specific action when the input checks out, to handle exceptions in a way that is convenient in forms processing (where exceptions are often more common than not) and send back output cleanly.
 
 =head2 MULTIPLE IMPLEMENTATIONS
 
-An action presents a blueprint for the data it needs to work. A form interface takes that blueprint and builds the UI to present the user and consume the input from the user to present back to the action.
+An action presents a blueprint for the data it needs to run. A form interface takes that blueprint and builds the UI to present to the user and consume input from the user and notify the action.
 
-As mentioned above, a form interface could be any kind of UI. The way the form interface and action is used will depend on the form interface implementation, but the action itself should not need to care overmuch about that. It might specify something related to a specific interface, but it would still work with a different interface anyway.
+A form interface could be any kind of UI. The way the form interface and action is used will depend on the form interface implementation. The action itself should not need to care (much) about what interface it is used in.
 
 =head2 CONTROLS VERSUS WIDGETS
 
-We specifically separate the logic for specifying controls from the widgets implementing those controls. A control specifies that the action expects some user input and a description of how that data is expected. The widget then implements that using whatever form control is most appropriate.
+So far, the attempt has been made to keep controls pretty generic. A control specifies the kind of inputs an action expects for some input, but the interface is responsible for rendering that control as a suitable widget and consuming data from that widget.
 
-=head2 FORM FEATURES
+=head2 FORM AND CONTROL FEATURES
 
 Forms and controls can be extended with common features. These features can clean up the input, check the input for errors, and provide additional processing to forms. Features can be added to an action class or even to a specific instance to modify the form on the fly.
 
@@ -79,7 +79,7 @@ Forms and controls can be extended with common features. These features can clea
 
 This creates a L<Form::Factory::Interface> object with the given options. This is, more or less, a shortcut for:
 
-  my $interface_class = 'Form::Factory::Interface::' . $name;
+  my $interface_class = Form::Factory->interface_class($name);
   my $interface       = $interface_class->new(\%options);
 
 =cut
@@ -95,7 +95,9 @@ sub new_interface {
 
   my $class_name = Form::Factory->interface_class('HTML');
 
-Returns the interface class for the named interface.
+Returns the interface class for the named interface. This loads the interface class from the L<Form::Factory::Interface> namespace. 
+
+See L</CLASS LOADING>.
 
 =cut
 
@@ -105,7 +107,9 @@ sub interface_class { _load_class_from_name(Interface => $_[1]) }
 
   my $class_name = Form::Factory->control_class('full_text');
 
-Returns the control class for the named control.
+Returns the control class for the named control. This loads the control class from the L<Form::Factory::Control> namespace.
+
+See L</CLASS LOADING>.
 
 =cut
 
@@ -115,7 +119,9 @@ sub control_class { _load_class_from_name(Control => $_[1]) }
 
   my $class_name = Form::Factory->feature_class('functional');
 
-Returns the feature class for the named feature.
+Returns the feature class for the named feature. This loads the feature class from the L<Form::Factory::Feature> namespace.
+
+See L</CLASS LOADING>.
 
 =cut
 
@@ -125,11 +131,45 @@ sub feature_class { _load_class_from_name(Feature => $_[1]) }
 
   my $class_name = Form::Factory->control_feature_class('required');
 
-Returns the control feature class for the named control feature.
+Returns the control feature class for the named control feature. This loads the control feature class from the L<Form::Factory::Feature::Control> namespace.
+
+See L</CLASS LOADING>.
 
 =cut
 
 sub control_feature_class { _load_class_from_name('Feature::Control' => $_[1]) }
+
+=head1 CLASS LOADING
+
+This package features a few class loading methods. These methods each load a type of class. The type of class depends on the namespace they are based upon (which is mentioned in the documentation for each class loading method).
+
+Each namespace is divided into two segments: the reserved namespace and the custom namespace. The reserved namespace is reserved for use by the L<Form::Factory> library itself. These will be any class directly under the namespace given. 
+
+For example, interface classes will always be directly under L<Form::Factory::Interface>, such as L<Form::Factory::Interface::HTML> and L<Form::Factory::Interface::CLI>.
+
+The custom namespaces are implemented as an alias under the C<Custom> package namespace. You first define a custom package, which contains a C<register_implementation>, which returns the name of a package that actually implements that class.
+
+For example, you might create an interface class specific to your app. You might define a class as follows:
+
+  package Form::Factory::Interface::Custom::MyAppHTML;
+  sub register_implementation { 'MyApp::Form::Factory::Interface::HTML' }
+
+  package MyApp::Form::Factory::Interface::HTML;
+  use Moose;
+
+  extends qw( Form::Factory::Interface::HTML );
+
+  # implementation here...
+
+Any custom name is similar. You could then retrieve your custom name via:
+
+  my $class = Form::Factory->interface_class('MyAppHTML');
+
+Though, you probably actually want:
+
+  my $interface = Form::Factory->new_interface('MyAppHTML');
+
+=cut
 
 sub _class_name_from_name {
     my ($prefix, $name) = @_;
