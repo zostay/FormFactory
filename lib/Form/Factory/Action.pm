@@ -211,6 +211,7 @@ sub _build_controls {
             $control_args{control} => $control_args{options},
         );
 
+        my @init_control_features;
         for my $feature_name (keys %$meta_features) {
             my $feature_class = $feature_classes{$feature_name};
 
@@ -221,6 +222,13 @@ sub _build_controls {
             );
             push @$features, $feature;
             push @{ $control->features }, $feature;
+
+            push @init_control_features, $feature
+                if $feature->does('Form::Factory::Feature::Role::InitializeControl');
+        }
+
+        for my $feature (@init_control_features) {
+            $feature->initialize_control;
         }
 
         $controls{ $meta_control->name } = $control;
