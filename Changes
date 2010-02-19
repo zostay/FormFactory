@@ -1,3 +1,12 @@
+0.016   February 18, 2010
+
+    * Added the InitializeControl control feature role
+    * Converting fill_on_assignment to an InitializeControl so that it will work
+      properly with value conversion features
+    * Correcting a bug that broke control value converter features
+    * Correcting some of the documentation
+    * Adding a new test for value conversions
+
 0.015   February 17, 2010
 
     * COMPATIBIILTTY: Controls no longer have a stashable_keys attribute. It was
