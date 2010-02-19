@@ -4,6 +4,7 @@ use Moose;
 with qw(
     Form::Factory::Feature
     Form::Factory::Feature::Role::BuildAttribute
+    Form::Factory::Feature::Role::InitializeControl
     Form::Factory::Feature::Role::Control
 );
 
@@ -74,13 +75,13 @@ sub build_attribute {
     };
 }
 
-=head2 BUILD
+=head2 initialize_control
 
-After building the feature, this will set the default value of the control to the value currently held by the action attribute.
+After the control is initialized, this will set the default value of the control to the value currently held by the action attribute.
 
 =cut
 
-sub BUILD {
+sub initialize_control {
     my $self    = shift;
     my $action  = $self->action;
     my $control = $self->control;
