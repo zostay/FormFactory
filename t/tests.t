@@ -13,6 +13,7 @@ else {
             Form::Factory::Test::Action::Basic
             Form::Factory::Test::Action::Controls
             Form::Factory::Test::Action::Inheritance
+            Form::Factory::Test::Action::ValueConversion
             Form::Factory::Test::CustomClassNames
             Form::Factory::Test::Feature::Control::BuildControl
             Form::Factory::Test::Feature::Control::FillOnAssignment
