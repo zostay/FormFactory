@@ -235,7 +235,7 @@ sub convert_value_to_control {
     my ($self, $value) = @_;
 
     for my $feature (@{ $self->features }) {
-        next unless $feature->does('Form::Factory::Feature::Role::ControlValueConvert');
+        next unless $feature->does('Form::Factory::Feature::Role::ControlValueConverter');
 
         $value = $feature->value_to_control($value);
     }
@@ -263,7 +263,7 @@ sub convert_control_to_value {
     my ($self, $value) = @_;
 
     for my $feature (@{ $self->features }) {
-        next unless $feature->does('Form::Factory::Feature::Role::ControlValueConvert');
+        next unless $feature->does('Form::Factory::Feature::Role::ControlValueConverter');
 
         $value = $feature->control_to_value($value);
     }
