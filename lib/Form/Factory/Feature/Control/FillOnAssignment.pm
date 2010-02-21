@@ -43,6 +43,28 @@ Form::Factory::Feature::Control::FillOnAssignment - Control gets the value of th
 
 This feature adds a trigger to the control so that any assignment to the action value causes the control to also gain that value.
 
+=head1 ATTRIBUTES
+
+=head2 slot
+
+This names the slot that will be filled with the value. This must be either C<value> or C<default_value>. The default is C<default_value>.
+
+=cut
+
+use Moose::Util::TypeConstraints;
+
+enum 'Form::Factory::Feature::Control::FillOnAssignment::Slot'
+    => qw( value default_value );
+
+no Moose::Util::TypeConstraints;
+
+has slot => (
+    is        => 'ro',
+    isa       => 'Form::Factory::Feature::Control::FillOnAssignment::Slot',
+    required  => 1,
+    default   => 'default_value',
+);
+
 =head1 METHODS
 
 =head2 check_control
@@ -67,11 +89,12 @@ sub build_attribute {
             if $attr->{is} eq 'ro' or $attr->{is} eq 'bare';
     }
 
+    my $slot = $options->{slot} || 'default_value';
     $attr->{trigger} = sub {
         my ($self, $value) = @_;
         my $control = $self->controls->{$name};
         $value = $control->convert_value_to_control($value);
-        $self->controls->{$name}->default_value($value);
+        $self->controls->{$name}->$slot($value);
     };
 }
 
@@ -91,7 +114,8 @@ sub initialize_control {
 
     if (defined $value) {
         $value = $control->convert_value_to_control($value);
-        $control->default_value($value);
+        my $slot = $self->slot;
+        $control->$slot($value);
     }
 
     return $self;
