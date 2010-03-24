@@ -3,7 +3,7 @@ use Moose::Role;
 
 =head1 NAME
 
-Form::Factory::Action::Meta::Class - The meta-class for form actions
+Form::Factory::Action::Meta::Class - The meta-class role for form actions
 
 =head1 SYNOPSIS
 
@@ -18,7 +18,7 @@ All form actions have this role attached to its meta-class.
 
 =head2 features
 
-This is a hash of features. The keys are the short name of the feature to attach and the value is a hash of options ot pass to the feature's constructor on instantiation.
+This is a hash of features. The keys are the short name of the feature to attach and the value is a hash of options to pass to the feature's constructor on instantiation.
 
 =cut
 
@@ -64,14 +64,15 @@ sub get_controls {
 
   my $features = $action->meta->get_all_features;
 
-Returns all the feature specs for teh form. This includes all inherited features as well. These are returned in the same format as the L</features> attribute.
+Returns all the feature specs for the form. This includes all inherited features and features configured in implemented roles as well. These are returned in the same format as the L</features> attribute.
 
 =cut
 
 sub get_all_features {
     my $meta = shift;
-
     my %all_features;
+
+    # For all the classes implemented, find the features we use
     for my $class (reverse $meta->linearized_isa) {
         my $other_meta = $meta->initialize($class);
 

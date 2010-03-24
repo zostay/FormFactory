@@ -29,7 +29,7 @@ Form::Factory::Action - Role implemented by actions
 
 =head1 DESCRIPTION
 
-This is the role implemented by all form actions. Rather than doing so directly, you should use L<Form::Factory::Process> as demonstrated in the L</SYNOPSIS>.
+This is the role implemented by all form actions. Rather than doing so directly, you should use L<Form::Factory::Processor> as demonstrated in the L</SYNOPSIS>.
 
 =head1 ATTRIBUTES
 
@@ -172,6 +172,8 @@ sub _build_controls {
     my %controls;
     my @meta_controls = $self->meta->get_controls;
     for my $meta_control (@meta_controls) {
+
+        # Construct any deferred options
         my %options = %{ $meta_control->options };
         OPTION: for my $key (keys %options) {
             my $value = $options{$key};
@@ -182,6 +184,7 @@ sub _build_controls {
             $options{$key} = $value->code->($self, $key);
         }
 
+        # Build the control constructor arguments
         my $control_name = $meta_control->name;
         my %control_args = (
             control => $meta_control->control,
@@ -194,6 +197,7 @@ sub _build_controls {
             },
         );
 
+        # Let any BuildControl features modify the constructor arguments
         my %feature_classes;
         my $meta_features = $meta_control->features;
         for my $feature_name (keys %$meta_features) {
@@ -207,10 +211,12 @@ sub _build_controls {
             );
         }
 
+        # Construct the control
         my $control = $interface->new_control(
             $control_args{control} => $control_args{options},
         );
 
+        # Construct and attach the features for the control
         my @init_control_features;
         for my $feature_name (keys %$meta_features) {
             my $feature_class = $feature_classes{$feature_name};
@@ -227,10 +233,12 @@ sub _build_controls {
                 if $feature->does('Form::Factory::Feature::Role::InitializeControl');
         }
 
+        # Have InitializeControl features work on the constructed control
         for my $feature (@init_control_features) {
             $feature->initialize_control;
         }
 
+        # Add the control to the list
         $controls{ $meta_control->name } = $control;
     }
 
