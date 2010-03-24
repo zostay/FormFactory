@@ -173,7 +173,7 @@ B<DO NOT> use the C<required> attribute option on controls. If you try to do so,
 
 =cut
 
-sub has_control {
+sub _setup_control_defaults {
     my $meta = shift;
     my $name = shift;
     my $args = @_ == 1 ? shift : { @_ };
@@ -200,6 +200,12 @@ sub has_control {
     }
 
     $args->{__meta} = $meta;
+
+    return ($meta, $name, $args);
+}
+
+sub has_control {
+    my ($meta, $name, $args) = _setup_control_defaults(@_);
     $meta->add_attribute( $name => $args );
 }
 

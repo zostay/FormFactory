@@ -87,6 +87,20 @@ sub get_all_features {
         }
     }
 
+    # Now, do the same for the roles we implement as well
+    for my $role ($meta->calculate_all_roles) {
+
+        next unless $role->can('meta');
+        next unless $role->meta->can('does_role');
+        next unless $role->meta->does_role('Form::Factory::Action::Meta::Role');
+
+        # Make sure these don't clobber the inherited features
+        while (my ($name, $feature_config) = each %{ $role->features }) {
+            my $full_name = join('#', $name, $role->name);
+            $all_features{$full_name} = $feature_config;
+        }
+    }
+
     return \%all_features;
 }
 
