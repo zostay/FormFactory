@@ -16,7 +16,7 @@ has join_by => (
 
 has split_by => (
     is        => 'ro',
-    isa       => 'Regexp',
+    isa       => 'RegexpRef',
     required  => 1,
     default   => sub { qr{\s*,\s*} },
 );

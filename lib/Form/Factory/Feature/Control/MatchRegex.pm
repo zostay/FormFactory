@@ -40,7 +40,7 @@ The regular expression to use.
 
 has regex => (
     is        => 'ro',
-    isa       => 'Regexp',
+    isa       => 'RegexpRef',
     required  => 1,
 );
 
