@@ -1,3 +1,8 @@
+0.019   May 21, 2010
+
+    * Correct tests that started failing with Moose 1.02 because Form::Factory
+      mistakenly used "Regexp" as a type, when "RegexpRef" was meant.
+
 0.018   March 23, 2010
 
     * Added Form::Factory::Process::Role and related changes to make it possible
