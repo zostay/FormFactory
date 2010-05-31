@@ -3,7 +3,7 @@ use Moose::Role;
 
 =head1 NAME
 
-Form::Factory::Action::Meta::Class - The meta-class role for form action roles
+Form::Factory::Action::Meta::Role - The meta-class role for form action roles
 
 =head1 SYNOPSIS
 
