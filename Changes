@@ -1,3 +1,11 @@
+0.020   September 7, 2010
+
+    * Correcting some POD problems
+    * Removing the sub around legal_options_for_inheritance in
+      Form::Factory::Action::Meta::Attribute::Control as this has been removed
+      in Moose 1.09, in favor of illegal_options_for_inheritance.
+    * Moose 1.09 is required.
+
 0.019   May 21, 2010
 
     * Correct tests that started failing with Moose 1.02 because Form::Factory

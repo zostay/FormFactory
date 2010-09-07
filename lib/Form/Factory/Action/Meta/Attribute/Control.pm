@@ -110,20 +110,6 @@ around new => sub {
     $class->$next($name, %options);
 };
 
-=head2 legal_options_for_inheritance
-
-Modifies the L<Moose::Meta::Attribute> version to also allow L<features> to be modified.
-
-=cut
-
-around legal_options_for_inheritance => sub {
-    my $next    = shift;
-    my $self    = shift;
-    my @options = $self->$next(@_);
-    push @options, 'features', '__meta';
-    return @options;
-};
-
 =head2 clone_and_inherit_options
 
 Modifies the L<Moose::Meta::Attribute> version to handle the merging of L<features>.
