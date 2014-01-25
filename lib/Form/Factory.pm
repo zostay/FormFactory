@@ -2,6 +2,7 @@ package Form::Factory;
 use Moose;
 
 use Carp ();
+use Class::Load;
 
 =head1 NAME
 
@@ -192,14 +193,14 @@ sub _load_class_from_name {
     for my $type ($given_type, $custom_type) {
         my $class_name = _class_name_from_name($type, $name);
 
-        if (not eval { Class::MOP::load_class($class_name) }) {
+        if (not eval { Class::Load::load_class($class_name) }) {
             $ERROR ||= $@ if $@;
             $ERROR ||= "failed to load $type class named $name";;
         }
         elsif ($type eq $custom_type) {
             $class_name = $class_name->register_implementation;
 
-            if (eval { Class::MOP::load_class($class_name) }) {
+            if (eval { Class::Load::load_class($class_name) }) {
                 return $class_name;
             }
             else {
