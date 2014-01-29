@@ -96,9 +96,11 @@ sub init_meta {
 
     Moose::Role->init_meta(%options);
 
-    my $meta = Moose::Util::MetaRole::apply_metaclass_roles(
-        for_class       => $options{for_class},
-        metaclass_roles => [ 'Form::Factory::Action::Meta::Role' ],
+    my $meta = Moose::Util::MetaRole::apply_metaroles(
+        for            => $options{for_class},
+        role_metaroles => {
+            role => [ 'Form::Factory::Action::Meta::Role' ],
+        },
     );
 
     Moose::Util::apply_all_roles(
