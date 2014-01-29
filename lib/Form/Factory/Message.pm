@@ -2,7 +2,7 @@ package Form::Factory::Message;
 use Moose;
 
 use Moose::Util::TypeConstraints;
-enum 'Form::Factory::Message::Type' => qw( info warning error );
+enum 'Form::Factory::Message::Type' => [qw( info warning error )];
 no Moose::Util::TypeConstraints;
 
 =head1 NAME

@@ -54,7 +54,7 @@ This names the slot that will be filled with the value. This must be either C<va
 use Moose::Util::TypeConstraints;
 
 enum 'Form::Factory::Feature::Control::FillOnAssignment::Slot'
-    => qw( value default_value );
+    => [qw( value default_value )];
 
 no Moose::Util::TypeConstraints;
 
