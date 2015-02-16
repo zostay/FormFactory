@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature::RequireNoneOrAll;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -29,7 +29,7 @@ sub error_message_is_ok {
         "error has label $label in it twice");
 }
 
-test plan => 1, empty_input_is_ok => sub {
+sub empty_input_is_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 
@@ -40,7 +40,7 @@ test plan => 1, empty_input_is_ok => sub {
     ok($action->results->is_valid, 'action is valid with none');
 };
 
-test plan => 1, group_one_all_input_is_ok => sub {
+sub group_one_all_input_is_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 
@@ -55,7 +55,7 @@ test plan => 1, group_one_all_input_is_ok => sub {
     ok($action->results->is_valid, 'action is valid with all one');
 };
 
-test plan => 1, all_all_input_is_ok => sub {
+sub all_all_input_is_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 
@@ -74,7 +74,7 @@ test plan => 1, all_all_input_is_ok => sub {
     ok($action->results->is_valid, 'action is valid with all all');
 };
 
-test plan => 2, one_incomplete_try_1_is_not_ok => sub {
+sub one_incomplete_try_1_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -88,7 +88,7 @@ test plan => 2, one_incomplete_try_1_is_not_ok => sub {
     $self->error_message_is_ok('One');
 };
 
-test plan => 2, one_incomplete_try_2_is_not_ok => sub {
+sub one_incomplete_try_2_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -102,7 +102,7 @@ test plan => 2, one_incomplete_try_2_is_not_ok => sub {
     $self->error_message_is_ok('Two');
 };
 
-test plan => 2, one_incomplete_try_3_is_not_ok => sub {
+sub one_incomplete_try_3_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -116,7 +116,7 @@ test plan => 2, one_incomplete_try_3_is_not_ok => sub {
     $self->error_message_is_ok('Three');
 };
 
-test plan => 2, all_most_input_try_1_is_not_ok => sub {
+sub all_most_input_try_1_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -135,7 +135,7 @@ test plan => 2, all_most_input_try_1_is_not_ok => sub {
     $self->error_message_is_ok('Two');
 };
 
-test plan => 2, all_most_input_try_2_is_not_ok => sub {
+sub all_most_input_try_2_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -154,7 +154,7 @@ test plan => 2, all_most_input_try_2_is_not_ok => sub {
     $self->error_message_is_ok('One');
 };
 
-test plan => 2, all_most_input_try_3_is_not_ok => sub {
+sub all_most_input_try_3_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -173,7 +173,7 @@ test plan => 2, all_most_input_try_3_is_not_ok => sub {
     $self->error_message_is_ok('Two');
 };
 
-test plan => 2, all_most_input_try_4_is_not_ok => sub {
+sub all_most_input_try_4_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -192,7 +192,7 @@ test plan => 2, all_most_input_try_4_is_not_ok => sub {
     $self->error_message_is_ok('Five');
 };
 
-test plan => 2, all_most_input_try_5_is_not_ok => sub {
+sub all_most_input_try_5_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -211,7 +211,7 @@ test plan => 2, all_most_input_try_5_is_not_ok => sub {
     $self->error_message_is_ok('Four');
 };
 
-test plan => 2, all_most_input_try_6_is_not_ok => sub {
+sub all_most_input_try_6_is_not_ok : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 
@@ -230,7 +230,7 @@ test plan => 2, all_most_input_try_6_is_not_ok => sub {
     $self->error_message_is_ok('Five');
 };
 
-test plan => 1, all_most_input_try_7_is_not_ok => sub {
+sub all_most_input_try_7_is_not_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 

@@ -1,35 +1,10 @@
-use Test::Able::Runner;
 use Form::Factory;
+use Test::Class::Moose::Load 't/lib';
+use Test::Class::Moose::Runner;
 
-if ($ENV{TEST_PACKAGE}) {
-    use_test_packages 
-        -test_packages => [ 'Form::Factory::Test::' . $ENV{TEST_PACKAGE} ];
-}
-
-else {
-    use_test_packages
-        -test_packages => [ qw(
-            Form::Factory::Test::Action::AllControls
-            Form::Factory::Test::Action::Basic
-            Form::Factory::Test::Action::Controls
-            Form::Factory::Test::Action::Inheritance
-            Form::Factory::Test::Action::RoleComposition
-            Form::Factory::Test::Action::ValueConversion
-            Form::Factory::Test::CustomClassNames
-            Form::Factory::Test::Feature::Control::BuildControl
-            Form::Factory::Test::Feature::Control::FillOnAssignment
-            Form::Factory::Test::Feature::Control::Length
-            Form::Factory::Test::Feature::Control::Required
-            Form::Factory::Test::Feature::Control::Trim
-            Form::Factory::Test::Feature::RequireNoneOrAll
-            Form::Factory::Test::Interface::CLI
-            Form::Factory::Test::Interface::HTML
-            Form::Factory::Test::Result::Gathered
-            Form::Factory::Test::Result::Single
-        ) ];
-}
-
-run;
+Test::Class::Moose::Runner->new(
+    test_classes => $ENV{TEST_PACKAGE},
+)->runtests;
 
 __END__
 

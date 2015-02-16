@@ -1,5 +1,5 @@
 package Form::Factory::Test::Interface;
-use Test::Able::Role;
+use Test::Class::Moose::Role;
 use Test::More;
 use Test::Moose;
 
@@ -36,7 +36,7 @@ has interface => (
     },
 );
 
-test plan => 4, interface_ok => sub { 
+sub interface_ok : Tests(4) {
     my $self = shift;
 
     my $interface = $self->interface;

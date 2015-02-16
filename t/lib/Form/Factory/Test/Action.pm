@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action;
-use Test::Able::Role;
+use Test::Class::Moose::Role;
 
 has output => (
     is        => 'rw',
@@ -29,7 +29,7 @@ has action => (
     required  => 1,
 );
 
-teardown clear_output => sub {
+sub test_teardown {
     my $self = shift;
     $self->output('');
 };

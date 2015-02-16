@@ -1,5 +1,5 @@
 package Form::Factory::Test::Interface::HTML;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 
 with qw( Form::Factory::Test::Interface );

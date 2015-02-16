@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action::Basic;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 use Test::Moose;
 
@@ -12,7 +12,7 @@ has '+action' => (
     }) },
 );
 
-test plan => 5, run_action => sub {
+sub run_action : Tests(5) {
     my $self = shift;
     my $action = $self->action;
 
@@ -25,14 +25,14 @@ test plan => 5, run_action => sub {
     is($action->content->{five}, 5, 'post_process is fifth');
 };
 
-test plan => 1, meta_class => sub {
+sub meta_class : Tests(1) {
     my $self = shift;
     my $meta = $self->action->meta;
 
     does_ok($meta, 'Form::Factory::Action::Meta::Class');
 };
 
-test plan => 3, meta_class_controls => sub {
+sub meta_class_controls : Tests(3) {
     my $self     = shift;
     my @controls = $self->action->meta->get_controls;
 
@@ -41,7 +41,7 @@ test plan => 3, meta_class_controls => sub {
     is($controls[0]->name, 'name', 'control is named name');
 };
 
-test plan => 3, meta_class_features => sub {
+sub meta_class_features : Tests(3) {
     my $self     = shift;
     my $features = $self->action->meta->features;
 
@@ -53,7 +53,7 @@ test plan => 3, meta_class_features => sub {
         'functional feature has expected code keys');
 };
 
-test plan => 3, meta_class_all_features => sub {
+sub meta_class_all_features : Tests(3) {
     my $self = shift;
     my $features = $self->action->meta->get_all_features;
 
@@ -65,7 +65,7 @@ test plan => 3, meta_class_all_features => sub {
         'functional feature has expected code keys');
 };
 
-test plan => 6, meta_control_name => sub {
+sub meta_control_name : Tests(6) {
     my $self = shift;
     my @controls = $self->action->meta->get_controls;
     my $control  = $controls[0];
@@ -79,7 +79,7 @@ test plan => 6, meta_control_name => sub {
     is_deeply($control->features, {}, 'control features are empty');
 };
 
-test plan => 12, control_name => sub {
+sub control_name : Tests(12) {
     my $self = shift;
     my $control = $self->action->controls->{name};
 
@@ -97,7 +97,7 @@ test plan => 12, control_name => sub {
     is($control->current_value, 'Superbark', 'control current value is Superbark');
 };
 
-test plan => 5, render_control => sub {
+sub render_control : Tests(5) {
     my $self = shift;
     my $action = $self->action;
 
@@ -113,7 +113,7 @@ test plan => 5, render_control => sub {
     is($control->current_value, undef, 'current_value is empty');
 };
 
-test plan => 4, consume_control_empty => sub {
+sub consume_control_empty : Tests(4) {
     my $self = shift;
     my $action = $self->action;
 
@@ -128,7 +128,7 @@ test plan => 4, consume_control_empty => sub {
     is($control->current_value, undef, 'current_value is empty');
 };
 
-test plan => 4, consume_control_full => sub {
+sub consume_control_full : Tests(4) {
     my $self = shift;
     my $action = $self->action;
 

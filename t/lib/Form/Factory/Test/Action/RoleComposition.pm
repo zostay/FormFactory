@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action::RoleComposition;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 use Test::Moose;
 
@@ -14,7 +14,7 @@ has '+action' => (
     },
 );
 
-test plan => 2, run_action => sub {
+sub run_action : Tests(2) {
     my $self = shift;
     my $action = $self->action;
 

@@ -1,5 +1,5 @@
 package Form::Factory::Test::Result;
-use Test::Able::Role;
+use Test::Class::Moose::Role;
 
 use Test::More;
 use Test::Moose;
@@ -19,7 +19,7 @@ has result => (
     default   => sub { shift->result_class->new },
 );
 
-test plan => 2, basic_result_checks => sub {
+sub basic_result_checks : Tests(2) {
     my $self = shift;
     my $result = $self->result;
 

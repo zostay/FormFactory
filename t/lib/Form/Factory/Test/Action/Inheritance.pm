@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action::Inheritance;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 use Test::Moose;
 
@@ -14,7 +14,7 @@ has '+action' => (
     },
 );
 
-test plan => 1, run_action => sub {
+sub run_action : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 
@@ -23,7 +23,7 @@ test plan => 1, run_action => sub {
     ok($action->is_success, 'action runs');
 };
 
-test plan => 5, inherited_checks => sub {
+sub inherited_checks : Tests(5) {
     my $self = shift;
     my $action = $self->action;
 
@@ -41,7 +41,7 @@ test plan => 5, inherited_checks => sub {
     like($errors[2]->message, qr/uppercase letters/, 'got uppsercase letters error');
 };
 
-test plan => 3, top_foo_has_features_trim => sub {
+sub top_foo_has_features_trim : Tests(3) {
     my $self = shift;
 
     my $meta = Class::MOP::class_of('TestApp::Action::Top');
@@ -56,7 +56,7 @@ test plan => 3, top_foo_has_features_trim => sub {
     }, 'top foo has just trim in the features');
 };
 
-test plan => 3, bottom_foo_has_features_trim_and_length => sub {
+sub bottom_foo_has_features_trim_and_length : Tests(3) {
     my $self = shift;
 
     my $meta = Class::MOP::class_of('TestApp::Action::Bottom');

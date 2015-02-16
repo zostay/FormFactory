@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature::Control::BuildControl;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -21,7 +21,7 @@ has '+feature' => (
     },
 );
 
-test plan => 1, modify_control_ok => sub {
+sub modify_control_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 

@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature::Control::Required;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -15,7 +15,7 @@ has '+feature' => (
     },
 );
 
-test plan => 1, scalar_required_ok => sub {
+sub scalar_required_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 
@@ -29,7 +29,7 @@ test plan => 1, scalar_required_ok => sub {
     ok($action->is_valid, qq{string "foo" is OK});
 };
 
-test plan => 1, scalar_required_not_ok => sub {
+sub scalar_required_not_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 

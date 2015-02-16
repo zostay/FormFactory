@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature;
-use Test::Able::Role;
+use Test::Class::Moose::Role;
 
 use Test::More;
 use Test::Moose;
@@ -28,7 +28,7 @@ has feature => (
     required   => 1,
 );
 
-test plan => 6, basic_feature_checks => sub {
+sub basic_feature_checks : Tests(6) {
     my $self = shift;
     my $feature = $self->feature;
 
@@ -70,8 +70,9 @@ test plan => 6, basic_feature_checks => sub {
     }
 };
 
-teardown clear_action => sub {
+sub test_teardown {
     my $self = shift;
     $self->action->clear;
 };
+
 1;

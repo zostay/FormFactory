@@ -1,5 +1,5 @@
 package Form::Factory::Test::Interface::CLI;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 use Test::Moose;
 
@@ -44,7 +44,7 @@ has files => (
     default   => sub { {} },
 );
 
-test plan => 7, render_usage => sub {
+sub render_usage : Tests(7) {
     my $self = shift;
     my $action = $self->interface->new_action('TestApp::Action::EveryControl');
 
@@ -65,7 +65,7 @@ test plan => 7, render_usage => sub {
     like($output, qr{--text TEXT\s+short text}, 'usage includes text');
 };
 
-test plan => 8, consume_values => sub {
+sub consume_values : Tests(8) {
     my $self = shift;
     my $action = $self->interface->new_action('TestApp::Action::EveryControl');
 

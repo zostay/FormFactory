@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action::Controls;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 use Test::Moose;
 
@@ -10,7 +10,7 @@ has '+action' => (
     default    => sub { shift->interface->new_action('TestApp::Action::EveryControl') },
 );
 
-test plan => 8, run_action => sub {
+sub run_action : Tests(8) {
     my $self = shift;
     my $action = $self->action;
 

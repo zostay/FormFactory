@@ -1,5 +1,5 @@
 package Form::Factory::Test::Result::Gathered;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 
 with qw( Form::Factory::Test::Result );
@@ -14,7 +14,7 @@ has '+result_class' => (
     default   => 'Form::Factory::Result::Gathered',
 );
 
-test plan => 2, cant_gather_self => sub {
+sub cant_gather_self : Tests(2) {
     my $self = shift;
 
     my $results = Gathered->new;
@@ -24,7 +24,7 @@ test plan => 2, cant_gather_self => sub {
     like($@, qr/\brecursively\b/, 'recursively');
 };
 
-test plan => 2, gathering_all_valid_singles_ok => sub {
+sub gathering_all_valid_singles_ok : Tests(2) {
     my $self = shift;
 
     my @results = map { $_ = Single->new; $_->is_valid(1); $_ } 1 .. 4;
@@ -36,7 +36,7 @@ test plan => 2, gathering_all_valid_singles_ok => sub {
     ok($results->is_valid, 'truly valid');
 };
 
-test plan => 2, gathering_some_valid_singles_ok => sub {
+sub gathering_some_valid_singles_ok : Tests(2) {
     my $self = shift;
 
     my @results = map { $_ = Single->new; $_ } 1 .. 4;
@@ -49,7 +49,7 @@ test plan => 2, gathering_some_valid_singles_ok => sub {
     ok($results->is_valid, 'truly valid');
 };
 
-test plan => 2, gather_all_invalid_singles_ok => sub {
+sub gather_all_invalid_singles_ok : Tests(2){
     my $self = shift;
 
     my @results = map { $_ = Single->new; $_->is_valid(0); $_ } 1 .. 4;
@@ -61,7 +61,7 @@ test plan => 2, gather_all_invalid_singles_ok => sub {
     ok(!$results->is_valid, 'truly invalid');
 };
 
-test plan => 2, gathering_some_invalid_singles_ok => sub {
+sub gathering_some_invalid_singles_ok_1 : Tests(2) {
     my $self = shift;
 
     my @results = map { $_ = Single->new; $_ } 1 .. 4;
@@ -74,7 +74,7 @@ test plan => 2, gathering_some_invalid_singles_ok => sub {
     ok(!$results->is_valid, 'truly invalid');
 };
 
-test plan => 2, gather_all_mixed_singles_ok => sub {
+sub gather_all_mixed_singles_ok : Tests(2) {
     my $self = shift;
 
     my @results = map { $_ = Single->new; $_->is_valid(1); $_ } 1 .. 4;
@@ -87,7 +87,7 @@ test plan => 2, gather_all_mixed_singles_ok => sub {
     ok(!$results->is_valid, 'truly invalid');
 };
 
-test plan => 2, gathering_some_invalid_singles_ok => sub {
+sub gathering_some_invalid_singles_ok_2 : Tests(2) {
     my $self = shift;
 
     my @results = map { $_ = Single->new; $_ } 1 .. 4;

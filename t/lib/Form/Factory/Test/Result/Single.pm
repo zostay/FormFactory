@@ -1,5 +1,5 @@
 package Form::Factory::Test::Result::Single;
-use Test::Able;
+use Test::Class::Moose;
 
 with qw( Form::Factory::Test::Result );
 

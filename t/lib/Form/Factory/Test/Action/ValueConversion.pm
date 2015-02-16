@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action::ValueConversion;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 
 with qw( Form::Factory::Test::Action );
@@ -9,7 +9,7 @@ has '+action' => (
     default   => sub { shift->interface->new_action('TestApp::Action::SplitValue') },
 );
 
-test plan => 11, conversion_ok => sub {
+sub conversion_ok : Tests(11) {
     my $self   = shift;
     my $action = $self->action;
 

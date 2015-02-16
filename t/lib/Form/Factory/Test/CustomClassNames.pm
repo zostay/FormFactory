@@ -1,5 +1,5 @@
 package Form::Factory::Test::CustomClassNames;
-use Test::Able;
+use Test::Class::Moose;
 use Test::More;
 use Test::Moose;
 
@@ -9,22 +9,22 @@ use TestApp::Feature::Null;
 use TestApp::Feature::Control::Null;
 use TestApp::Interface::Null;
 
-test plan => 1, custom_interface => sub {
+sub custom_interface : Tests(1) {
     my $interface = Form::Factory->new_interface('Null');
     isa_ok($interface, 'TestApp::Interface::Null');
 };
 
-test plan => 1, custom_control => sub {
+sub custom_control : Tests(1) {
     my $control = Form::Factory->control_class('null');
     is($control, 'TestApp::Control::Null');
 };
 
-test plan => 1, custom_feature => sub {
+sub custom_feature : Tests(1) {
     my $feature = Form::Factory->feature_class('null');
     is($feature, 'TestApp::Feature::Null');
 };
 
-test plan => 1, custom_control_feature => sub {
+sub custom_control_features : Tests(1) {
     my $feature = Form::Factory->control_feature_class('null');
     is($feature, 'TestApp::Feature::Control::Null');
 };

@@ -1,5 +1,5 @@
 package Form::Factory::Test::Action::AllControls;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -12,7 +12,7 @@ has '+action' => (
 
 # There's a bug in Form-Feature-0.006 that causes an action to die when clean or
 # check is run without the controls option being sent. This tests for that bug.
-test plan => 1, run_checks_on_all => sub {
+sub run_checks_on_all : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 

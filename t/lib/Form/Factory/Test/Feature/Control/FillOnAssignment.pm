@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature::Control::FillOnAssignment;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -15,7 +15,7 @@ has '+feature' => (
     },
 );
 
-test plan => 1, set_ok => sub {
+sub set_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 

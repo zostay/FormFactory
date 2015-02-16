@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature::Control::Length;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -15,7 +15,7 @@ has '+feature' => (
     },
 );
 
-test plan => 5, length_ok => sub {
+sub length_ok : Tests(5) {
     my $self = shift;
     my $action = $self->action;
 
@@ -33,7 +33,7 @@ test plan => 5, length_ok => sub {
     continue { $test_string .= $i }
 };
 
-test plan => 6, length_too_short => sub {
+sub length_too_short : Tests(6) {
     my $self = shift;
     my $action = $self->action;
 
@@ -56,7 +56,7 @@ test plan => 6, length_too_short => sub {
     }
 };
 
-test plan => 8, length_too_long => sub {
+sub length_too_long : Tests(8) {
     my $self = shift;
     my $action = $self->action;
 

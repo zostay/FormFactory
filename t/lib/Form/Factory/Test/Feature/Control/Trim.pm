@@ -1,5 +1,5 @@
 package Form::Factory::Test::Feature::Control::Trim;
-use Test::Able;
+use Test::Class::Moose;
 
 use Test::More;
 
@@ -15,7 +15,7 @@ has '+feature' => (
     },
 );
 
-test plan => 1, trim_ok => sub {
+sub trim_ok : Tests(1) {
     my $self = shift;
     my $action = $self->action;
 
