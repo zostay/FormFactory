@@ -22,6 +22,7 @@ has label => (
     isa       => 'Str',
     required  => 1,
     builder   => '_build_label',
+    lazy      => 1,
 );
 
 sub _build_label {
