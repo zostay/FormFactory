@@ -1,3 +1,14 @@
+0.021   February 15, 2015
+
+    * (HT: zoffixznet) Corrected the use of enum to fix deprecation warnings.
+    * (HT: zoffixznet) Fix the use of load_class to fix deprecation warnings.
+    * Replace apply_metaclass_roles with apply_metaroles.
+    * Fix some problems with the way the code is released.
+    * Convert to Test::Class::Moose because Test::Able has not been maintained
+      and because OVID is awesome.
+    * Fix test failures related to _build_label being run too soon on labeled
+      controls. (Fixed by making labels build lazily.)
+
 0.020   September 7, 2010
 
     * Correcting some POD problems
