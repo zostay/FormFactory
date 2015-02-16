@@ -1,4 +1,5 @@
 package Form::Factory::Interface::HTML::Widget::Element;
+
 use Moose;
 
 with qw( Form::Factory::Interface::HTML::Widget );

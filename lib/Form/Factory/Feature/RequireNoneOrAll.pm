@@ -1,4 +1,5 @@
 package Form::Factory::Feature::RequireNoneOrAll;
+
 use Moose;
 
 use Moose::Util qw( english_list );

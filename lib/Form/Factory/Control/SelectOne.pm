@@ -1,4 +1,5 @@
 package Form::Factory::Control::SelectOne;
+
 use Moose;
 
 with qw(

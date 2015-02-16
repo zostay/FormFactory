@@ -1,4 +1,5 @@
 package TestApp::Action::RequireNoneOrAll;
+
 use Form::Factory::Processor;
 
 use_feature require_none_or_all => {

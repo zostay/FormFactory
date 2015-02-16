@@ -1,4 +1,5 @@
 package TestApp::Action::Middle;
+
 use Form::Factory::Processor;
 
 extends qw( TestApp::Action::Top );

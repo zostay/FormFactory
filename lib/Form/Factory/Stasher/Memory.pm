@@ -1,4 +1,5 @@
 package Form::Factory::Stasher::Memory;
+
 use Moose;
 
 with qw( Form::Factory::Stasher );

@@ -1,4 +1,5 @@
 package Form::Factory::Interface::CLI;
+
 use Moose;
 
 with qw( Form::Factory::Interface );

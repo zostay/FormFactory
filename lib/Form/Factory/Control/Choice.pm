@@ -1,4 +1,5 @@
 package Form::Factory::Control::Choice;
+
 use Moose;
 
 =head1 NAME

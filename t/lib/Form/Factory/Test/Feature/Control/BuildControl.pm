@@ -1,4 +1,5 @@
 package Form::Factory::Test::Feature::Control::BuildControl;
+
 use Test::Class::Moose;
 
 use Test::More;

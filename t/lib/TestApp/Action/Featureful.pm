@@ -1,4 +1,5 @@
 package TestApp::Action::Featureful;
+
 use Form::Factory::Processor;
 
 has_control fill_on_assignment => (

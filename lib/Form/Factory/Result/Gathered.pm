@@ -1,4 +1,5 @@
 package Form::Factory::Result::Gathered;
+
 use Moose;
 
 use Carp ();

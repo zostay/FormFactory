@@ -1,4 +1,5 @@
 package Form::Factory::Control::Role::BooleanValue;
+
 use Moose::Role;
 
 excludes qw(

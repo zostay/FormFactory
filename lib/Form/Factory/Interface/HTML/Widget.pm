@@ -1,4 +1,5 @@
 package Form::Factory::Interface::HTML::Widget;
+
 use Moose::Role;
 
 requires qw( render_control consume_control );

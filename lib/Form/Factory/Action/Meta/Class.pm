@@ -1,4 +1,5 @@
 package Form::Factory::Action::Meta::Class;
+
 use Moose::Role;
 
 =head1 NAME

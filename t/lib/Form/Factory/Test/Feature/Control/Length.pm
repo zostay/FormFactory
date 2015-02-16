@@ -1,4 +1,5 @@
 package Form::Factory::Test::Feature::Control::Length;
+
 use Test::Class::Moose;
 
 use Test::More;

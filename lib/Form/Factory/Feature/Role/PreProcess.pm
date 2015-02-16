@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::PreProcess;
+
 use Moose::Role;
 
 requires qw( pre_process );

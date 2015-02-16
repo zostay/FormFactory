@@ -1,4 +1,5 @@
 package Form::Factory::Message;
+
 use Moose;
 
 use Moose::Util::TypeConstraints;

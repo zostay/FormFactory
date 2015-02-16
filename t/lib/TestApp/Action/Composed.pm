@@ -1,4 +1,5 @@
 package TestApp::Action::Composed;
+
 use Form::Factory::Processor;
 
 with qw(

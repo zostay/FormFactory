@@ -1,4 +1,5 @@
 package Form::Factory::Control::Role::ScalarValue;
+
 use Moose::Role;
 
 excludes qw( 

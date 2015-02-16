@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::Clean;
+
 use Moose::Role;
 
 requires qw( clean );

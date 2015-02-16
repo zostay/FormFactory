@@ -1,4 +1,5 @@
 package TestApp::Feature::Control::CapitalizeLabel;
+
 use Moose;
 
 with qw(

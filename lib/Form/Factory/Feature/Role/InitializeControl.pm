@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::InitializeControl;
+
 use Moose::Role;
 
 requires qw( initialize_control );

@@ -1,4 +1,5 @@
 package Form::Factory::Control::Password;
+
 use Moose;
 
 with qw( 

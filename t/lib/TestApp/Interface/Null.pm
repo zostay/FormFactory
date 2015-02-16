@@ -1,4 +1,5 @@
 package TestApp::Interface::Null;
+
 use Moose;
 
 with qw( Form::Factory::Interface );

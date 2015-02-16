@@ -1,4 +1,5 @@
 package TestApp::Feature::Null;
+
 use Moose;
 
 with qw( Form::Factory::Feature );

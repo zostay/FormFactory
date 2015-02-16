@@ -1,4 +1,5 @@
 package Form::Factory::Result::Single;
+
 use Moose;
 
 with qw( Form::Factory::Result );

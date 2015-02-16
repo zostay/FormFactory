@@ -1,4 +1,5 @@
 package Form::Factory::Action::Meta::Attribute::Control;
+
 use Moose::Role;
 
 =head1 NAME
@@ -151,6 +152,7 @@ it under the same terms as Perl itself.
 =cut
 
 package Moose::Meta::Attribute::Custom::Trait::Form::Control;
+
 sub register_implementation { 'Form::Factory::Action::Meta::Attribute::Control' }
 
 1;

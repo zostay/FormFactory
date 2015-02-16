@@ -1,4 +1,5 @@
 package Form::Factory::Interface::HTML::Widget::Select;
+
 use Moose;
 
 extends qw( Form::Factory::Interface::HTML::Widget::Element );

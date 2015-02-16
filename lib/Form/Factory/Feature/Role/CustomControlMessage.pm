@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::CustomControlMessage;
+
 use Moose::Role;
 
 with qw( Form::Factory::Feature::Role::CustomMessage );

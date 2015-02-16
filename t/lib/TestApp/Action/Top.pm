@@ -1,4 +1,5 @@
 package TestApp::Action::Top;
+
 use Form::Factory::Processor;
 
 has_control foo => (

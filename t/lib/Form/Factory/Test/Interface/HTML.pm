@@ -1,4 +1,5 @@
 package Form::Factory::Test::Interface::HTML;
+
 use Test::Class::Moose;
 use Test::More;
 

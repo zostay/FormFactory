@@ -1,4 +1,5 @@
 package Form::Factory::Control::Text;
+
 use Moose;
 
 with qw( 

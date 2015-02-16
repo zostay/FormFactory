@@ -1,4 +1,5 @@
 package Form::Factory::Feature;
+
 use Moose::Role;
 
 use Scalar::Util qw( blessed );

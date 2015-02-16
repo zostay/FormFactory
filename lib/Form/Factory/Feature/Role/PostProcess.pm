@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::PostProcess;
+
 use Moose::Role;
 
 requires qw( post_process );

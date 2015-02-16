@@ -1,4 +1,5 @@
 package Form::Factory::Test::Interface;
+
 use Test::Class::Moose::Role;
 use Test::More;
 use Test::Moose;

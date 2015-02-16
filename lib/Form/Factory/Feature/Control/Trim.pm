@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Control::Trim;
+
 use Moose;
 
 with qw( 

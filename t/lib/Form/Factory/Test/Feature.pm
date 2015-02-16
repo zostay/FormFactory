@@ -1,4 +1,5 @@
 package Form::Factory::Test::Feature;
+
 use Test::Class::Moose::Role;
 
 use Test::More;

@@ -1,4 +1,5 @@
 package Form::Factory::Test::Result::Gathered;
+
 use Test::Class::Moose;
 use Test::More;
 

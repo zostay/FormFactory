@@ -1,4 +1,5 @@
 package Form::Factory::Control::Role::AvailableChoices;
+
 use Moose::Role;
 
 use Form::Factory::Control::Choice;

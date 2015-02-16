@@ -1,4 +1,5 @@
 package Form::Factory::Test::Action::ValueConversion;
+
 use Test::Class::Moose;
 use Test::More;
 

@@ -1,4 +1,5 @@
 package Form::Factory::Stasher;
+
 use Moose::Role;
 
 requires qw( stash unstash );

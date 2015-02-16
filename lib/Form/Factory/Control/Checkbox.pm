@@ -1,4 +1,5 @@
 package Form::Factory::Control::Checkbox;
+
 use Moose;
 
 with qw(

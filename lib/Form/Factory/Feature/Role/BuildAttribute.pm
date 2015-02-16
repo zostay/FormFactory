@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::BuildAttribute;
+
 use Moose::Role;
 
 requires qw( build_attribute );

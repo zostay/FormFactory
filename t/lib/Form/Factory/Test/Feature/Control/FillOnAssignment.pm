@@ -1,4 +1,5 @@
 package Form::Factory::Test::Feature::Control::FillOnAssignment;
+
 use Test::Class::Moose;
 
 use Test::More;

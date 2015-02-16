@@ -1,4 +1,5 @@
 package Form::Factory::Control::SelectMany;
+
 use Moose;
 
 with qw(

@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::CustomMessage;
+
 use Moose::Role;
 
 =head1 NAME

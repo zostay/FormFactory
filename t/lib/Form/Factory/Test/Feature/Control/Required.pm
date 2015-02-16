@@ -1,4 +1,5 @@
 package Form::Factory::Test::Feature::Control::Required;
+
 use Test::Class::Moose;
 
 use Test::More;

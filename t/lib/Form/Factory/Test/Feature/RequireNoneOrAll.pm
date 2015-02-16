@@ -1,4 +1,5 @@
 package Form::Factory::Test::Feature::RequireNoneOrAll;
+
 use Test::Class::Moose;
 
 use Test::More;

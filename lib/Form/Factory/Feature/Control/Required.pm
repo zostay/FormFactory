@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Control::Required;
+
 use Moose;
 
 with qw( 

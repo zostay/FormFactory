@@ -1,4 +1,5 @@
 package Form::Factory::Feature::Role::Control;
+
 use Moose::Role;
 
 requires qw( check_control );

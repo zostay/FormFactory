@@ -1,4 +1,5 @@
 package Form::Factory::Control::Button;
+
 use Moose;
 
 with qw(

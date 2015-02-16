@@ -1,4 +1,5 @@
 package Form::Factory::Test::CustomClassNames;
+
 use Test::Class::Moose;
 use Test::More;
 use Test::Moose;

@@ -1,4 +1,5 @@
 package Form::Factory::Action;
+
 use Moose::Role;
 
 use Carp ();

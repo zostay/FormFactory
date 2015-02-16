@@ -1,4 +1,5 @@
 package Form::Factory::Interface;
+
 use Moose::Role;
 
 use Carp ();

@@ -1,4 +1,5 @@
 package Form::Factory::Control::Role::MultiLine;
+
 use Moose::Role;
 
 =head1 NAME

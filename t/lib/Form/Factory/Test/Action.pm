@@ -1,4 +1,5 @@
 package Form::Factory::Test::Action;
+
 use Test::Class::Moose::Role;
 
 has output => (

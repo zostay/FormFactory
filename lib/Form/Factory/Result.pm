@@ -1,4 +1,5 @@
 package Form::Factory::Result;
+
 use Moose::Role;
 
 use Form::Factory::Message;

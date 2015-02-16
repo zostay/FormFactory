@@ -1,4 +1,5 @@
 package Form::Factory::Test::Action::AllControls;
+
 use Test::Class::Moose;
 
 use Test::More;

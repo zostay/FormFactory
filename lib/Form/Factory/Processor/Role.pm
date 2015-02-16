@@ -1,4 +1,5 @@
 package Form::Factory::Processor::Role;
+
 use Moose;
 use Moose::Exporter;
 

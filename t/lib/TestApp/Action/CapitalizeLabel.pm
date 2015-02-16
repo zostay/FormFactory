@@ -1,4 +1,5 @@
 package TestApp::Action::CapitalizeLabel;
+
 use Form::Factory::Processor;
 
 use TestApp::Feature::Control::CapitalizeLabel;
