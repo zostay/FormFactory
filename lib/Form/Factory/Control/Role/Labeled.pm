@@ -2,9 +2,7 @@ package Form::Factory::Control::Role::Labeled;
 
 use Moose::Role;
 
-=head1 NAME
-
-Form::Factory::Control::Role::Labeled - labeled controls
+# ABSTRACT: labeled controls
 
 =head1 DESCRIPTION
 

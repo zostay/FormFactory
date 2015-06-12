@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::MatchCode - Greps the control value for correctness
+# ABSTRACT: Greps the control value for correctness
 
 =head1 SYNOPSIS
 

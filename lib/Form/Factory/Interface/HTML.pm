@@ -16,9 +16,7 @@ use Form::Factory::Interface::HTML::Widget::Select;
 use Form::Factory::Interface::HTML::Widget::Span;
 use Form::Factory::Interface::HTML::Widget::Textarea;
 
-=head1 NAME
-
-Form::Factory::Interface::HTML - Simple HTML form interface
+# ABSTRACT: Simple HTML form interface
 
 =head1 SYNOPSIS
 

@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::Required - Makes sure a value is set on a control
+# ABSTRACT: Makes sure a value is set on a control
 
 =head1 SYNOPSIS
 

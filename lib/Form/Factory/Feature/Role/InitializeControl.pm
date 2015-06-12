@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( initialize_control );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::InitializeControl - control features that work on just constructed controls
+# ABSTRACT: control features that work on just constructed controls
 
 =head1 SYNOPSIS
 

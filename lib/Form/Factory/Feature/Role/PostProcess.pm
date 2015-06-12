@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( post_process );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::PostProcess - features that run just after processing
+# ABSTRACT: features that run just after processing
 
 =head1 SYNOPSIS
 

@@ -4,9 +4,7 @@ use Moose;
 
 with qw( Form::Factory::Stasher );
 
-=head1 NAME
-
-Form::Factory::Stasher::Memory - Remember things in a Perl hash
+# ABSTRACT: Remember things in a Perl hash
 
 =head1 SYNOPSIS
 

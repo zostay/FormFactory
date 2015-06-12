@@ -2,9 +2,7 @@ package Form::Factory::Action::Meta::Attribute::Control;
 
 use Moose::Role;
 
-=head1 NAME
-
-Form::Factory::Action::Meta::Attribute::Control - Form control attribute-traits
+# ABSTRACT: Form control attribute-traits
 
 =head1 SYNOPSIS
 

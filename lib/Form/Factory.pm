@@ -5,9 +5,7 @@ use Moose;
 use Carp ();
 use Class::Load;
 
-=head1 NAME
-
-Form::Factory - a general-purpose form handling API
+# ABSTRACT: a general-purpose form handling API
 
 =head1 SYNOPSIS
 

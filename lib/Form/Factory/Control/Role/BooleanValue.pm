@@ -7,9 +7,7 @@ excludes qw(
     Form::Factory::Control::Role::ScalarValue
 );
 
-=head1 NAME
-
-Form::Factory::Control::Role::BooleanValue - boolean valued controls
+# ABSTRACT: boolean valued controls
 
 =head1 DESCRIPTION
 

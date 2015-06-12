@@ -4,9 +4,7 @@ use Moose::Role;
 
 use Form::Factory::Control::Choice;
 
-=head1 NAME
-
-Form::Factory::Control::Role::AvailableChoices - Controls that list available choices
+# ABSTRACT: Controls that list available choices
 
 =head1 DESCRIPTION
 

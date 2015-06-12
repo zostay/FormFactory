@@ -8,9 +8,7 @@ use List::MoreUtils qw( all any );
 
 with qw( Form::Factory::Result );
 
-=head1 NAME
-
-Form::Factory::Result::Gathered - A group of results
+# ABSTRACT: A group of results
 
 =head1 SYNOPSIS
 

@@ -8,9 +8,7 @@ with qw(
     Form::Factory::Control::Role::ScalarValue
 );
 
-=head1 NAME
-
-Form::Factory::Control::Text - A single line text field
+# ABSTRACT: A single line text field
 
 =head1 SYNOPSIS
 

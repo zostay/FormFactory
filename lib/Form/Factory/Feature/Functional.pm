@@ -10,9 +10,7 @@ with qw(
     Form::Factory::Feature::Role::PostProcess
 );
 
-=head1 NAME
-
-Form::Factory::Feature::Functional - A generic feature for actions
+# ABSTRACT: A generic feature for actions
 
 =head1 SYNOPSIS
 

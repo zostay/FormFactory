@@ -15,9 +15,7 @@ Moose::Exporter->setup_import_methods(
     also      => 'Moose::Role',
 );
 
-=head1 NAME
-
-Form::Factory::Processor::Role - Moos-ish helper for action roles
+# ABSTRACT: Moos-ish helper for action roles
 
 =head1 SYNOPSIS
 

@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::FillOnAssignment - Control gets the value of the attribute
+# ABSTRACT: Control gets the value of the attribute
 
 =head1 SYNOPSIS
 

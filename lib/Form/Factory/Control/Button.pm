@@ -8,9 +8,7 @@ with qw(
     Form::Factory::Control::Role::Labeled
 );
 
-=head1 NAME
-
-Form::Factory::Control::Button - The button control
+# ABSTRACT: The button control
 
 =head1 SYNOPSIS
 

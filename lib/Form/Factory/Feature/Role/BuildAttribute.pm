@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( build_attribute );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::BuildAttribute - control features that modify the action attribute
+# ABSTRACT: control features that modify the action attribute
 
 =head1 SYNOPSIS
 

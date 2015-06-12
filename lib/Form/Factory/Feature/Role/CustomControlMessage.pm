@@ -4,9 +4,7 @@ use Moose::Role;
 
 with qw( Form::Factory::Feature::Role::CustomMessage );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::CustomControlMessage - control features with custom messages
+# ABSTRACT: control features with custom messages
 
 =head1 SYNOPSIS
 

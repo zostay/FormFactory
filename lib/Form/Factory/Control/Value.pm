@@ -10,9 +10,7 @@ with qw(
     Form::Factory::Control::Role::ScalarValue
 );
 
-=head1 NAME
-
-Form::Factory::Control::Value - A read-only value control
+# ABSTRACT: A read-only value control
 
 =head1 SYNOPSIS
 

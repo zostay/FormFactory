@@ -10,9 +10,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::Trim - Trims whitespace from a control value
+# ABSTRACT: Trims whitespace from a control value
 
 =head1 SYNOPSIS
 

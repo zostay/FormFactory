@@ -11,9 +11,7 @@ with qw(
 
 use List::MoreUtils qw( any );
 
-=head1 NAME
-
-Form::Factory::Control::SelectMany - the multi-select control
+# ABSTRACT: the multi-select control
 
 =head1 SYNOPSIS
 

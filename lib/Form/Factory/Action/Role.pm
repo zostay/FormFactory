@@ -4,9 +4,7 @@ use Moose::Role;
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Action::Role - Role implemented by action roles
+# ABSTRACT: Role implemented by action roles
 
 =head1 SYNOPSIS
 

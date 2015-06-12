@@ -4,9 +4,7 @@ use Moose::Role;
 
 use Form::Factory::Message;
 
-=head1 NAME
-
-Form::Factory::Result - Interface for the result classes
+# ABSTRACT: Interface for the result classes
 
 =head1 SYNOPSIS
 

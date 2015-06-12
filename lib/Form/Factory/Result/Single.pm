@@ -4,9 +4,7 @@ use Moose;
 
 with qw( Form::Factory::Result );
 
-=head1 NAME
-
-Form::Factory::Result::Single - Form result class representing a single result
+# ABSTRACT: Form result class representing a single result
 
 =head1 SYNOPSIS
 

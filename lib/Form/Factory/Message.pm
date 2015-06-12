@@ -6,9 +6,7 @@ use Moose::Util::TypeConstraints;
 enum 'Form::Factory::Message::Type' => [qw( info warning error )];
 no Moose::Util::TypeConstraints;
 
-=head1 NAME
-
-Form::Factory::Message - Handy class for encapsulating messages
+# ABSTRACT: Handy class for encapsulating messages
 
 =head1 SYNOPSIS
 

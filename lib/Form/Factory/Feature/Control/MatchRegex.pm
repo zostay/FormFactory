@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::MatchRegex - Match a control value against a regex
+# ABSTRACT: Match a control value against a regex
 
 =head1 SYNOPSIS
 

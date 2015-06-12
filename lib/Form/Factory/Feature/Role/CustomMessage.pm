@@ -2,9 +2,7 @@ package Form::Factory::Feature::Role::CustomMessage;
 
 use Moose::Role;
 
-=head1 NAME
-
-Form::Factory::Feature::Role::CustomMessage - features with custom messages
+# ABSTRACT: features with custom messages
 
 =head1 DESCRIPTION
 

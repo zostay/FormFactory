@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::Length - A control feature for checking length
+# ABSTRACT: A control feature for checking length
 
 =head1 SYNOPSIS
 

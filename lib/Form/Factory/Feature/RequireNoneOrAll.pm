@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::RequireNoneOrAll - if one control has a value, all should
+# ABSTRACT: if one control has a value, all should
 
 =head1 SYNOPSIS
 

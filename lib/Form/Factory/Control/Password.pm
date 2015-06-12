@@ -8,9 +8,7 @@ with qw(
     Form::Factory::Control::Role::ScalarValue
 );
 
-=head1 NAME
-
-Form::Factory::Control::Password - the password control
+# ABSTRACT: the password control
 
 =head1 SYNOPSIS
 

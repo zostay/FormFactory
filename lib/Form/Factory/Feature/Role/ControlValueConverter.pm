@@ -6,9 +6,7 @@ with qw( Form::Factory::Feature::Role::Control );
 
 requires qw( value_to_control control_to_value );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::ControlValueConverter - form features that convert values
+# ABSTRACT: form features that convert values
 
 =head1 SYNOPSIS
 

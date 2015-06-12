@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( build_control );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::BuildControl - control features that modify control construction
+# ABSTRACT: control features that modify control construction
 
 =head1 SYNOPSIS
 

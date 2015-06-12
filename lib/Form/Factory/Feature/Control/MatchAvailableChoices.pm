@@ -11,9 +11,7 @@ with qw(
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Feature::Control::MatchAvailableChoices - Check for choice availability
+# ABSTRACT: Check for choice availability
 
 =head1 SYNOPSIS
 

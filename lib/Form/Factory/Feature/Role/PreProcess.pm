@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( pre_process );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::PreProcess - features that run just before processing
+# ABSTRACT: features that run just before processing
 
 =head1 SYNOPSIS
 

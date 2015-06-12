@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( check_control );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::Control - Form features tied to particular controls
+# ABSTRACT: Form features tied to particular controls
 
 =head1 SYNOPSIS
 

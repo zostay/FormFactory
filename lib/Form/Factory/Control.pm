@@ -7,9 +7,7 @@ use List::Util qw( first );
 
 requires qw( default_isa );
 
-=head1 NAME
-
-Form::Factory::Control - high-level API for working with form controls
+# ABSTRACT: high-level API for working with form controls
 
 =head1 SYNOPSIS
 

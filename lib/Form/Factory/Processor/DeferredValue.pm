@@ -2,9 +2,7 @@ package Form::Factory::Processor::DeferredValue;
 
 use Moose;
 
-=head1 NAME
-
-Form::Factory::Processor::DeferredValue - Tag class for deferred_values
+# ABSTRACT: Tag class for deferred_values
 
 =head1 DESCRIPTION
 

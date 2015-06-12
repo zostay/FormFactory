@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( clean );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::Clean - features that clean up control values
+# ABSTRACT: features that clean up control values
 
 =head1 SYNOPSIS
 

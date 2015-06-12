@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( render_control consume_control );
 
-=head1 NAME
-
-Form::Factory::Interface::HTML::Widget - rendering/consuming HTML controls
+# ABSTRACT: rendering/consuming HTML controls
 
 =head1 DESCRIPTION
 

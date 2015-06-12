@@ -9,9 +9,7 @@ with qw(
     Form::Factory::Control::Role::ScalarValue
 );
 
-=head1 NAME
-
-Form::Factory::Control::FullText - The full_text control
+# ABSTRACT: The full_text control
 
 =head1 SYNOPSIS
 

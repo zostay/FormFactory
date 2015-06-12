@@ -4,9 +4,7 @@ use Moose::Role;
 
 use Scalar::Util qw( blessed );
 
-=head1 NAME
-
-Form::Factory::Feature - Interface for objects that modify how actions work
+# ABSTRACT: Interface for objects that modify how actions work
 
 =head1 SYNOPSIS
 

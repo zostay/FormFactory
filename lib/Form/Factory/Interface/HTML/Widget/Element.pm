@@ -4,9 +4,7 @@ use Moose;
 
 with qw( Form::Factory::Interface::HTML::Widget );
 
-=head1 NAME
-
-Form::Factory::Interface::HTML::Widget::Element - HTML interface widget helper
+# ABSTRACT: HTML interface widget helper
 
 =head1 DESCRIPTION
 

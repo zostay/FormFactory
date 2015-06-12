@@ -2,9 +2,7 @@ package Form::Factory::Control::Role::PresetValue;
 
 use Moose::Role;
 
-=head1 NAME
-
-Form::Factory::Control::Role::PresetValue - controls with preset values
+# ABSTRACT: controls with preset values
 
 =head1 DESCRIPTION
 

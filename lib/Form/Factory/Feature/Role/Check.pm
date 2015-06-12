@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( check );
 
-=head1 NAME
-
-Form::Factory::Feature::Role::Check - features that check control values
+# ABSTRACT: features that check control values
 
 =head1 SYNOPSIS
 

@@ -2,9 +2,7 @@ package Form::Factory::Control::Role::HiddenValue;
 
 use Moose::Role;
 
-=head1 NAME
-
-Form::Factory::Control::Role::HiddenValue - hidden controls
+# ABSTRACT: hidden controls
 
 =head1 DESCRIPTION
 

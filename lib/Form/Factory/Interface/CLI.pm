@@ -6,9 +6,7 @@ with qw( Form::Factory::Interface );
 
 use Carp ();
 
-=head1 NAME
-
-Form::Factory::Interface::CLI - Command-line interface builder for form factory
+# ABSTRACT: Command-line interface builder for form factory
 
 =head1 SYNOPSIS
 

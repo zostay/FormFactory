@@ -8,9 +8,7 @@ use Form::Factory::Stasher::Memory;
 
 requires qw( render_control consume_control );
 
-=head1 NAME
-
-Form::Factory::Interface - Role for form interface implementations
+# ABSTRACT: Role for form interface implementations
 
 =head1 SYNOPSIS
 

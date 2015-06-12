@@ -2,9 +2,7 @@ package Form::Factory::Control::Choice;
 
 use Moose;
 
-=head1 NAME
-
-Form::Factory::Control::Choice - Helper class for tracking choices
+# ABSTRACT: Helper class for tracking choices
 
 =head1 SYNOPSIS
 

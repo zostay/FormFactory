@@ -18,9 +18,7 @@ Moose::Exporter->setup_import_methods(
     also      => 'Moose',
 );
 
-=head1 NAME
-
-Form::Factory::Processor - Moos-ish helper for action classes
+# ABSTRACT: Moos-ish helper for action classes
 
 =head1 SYNOPSIS
 

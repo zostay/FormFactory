@@ -4,9 +4,7 @@ use Moose::Role;
 
 requires qw( stash unstash );
 
-=head1 NAME
-
-Form::Factory::Stasher - An object responsible for remembering things
+# ABSTRACT: An object responsible for remembering things
 
 =head1 DESCRIPTION
 

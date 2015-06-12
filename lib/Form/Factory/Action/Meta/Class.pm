@@ -2,9 +2,7 @@ package Form::Factory::Action::Meta::Class;
 
 use Moose::Role;
 
-=head1 NAME
-
-Form::Factory::Action::Meta::Class - The meta-class role for form actions
+# ABSTRACT: The meta-class role for form actions
 
 =head1 SYNOPSIS
 

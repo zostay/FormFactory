@@ -9,9 +9,7 @@ use Form::Factory::Result::Single;
 
 #requires qw( run );
 
-=head1 NAME
-
-Form::Factory::Action - Role implemented by actions
+# ABSTRACT: Role implemented by actions
 
 =head2 SYNOPSIS
 

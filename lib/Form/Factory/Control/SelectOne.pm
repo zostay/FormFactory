@@ -9,9 +9,7 @@ with qw(
     Form::Factory::Control::Role::ScalarValue
 );
 
-=head1 NAME
-
-Form::Factory::Control::SelectOne - A control for selecting a single item
+# ABSTRACT: A control for selecting a single item
 
 =head1 SYNOPSIS
 

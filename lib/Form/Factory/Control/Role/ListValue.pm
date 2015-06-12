@@ -7,9 +7,7 @@ excludes qw(
     Form::Factory::Control::Role::ScalarValue 
 );
 
-=head1 NAME
-
-Form::Factory::Control::Role::ListValue - list-valued controls
+# ABSTRACT: list-valued controls
 
 =head1 DESCRIPTION
 

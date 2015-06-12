@@ -8,9 +8,7 @@ with qw(
     Form::Factory::Control::Role::Labeled
 );
 
-=head1 NAME
-
-Form::Factory::Control::Checkbox - the checkbox control
+# ABSTRACT: the checkbox control
 
 =head1 SYNOPSIS
 
