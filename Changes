@@ -1,3 +1,9 @@
+{{NEXT}}
+
+    * Retooling Dist::Zilla config for modern times.
+    * (HT: srezic) Fixing missing prereqs in an attempt to fix broken tests
+    * Adding a .travis.yml config to setup CI testing for myself
+
 0.021   February 15, 2015
 
     * (HT: zoffixznet) Corrected the use of enum to fix deprecation warnings.
