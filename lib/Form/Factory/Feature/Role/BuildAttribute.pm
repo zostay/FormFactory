@@ -57,17 +57,6 @@ The C<$name> is the name of the attribute being added to the metaclass.
 
 The C<$attr> is the arguments that are about to be passed to the attribute constructor. This the hash of argumentst that will be passed to the attribute constructor shortly. Modifying this hash will change the attribute construction.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

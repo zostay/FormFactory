@@ -215,17 +215,6 @@ sub has_post_processor { _add_function('post_processor', @_) }
 
 L<Form::Factory::Action::Role>
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2010 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

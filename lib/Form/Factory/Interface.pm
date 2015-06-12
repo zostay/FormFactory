@@ -154,17 +154,6 @@ L<Form::Factory::Control::Value>
 
 L<Form::Factory::Action>, L<Form::Factory::Control>, L<Form::Factory::Stasher>
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp, C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

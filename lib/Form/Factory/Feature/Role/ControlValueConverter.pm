@@ -75,17 +75,6 @@ It is defined like this:
 
 The C<$value> here will be a value from the action attribute (or something of the same type) and the value returned should be appropriate for assigning to the control value.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2010 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

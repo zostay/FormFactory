@@ -74,17 +74,6 @@ The C<$name> argument is the name of the control (and action attribute) that thi
 
 The C<$control> argument is a hash reference containing two keys. The "control" key will name the type of control this is. The "options" contains a copy of the options that are about to be passed to the control's constructor. You may modify either of these to modify which control class is constructed (by modifying "control") or the options passed to that constructor (by modifying the "options").
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

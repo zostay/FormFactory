@@ -819,17 +819,6 @@ Ajax or GUIs will generally want to give their feedback as early as possible. As
 
 You will still run the steps above, but can do a check and clean on a subset of controls when you need to do so to give the user early feedback.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

@@ -19,17 +19,6 @@ use Carp ();
 
 This is the role implemented by all form action roles. Do not use this directly, but use L<Form::Factory::Processor::Role>, which performs the magic required to make your class implement this role.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2010 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

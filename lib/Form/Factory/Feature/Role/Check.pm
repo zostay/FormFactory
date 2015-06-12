@@ -45,17 +45,6 @@ The check method is run after the data has been cleaned up and is intended for c
 
 This method is passed no arguments other than the object it is being called on. The return value is ignored. If you check method needs to output anything, it should do so through the attached C<result> object.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

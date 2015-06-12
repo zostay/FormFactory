@@ -107,17 +107,6 @@ The C<$control> argument is the control this feature is being attached to. You a
 
 The return value of this method is ignored. If the control is incompatible with your feature, your feature should die with a message explaining the problem.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

@@ -41,17 +41,6 @@ This is called immediately after input has been consumed and before the input is
 
 The method will receive no arguments except the object it is called upon and the return value is ignored. Any output it needs to send should be placed in the C<result> object.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

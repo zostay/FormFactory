@@ -52,17 +52,6 @@ The feature must implement the C<initialize_control> method.
 
 This method is called on the feature immediately after the control has been completely constructed. This method is called with no arguments and the return value is ignored.
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2010 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 1;

@@ -136,17 +136,6 @@ around clone_and_inherit_options => sub {
 
 L<Form::Factory::Processor>
 
-=head1 AUTHOR
-
-Andrew Sterling Hanenkamp C<< <hanenkamp@cpan.org> >>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2009 Qubling Software LLC.
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut
 
 package Moose::Meta::Attribute::Custom::Trait::Form::Control;
