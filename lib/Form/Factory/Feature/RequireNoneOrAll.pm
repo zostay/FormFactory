@@ -123,4 +123,4 @@ sub _control_label {
     return $control_label;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

@@ -141,4 +141,4 @@ sub post_process {
     $_->($self->action, @_) for values %{ $self->post_processor_code };
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

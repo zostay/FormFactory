@@ -82,4 +82,4 @@ sub BUILDARGS {
     return $class->SUPER::BUILDARGS(%args);
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

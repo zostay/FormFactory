@@ -252,4 +252,4 @@ sub failure {
     $self->add_message( type => 'error', message => $message);
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

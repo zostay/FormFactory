@@ -59,4 +59,4 @@ sub unstash {
     delete $self->stash_hash->{ $moniker };
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

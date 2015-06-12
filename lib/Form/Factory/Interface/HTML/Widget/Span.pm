@@ -30,4 +30,4 @@ sub has_content { 1 }
 
 =cut
 
-1;
+__PACKAGE__->meta->make_immutable;

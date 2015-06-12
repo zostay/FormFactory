@@ -114,4 +114,4 @@ around has_current_value => sub {
         && scalar(@{ $self->current_value }) > 0;
 };
 
-1;
+__PACKAGE__->meta->make_immutable;

@@ -252,4 +252,4 @@ L<Form::Factory::Interface::CLI>, L<Form::Factory::Interface::HTML>
 
 =cut
 
-1;
+__PACKAGE__->meta->make_immutable;

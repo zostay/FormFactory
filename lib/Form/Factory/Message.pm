@@ -82,4 +82,4 @@ sub english_message {
     return $message;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

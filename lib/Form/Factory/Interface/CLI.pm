@@ -182,4 +182,4 @@ sub consume_control {
     }
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

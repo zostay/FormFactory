@@ -50,4 +50,4 @@ has is_visible => (
     default   => 0,
 );
 
-1;
+__PACKAGE__->meta->make_immutable;

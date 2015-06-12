@@ -208,4 +208,4 @@ sub content {
     return { map { %{ $_->content } } $self->results };
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

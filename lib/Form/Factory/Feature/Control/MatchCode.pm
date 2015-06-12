@@ -72,4 +72,4 @@ sub check {
     $self->result->is_valid(1) unless $self->result->is_validated;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

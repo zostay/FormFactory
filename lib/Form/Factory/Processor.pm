@@ -301,4 +301,4 @@ L<Form::Factory::Action>
 
 =cut
 
-1;
+__PACKAGE__->meta->make_immutable;

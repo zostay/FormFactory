@@ -24,4 +24,4 @@ L<Form::Factory::Processor>
 
 =cut
 
-1;
+__PACKAGE__->meta->make_immutable;

@@ -60,4 +60,4 @@ Boolean values default to C<Bool>.
 
 use constant default_isa => 'Str';
 
-1;
+__PACKAGE__->meta->make_immutable;

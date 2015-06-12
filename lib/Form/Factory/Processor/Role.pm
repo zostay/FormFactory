@@ -217,4 +217,4 @@ L<Form::Factory::Action::Role>
 
 =cut
 
-1;
+__PACKAGE__->meta->make_immutable;

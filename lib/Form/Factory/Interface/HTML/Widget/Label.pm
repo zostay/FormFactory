@@ -42,4 +42,4 @@ override more_attributes => sub {
 
 =cut
 
-1;
+__PACKAGE__->meta->make_immutable;
