@@ -1,0 +1,177 @@
+# NAME
+
+Form::Factory - a general-purpose form handling API
+
+# VERSION
+
+version 0.022
+
+# SYNOPSIS
+
+    ### CGI, HTML example
+    my $interface = Form::Factory->new_interface('HTML');
+    my $action  = $interface->new_action('MyApp::Action::Login');
+
+    ### Drawing the form contents
+    $action->unstash('login');
+    $action->globals->{after_login} = '/index.html';
+    $action->stash('login');
+    $action->render;
+    $action->render_control(button => {
+        name  => 'submit',
+        label => 'Login',
+    });
+    $action->results->clear_all;
+    
+    ### Processing the form result
+    my $q = CGI->new;
+    $action->unstash('login');
+    $action->consume_and_clean_and_check_and_process( request => $q->Vars );
+
+    if ($action->is_valid and $action->is_success) {
+        $action->stash('login');
+        print $q->redirect($action->globals->{after_login});
+    }
+    else {
+        print q{<p class="errors">};
+        print $action->error_messages;
+        print q{</p>};
+    }
+
+# DESCRIPTION
+
+**ALPHA API**. This code is not fully tested (if you look in the test files you will see a long list of tests planned, but no yet implemented). It is currently being employed on a non-production project. The API _will_ change. See ["TODO"](#todo) for more.
+
+This API is designed to be a general purpose API for showing and processing forms. This has been done before. I know. However, I believe this provides some distinct advantages. 
+
+You should check out the alternatives because this might be more complex than you really need. That said, why would you want this?
+
+## MODULAR AND EXTENSIBLE
+
+This forms processor makes heavy use of [Moose](https://metacpan.org/pod/Moose). Nearly every class is replaceable or extensible in case it does not work the way you need it to. It is initially implemented to support HTML forms and command-line interfaces, but I would like to see it support XForms, XUL, PDF forms, GUI forms via Wx or Curses, etc.
+
+## ENCAPSULATED ACTIONS
+
+The centerpiece of this API is the way an action is encapsulated in a single object. In a way, a form object is a glorified functor with a `run` method responsible for taking the action. Wrapped around that is the ability to describe what kind of inputs are expected, how to clean up and verify the inputs, how to report errors so that they can be used, how entered values can be sent back to the orignal user, etc.
+
+The goal here is to create self-contained actions that specify what they are in fairly generic terms, take specific action when the input checks out, to handle exceptions in a way that is convenient in forms processing (where exceptions are often more common than not) and send back output cleanly.
+
+## MULTIPLE IMPLEMENTATIONS
+
+An action presents a blueprint for the data it needs to run. A form interface takes that blueprint and builds the UI to present to the user and consume input from the user and notify the action.
+
+A form interface could be any kind of UI. The way the form interface and action is used will depend on the form interface implementation. The action itself should not need to care (much) about what interface it is used in.
+
+## CONTROLS VERSUS WIDGETS
+
+So far, the attempt has been made to keep controls pretty generic. A control specifies the kind of inputs an action expects for some input, but the interface is responsible for rendering that control as a suitable widget and consuming data from that widget.
+
+## FORM AND CONTROL FEATURES
+
+Forms and controls can be extended with common features. These features can clean up the input, check the input for errors, and provide additional processing to forms. Features can be added to an action class or even to a specific instance to modify the form on the fly.
+
+# METHODS
+
+## new\_interface
+
+    my $interface = Form::Factory->new_interface($name, \%options);
+
+This creates a [Form::Factory::Interface](https://metacpan.org/pod/Form::Factory::Interface) object with the given options. This is, more or less, a shortcut for:
+
+    my $interface_class = Form::Factory->interface_class($name);
+    my $interface       = $interface_class->new(\%options);
+
+## interface\_class
+
+    my $class_name = Form::Factory->interface_class('HTML');
+
+Returns the interface class for the named interface. This loads the interface class from the [Form::Factory::Interface](https://metacpan.org/pod/Form::Factory::Interface) namespace. 
+
+See ["CLASS LOADING"](#class-loading).
+
+## control\_class
+
+    my $class_name = Form::Factory->control_class('full_text');
+
+Returns the control class for the named control. This loads the control class from the [Form::Factory::Control](https://metacpan.org/pod/Form::Factory::Control) namespace.
+
+See ["CLASS LOADING"](#class-loading).
+
+## feature\_class
+
+    my $class_name = Form::Factory->feature_class('functional');
+
+Returns the feature class for the named feature. This loads the feature class from the [Form::Factory::Feature](https://metacpan.org/pod/Form::Factory::Feature) namespace.
+
+See ["CLASS LOADING"](#class-loading).
+
+## control\_feature\_class
+
+    my $class_name = Form::Factory->control_feature_class('required');
+
+Returns the control feature class for the named control feature. This loads the control feature class from the [Form::Factory::Feature::Control](https://metacpan.org/pod/Form::Factory::Feature::Control) namespace.
+
+See ["CLASS LOADING"](#class-loading).
+
+# CLASS LOADING
+
+This package features a few class loading methods. These methods each load a type of class. The type of class depends on the namespace they are based upon (which is mentioned in the documentation for each class loading method).
+
+Each namespace is divided into two segments: the reserved namespace and the custom namespace. The reserved namespace is reserved for use by the [Form::Factory](https://metacpan.org/pod/Form::Factory) library itself. These will be any class directly under the namespace given. 
+
+For example, interface classes will always be directly under [Form::Factory::Interface](https://metacpan.org/pod/Form::Factory::Interface), such as [Form::Factory::Interface::HTML](https://metacpan.org/pod/Form::Factory::Interface::HTML) and [Form::Factory::Interface::CLI](https://metacpan.org/pod/Form::Factory::Interface::CLI).
+
+The custom namespaces are implemented as an alias under the `Custom` package namespace. You first define a custom package, which contains a `register_implementation`, which returns the name of a package that actually implements that class.
+
+For example, you might create an interface class specific to your app. You might define a class as follows:
+
+    package Form::Factory::Interface::Custom::MyAppHTML;
+    sub register_implementation { 'MyApp::Form::Factory::Interface::HTML' }
+
+    package MyApp::Form::Factory::Interface::HTML;
+    use Moose;
+
+    extends qw( Form::Factory::Interface::HTML );
+
+    # implementation here...
+
+Any custom name is similar. You could then retrieve your custom name via:
+
+    my $class = Form::Factory->interface_class('MyAppHTML');
+
+Though, you probably actually want:
+
+    my $interface = Form::Factory->new_interface('MyAppHTML');
+
+# TODO
+
+This is not definite, but some things I know as of right now I'm not happy with:
+
+- There are lots of tweaks coming to controls.
+- Features do not do very much yet, but they must do more, especially control features. I want features to be able to modify control construction, add interface-specific functionality for rendering and consuming, etc. They will be bigger and badder, but this might mean who knows what needs to change elsewhere.
+- The interfaces are kind of stupid at this point. They probably need a place to put their brains so they can some more interesting work.
+
+# CODE REPOSITORY
+
+If you would like to take a look at the latest progress on this software, please see the Github repository: [http://github.com/zostay/FormFactory](http://github.com/zostay/FormFactory)
+
+# BUGS
+
+Please report any bugs you find to the Github issue tracker: [http://github.com/zostay/FormFactory/issues](http://github.com/zostay/FormFactory/issues)
+
+If you need help getting started or something (the documentation was originally thrown together over my recent vacation, so it's probably lacking and wonky), you can also contact me on Twitter ([http://twitter.com/zostay](http://twitter.com/zostay)) or by [email](#author).
+
+# SEE ALSO
+
+[Form::Factory::Interface::CLI](https://metacpan.org/pod/Form::Factory::Interface::CLI), [Form::Factory::Interface::HTML](https://metacpan.org/pod/Form::Factory::Interface::HTML)
+
+# AUTHOR
+
+Andrew Sterling Hanenkamp <hanenkamp@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2015 by Qubling Software LLC.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
